@@ -12,3 +12,9 @@ interface Book {
 interface BooksProps {
     books: Book[];
 }
+
+
+function Books({}: BooksProps) {
+}
+
+export default Books;
