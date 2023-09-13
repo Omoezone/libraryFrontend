@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export interface Book {
     id: number;
     title: string;
@@ -10,5 +12,12 @@ export interface Book {
 }
 
 const getBooks = () => {
+    useEffect(() => {
+        
+    }
 
+    );
+    return {};
 }
+
+export default getBooks;
