@@ -2,10 +2,14 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
+import BurgerMenuFilter from "./components/filter/burger_menu_filter";
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <>
+      <BurgerMenuFilter/>
     <div className="App">
       <div>
         <a href="https://vitejs.dev" target="_blank">
@@ -28,6 +32,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
+    </>
   )
 }
 
