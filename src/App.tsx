@@ -3,13 +3,16 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 
 import BurgerMenuFilter from "./components/filter/burger_menu_filter";
+import { Box } from "@chakra-ui/react"
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+    <Box background='red' w='100vw' margin='-2rem' position={"relative"} zIndex='99'>
       <BurgerMenuFilter/>
+    </Box>
     <div className="App">
       <div>
         <a href="https://vitejs.dev" target="_blank">
