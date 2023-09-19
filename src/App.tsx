@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-    <Box background='red' w='100vw' margin='-2rem' position={"relative"} zIndex='99'>
+    <Box margin='-1rem'>
       <BurgerMenuFilter/>
     </Box>
     <div className="App">

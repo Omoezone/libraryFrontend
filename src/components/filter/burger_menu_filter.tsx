@@ -10,10 +10,12 @@ import {
     IconButton,
   } from '@chakra-ui/react'
   import { HamburgerIcon, AddIcon, ExternalLinkIcon, RepeatIcon, EditIcon} from '@chakra-ui/icons'
+ 
+
 
 function BurgerMenuFilter(){
     return <Menu> 
-        <MenuButton
+        <MenuButton display={'flex'}
         as={IconButton}
         aria-label='Options'
         icon={<HamburgerIcon />}
@@ -39,3 +41,7 @@ function BurgerMenuFilter(){
 }
 
 export default BurgerMenuFilter;
+
+function translate3d(arg0: number, px: any, arg2: number, px1: any, arg4: number, px2: any): any {
+    throw new Error('Function not implemented.')
+}
