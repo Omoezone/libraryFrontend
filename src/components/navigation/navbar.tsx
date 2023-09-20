@@ -1,6 +1,6 @@
 import { HStack, Image, Spacer, Text} from "@chakra-ui/react";
 import logoMan from "../../assets/logo.png";
-import logoName from "../../assets/logoName.png";
+import logoName from "../../assets/logoName.svg";
 import BurgerMenu from "./burger";
 import SearchBar from "./searchbar";
 

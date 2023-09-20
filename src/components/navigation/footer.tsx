@@ -1,6 +1,6 @@
 import { Flex, Image, Icon, Box, VStack, Text } from "@chakra-ui/react"
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa"
-import logoName from "../../assets/logoName.png";
+import logoName from "../../assets/logoName.svg";
 
 const footer = () => {
 
@@ -18,8 +18,8 @@ const footer = () => {
         <VStack
         spacing={10}
         >
-            <Box h="1rem" marginBottom="2rem">
-                <Image src={logoName} w="6rem" h="6rem"/>
+            <Box h="1rem" marginBottom="3rem">
+                <Image src={logoName} w="8rem" h="8rem"/>
             </Box>
             <Box h="20px" px="2rem" py="1rem">
                 <Icon as={FaFacebook} fontSize="24px" mr="2" color="blue.500" />
