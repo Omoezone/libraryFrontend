@@ -9,6 +9,8 @@ import {
     SliderThumb,
     SliderMark,
     ChakraProvider,
+    Heading,
+    DarkMode,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
 import { FcGenericSortingAsc } from 'react-icons/fc';
@@ -17,6 +19,10 @@ import { GiFeather } from 'react-icons/gi';
 import { TbRulerMeasure } from 'react-icons/tb';
 import Theme from '../../theme';
 import { CacheProvider } from '@emotion/react';
+import '@fontsource/libre-baskerville/700.css'
+import '@fontsource/lato/700.css'
+import '@fontsource/lato/400.css'
+
 
 
 
@@ -31,14 +37,14 @@ function BurgerConetnt() {
     return (
 
         <ChakraProvider theme={Theme}>
-            <Box bg="color.lightS">
+            <Box bg="red.gradient">
                 <Box display={'flex'}>
                     <FcGenericSortingAsc />
-                    <h3>Sorting</h3>
+                    <Heading>Sorting</Heading>
                 </Box>
 
                 <Box>
-                    <Button colorScheme='teal'>Alphabetical  A-Z</Button>
+                    <Button>Alphabetical  A-Z</Button>
                     <Button>Highest ratings</Button>
                 </Box>
             </Box>
@@ -50,11 +56,11 @@ function BurgerConetnt() {
                 </Box>
 
                 <Box>
-                    <Button colorScheme='teal'>Subject<CheckIcon /></Button>
-                    <Button>Subject <SmallAddIcon /></Button>
-                    <Button>Subject <SmallAddIcon /></Button>
-                    <Button>Subject <SmallAddIcon /></Button>
-                    <Button>Subject <SmallAddIcon /></Button>
+                    <Button variant='primary'>Subject<CheckIcon /></Button>
+                    <Button variant='secondary'>Subject <SmallAddIcon /></Button>
+                    <Button variant='confirm'>Subject <SmallAddIcon /></Button>
+                    <Button variant='selected'>Subject <SmallAddIcon /></Button>
+                    <Button variant='select'>Subject <SmallAddIcon /></Button>
                     <Button>Subject <SmallAddIcon /></Button>
                 </Box>
             </Box>
@@ -99,7 +105,7 @@ function BurgerConetnt() {
                 </Box>
 
                 <Box>
-                    <Button colorScheme='teal'>Author<CheckIcon /></Button>
+                    <Button>Author<CheckIcon /></Button>
                     <Button>Author <SmallAddIcon /></Button>
                     <Button>Author <SmallAddIcon /></Button>
                     <Button>Author <SmallAddIcon /></Button>
