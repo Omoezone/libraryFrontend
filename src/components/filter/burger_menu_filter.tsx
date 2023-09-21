@@ -8,13 +8,15 @@ import {
     SliderFilledTrack,
     SliderThumb,
     SliderMark,
+    ChakraProvider,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
 import { FcGenericSortingAsc } from 'react-icons/fc';
 import { LuListTodo } from 'react-icons/lu';
 import { GiFeather } from 'react-icons/gi';
 import { TbRulerMeasure } from 'react-icons/tb';
-
+import Theme from '../../theme';
+import { CacheProvider } from '@emotion/react';
 
 
 
@@ -28,8 +30,8 @@ function BurgerConetnt() {
     }
     return (
 
-        <Box>
-            <Box>
+        <ChakraProvider theme={Theme}>
+            <Box bg="color.lightS">
                 <Box display={'flex'}>
                     <FcGenericSortingAsc />
                     <h3>Sorting</h3>
@@ -105,7 +107,7 @@ function BurgerConetnt() {
                     <Button>Author <SmallAddIcon /></Button>
                 </Box>
             </Box>
-        </Box>
+        </ChakraProvider>
     )
 
 }
