@@ -4,7 +4,7 @@ const Theme = extendTheme({
     colors: {
         red: {
             solid: "#6F0000",
-            gradient: "linear-gradient(174deg, rgba(15,12,41,1) 0%, rgba(111,0,0,1) 100%)",
+            gradient: "linear-gradient(174deg, rgba(111,0,0,1) 0%, rgba(15,12,41,1) 100%)",
         },
         light: {
             solid: "#FFEFBA",
@@ -29,19 +29,19 @@ const Theme = extendTheme({
                 fontFamily: 'Libre Baskerville',
                 color: 'dark',
                 fontSize: '4rem',
-                weight: 'bold',
+                fontWeight: 'bold',
             },
             h2: {
                 fontFamily: 'Libre Baskerville',
                 color: 'red.solid',
                 fontSize: '2.1rem',
-                weight: 'bold',
+                fontWeight: 'light',
             },
             h3: {
                 fontFamily: 'Libre Baskerville',
                 color: 'dark',
                 fontSize: '1.3rem',
-                weight: 'bold',
+                fontWeight: 'bold',
             },
             h4: {
                 fontFamily: 'Lato',

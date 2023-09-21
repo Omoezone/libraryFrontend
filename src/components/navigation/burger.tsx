@@ -1,7 +1,12 @@
-import { IconButton, Icon, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody } from "@chakra-ui/react";
+import { IconButton, Icon, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, ChakraProvider } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { HamburgerIcon } from '@chakra-ui/icons'
-import BurgerConetnt from "../filter/burger_menu_filter";
+import BurgerConetnt from "../filter/burger_content";
+import { Image } from "@chakra-ui/react";
+import LogoBurger from "../../assets/logo_burger.svg"
+
+
+
 const BurgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -21,9 +26,11 @@ const BurgerMenu = () => {
 
             <Drawer isOpen={isOpen} onClose={onClose}>
                 <DrawerOverlay />
-                <DrawerContent>
-                    <DrawerCloseButton />
-                    <DrawerHeader>Filter</DrawerHeader>
+                <DrawerContent bg='red.gradient'>
+                    <DrawerCloseButton color='white' />
+                    <DrawerHeader>
+                        <Image src={LogoBurger} />
+                    </DrawerHeader>
                     <DrawerBody>
                         <BurgerConetnt />
                     </DrawerBody>
