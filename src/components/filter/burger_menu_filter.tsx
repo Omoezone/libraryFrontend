@@ -1,7 +1,8 @@
-import React from 'react';
 import { useState } from 'react';
 import {
     Box,
+    Text,
+
     Button,
     Slider,
     SliderTrack,
@@ -9,23 +10,17 @@ import {
     SliderThumb,
     SliderMark,
     ChakraProvider,
-    Heading,
-    DarkMode,
+
 } from '@chakra-ui/react'
-import { HamburgerIcon, CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
+import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
 import { FcGenericSortingAsc } from 'react-icons/fc';
 import { LuListTodo } from 'react-icons/lu';
 import { GiFeather } from 'react-icons/gi';
 import { TbRulerMeasure } from 'react-icons/tb';
 import Theme from '../../theme';
-import { CacheProvider } from '@emotion/react';
 import '@fontsource/libre-baskerville/700.css'
 import '@fontsource/lato/700.css'
 import '@fontsource/lato/400.css'
-import { color } from 'framer-motion';
-
-
-
 
 function BurgerConetnt() {
     const [sliderValue, setSliderValue] = useState(50)
@@ -54,6 +49,9 @@ function BurgerConetnt() {
                 <Box display={'flex'}>
                     <LuListTodo />
                     <h4>Subdjekt</h4>
+                    {/*  <Link textDecor={'underline'}>Helo</Link> */}
+                    <p>Helo</p>
+                    <Text className='smol'>Helo</Text>
                 </Box>
 
                 <Box>
