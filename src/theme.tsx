@@ -49,6 +49,10 @@ const Theme = extendTheme({
                 fontSize: '1.1rem',
                 fontWeight: 'bold',
             },
+            p: {
+                color: 'dark',
+            }
+
         }
     },
 
@@ -114,6 +118,9 @@ const Theme = extendTheme({
                 },
             },
         },
+
+
+
     }
 })
 

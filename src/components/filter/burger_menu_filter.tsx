@@ -10,6 +10,10 @@ import {
     SliderThumb,
     SliderMark,
     ChakraProvider,
+    Card,
+    CardBody,
+    CardHeader,
+    Input,
 
 } from '@chakra-ui/react'
 import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
@@ -69,7 +73,7 @@ function BurgerConetnt() {
                     <TbRulerMeasure />
                     <h3>Number of pages</h3>
                 </Box>
-                <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)}>
+                <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)} >
                     <SliderMark value={25} {...labelStyles}>
                         25
                     </SliderMark>
@@ -83,17 +87,18 @@ function BurgerConetnt() {
                         value={sliderValue}
                         textAlign='center'
                         bg='teal'
-                        color='white'
+                        color='dark'
+                        background='gold.solid'
                         mt='-10'
                         ml='-5'
                         w='12'
                     >
                         {sliderValue}
                     </SliderMark>
-                    <SliderTrack>
-                        <SliderFilledTrack />
+                    <SliderTrack borderColor='gold.solid' borderStyle='solid' borderWidth='1px' h='0.8rem' borderRadius='20px' bg='light.solid'>
+                        <SliderFilledTrack bg='gold.gradient' />
                     </SliderTrack>
-                    <SliderThumb />
+                    <SliderThumb bg='gold.gradient' borderColor='gold.solid' w='1.3rem' h='1.3rem' />
                 </Slider>
             </Box>
 
