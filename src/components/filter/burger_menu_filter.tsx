@@ -22,6 +22,7 @@ import { CacheProvider } from '@emotion/react';
 import '@fontsource/libre-baskerville/700.css'
 import '@fontsource/lato/700.css'
 import '@fontsource/lato/400.css'
+import { color } from 'framer-motion';
 
 
 
@@ -40,7 +41,7 @@ function BurgerConetnt() {
             <Box bg="red.gradient">
                 <Box display={'flex'}>
                     <FcGenericSortingAsc />
-                    <Heading>Sorting</Heading>
+                    <h3 style={{ color: 'white' }}>Sorting</h3>
                 </Box>
 
                 <Box>
@@ -52,7 +53,7 @@ function BurgerConetnt() {
             <Box>
                 <Box display={'flex'}>
                     <LuListTodo />
-                    <h3>Subdjekt</h3>
+                    <h4>Subdjekt</h4>
                 </Box>
 
                 <Box>

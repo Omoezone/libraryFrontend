@@ -20,6 +20,36 @@ const Theme = extendTheme({
     fonts: {
         heading: `Libre Baskerville`,
         body: `Lato.400`,
+
+    },
+
+    styles: {
+        global: {
+            h1: {
+                fontFamily: 'Libre Baskerville',
+                color: 'dark',
+                fontSize: '4rem',
+                weight: 'bold',
+            },
+            h2: {
+                fontFamily: 'Libre Baskerville',
+                color: 'red.solid',
+                fontSize: '2.1rem',
+                weight: 'bold',
+            },
+            h3: {
+                fontFamily: 'Libre Baskerville',
+                color: 'dark',
+                fontSize: '1.3rem',
+                weight: 'bold',
+            },
+            h4: {
+                fontFamily: 'Lato',
+                color: 'dark',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+            },
+        }
     },
 
     components: {
