@@ -14,8 +14,7 @@ const BurgerMenu = () => {
         aria-label="Open menu"
         icon={<Icon as={HamburgerIcon} />}
         onClick={() => setIsOpen(true)}
-        variant="outline"
-        colorScheme="teal"
+        variant="ghost"
         />
 
         <Drawer isOpen={isOpen} onClose={onClose}>
