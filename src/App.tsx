@@ -1,12 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Grid, GridItem } from "@chakra-ui/layout";
+import { Show } from "@chakra-ui/media-query";
+import "./App.css";
+import NavBar from "./components/navigation/navbar";
+import FooterBar from "./components/navigation/footer"
 
 import BurgerMenuFilter from "./components/filter/burger_menu_filter";
 import { Box } from "@chakra-ui/react"
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
     <>
@@ -14,29 +16,29 @@ function App() {
       <BurgerMenuFilter/>
     </Box>
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+   
     </div>
+  
+  
+      <Grid
+        templateAreas={{
+          base: `"nav" "main" "footer"`,
+          lg: `"nav nav" "aside main" "footer"`,
+          
+        }}
+      >
+        <GridItem gridArea="nav" >
+          <NavBar />
+        </GridItem>
+        <GridItem gridArea="main">
+          // main grid 
+        </GridItem>
+        <GridItem gridArea="footer" >
+          <FooterBar />
+        </GridItem>
+      </Grid>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
