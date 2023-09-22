@@ -19,13 +19,14 @@ function Pages() {
         mt: '2',
         ml: '-2.5',
         fontSize: 'sm',
+        color: 'white',
     }
     return (
 
         <Box>
-            <Box display={'flex'}>
-                <TbRulerMeasure />
-                <h3>Number of pages</h3>
+            <Box className='flex' marginBottom={8}>
+                <TbRulerMeasure className='white_icons' />
+                <h3 style={{ color: 'white' }}>Pages</h3>
             </Box>
             <Slider aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)} >
                 <SliderMark value={25} {...labelStyles}>

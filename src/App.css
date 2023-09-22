@@ -2,3 +2,27 @@
   font-size: 0.8rem;
   align-self: center;
 }
+
+.white_icons {
+  color: white;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-right: 0.5rem;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.button_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.button_grid button {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}

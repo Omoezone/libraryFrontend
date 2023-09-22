@@ -6,18 +6,18 @@ function Author() {
     return (
 
         <Box>
-            <Box display={'flex'}>
-                <GiFeather />
-                <h3>Author</h3>
+            <Box className='flex' marginBottom={3}>
+                <GiFeather className='white_icons' />
+                <h3 style={{ color: 'white' }}>Author</h3>
             </Box>
 
-            <Box>
-                <Button>Author<CheckIcon /></Button>
-                <Button>Author <SmallAddIcon /></Button>
-                <Button>Author <SmallAddIcon /></Button>
-                <Button>Author <SmallAddIcon /></Button>
-                <Button>Author <SmallAddIcon /></Button>
-                <Button>Author <SmallAddIcon /></Button>
+            <Box className='button_grid'>
+                <Button variant='selected'>Author<CheckIcon /></Button>
+                <Button variant='select'>Author <SmallAddIcon /></Button>
+                <Button variant='select'>Author <SmallAddIcon /></Button>
+                <Button variant='select'>Author <SmallAddIcon /></Button>
+                <Button variant='select'>Author <SmallAddIcon /></Button>
+                <Button variant='select'>Author <SmallAddIcon /></Button>
             </Box>
         </Box>
 

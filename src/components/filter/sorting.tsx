@@ -1,21 +1,20 @@
 import { Box, Button } from '@chakra-ui/react';
-import { FcGenericSortingAsc } from 'react-icons/fc';
+import { BsSortDownAlt } from 'react-icons/bs';
 
 function Sorting() {
     return (
 
         <Box>
-            <Box display={'flex'}>
-                <FcGenericSortingAsc />
-                <h3 >Sorting</h3>
+            <Box className='flex' marginBottom={3}>
+                <BsSortDownAlt className='white_icons' />
+                <h3 style={{ color: 'white' }}>Sorting</h3>
             </Box>
 
-            <Box>
-                <Button>Alphabetical  A-Z</Button>
-                <Button>Highest ratings</Button>
+            <Box className='button_grid'>
+                <Button variant='selected'>Alphabetical  A-Z</Button>
+                <Button variant='select'>Highest ratings</Button>
             </Box>
         </Box>
-
     )
 }
 

@@ -6,20 +6,18 @@ function Subdjekt() {
     return (
 
         <Box>
-            <Box display={'flex'}>
-                <LuListTodo />
-                <h4>Subdjekt</h4>
-                <p>Helo</p>
-
+            <Box className='flex' marginBottom={3}>
+                <LuListTodo className='white_icons' />
+                <h3 style={{ color: 'white' }}>Subdjekt</h3>
             </Box>
 
-            <Box>
-                <Button variant='primary'>Subject<CheckIcon /></Button>
-                <Button variant='secondary'>Subject <SmallAddIcon /></Button>
-                <Button variant='confirm'>Subject <SmallAddIcon /></Button>
-                <Button variant='selected'>Subject <SmallAddIcon /></Button>
+            <Box className='button_grid'>
+                <Button variant='selected'>Subject <CheckIcon /></Button>
                 <Button variant='select'>Subject <SmallAddIcon /></Button>
-                <Button>Subject <SmallAddIcon /></Button>
+                <Button variant='select'>Subject <SmallAddIcon /></Button>
+                <Button variant='select'>Subject <SmallAddIcon /></Button>
+                <Button variant='select'>Subject <SmallAddIcon /></Button>
+                <Button variant='select'>Subject <SmallAddIcon /></Button>
             </Box>
         </Box>
 

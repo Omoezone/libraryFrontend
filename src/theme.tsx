@@ -41,7 +41,7 @@ const Theme = extendTheme({
                 fontFamily: 'Libre Baskerville',
                 color: 'dark',
                 fontSize: '1.3rem',
-                fontWeight: 'bold',
+                fontWeight: 'light',
             },
             h4: {
                 fontFamily: 'Lato',
@@ -57,6 +57,7 @@ const Theme = extendTheme({
     },
 
     components: {
+
         Button: {
             baseStyle: {
                 borderRadius: '2px',
@@ -100,6 +101,8 @@ const Theme = extendTheme({
                     color: 'dark',
                     background: 'gold.gradient',
                     shadow: 'md',
+                    h: '1.5rem',
+                    fontSize: '0.8rem',
                     borderRadius: '20px',
                     _hover: {
                         shadow: 'xl',
@@ -110,6 +113,8 @@ const Theme = extendTheme({
                     color: 'gold.solid',
                     background: 'light.solid',
                     shadow: 'md',
+                    h: '1.5rem',
+                    fontSize: '0.8rem',
                     borderRadius: '20px',
                     _hover: {
                         shadow: 'xl',
