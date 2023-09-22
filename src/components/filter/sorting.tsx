@@ -1,7 +1,11 @@
 import { Box, Button } from '@chakra-ui/react';
 import { BsSortDownAlt } from 'react-icons/bs';
+import { useState } from 'react';
 
 function Sorting() {
+
+    const [sort, setSort] = useState(true);
+
     return (
 
         <Box>
@@ -11,12 +15,23 @@ function Sorting() {
             </Box>
 
             <Box className='button_grid'>
-                <Button variant='selected'>Alphabetical  A-Z</Button>
-                <Button variant='select'>Highest ratings</Button>
+                <Button
+                    onClick={() => {
+                        setSort(!sort)
+                    }}
+                    variant={sort ? 'selected' : 'select'} >Alphabetical  A-Z</Button>
+                <Button
+                    onClick={() => {
+                        setSort(!sort)
+                    }} variant={sort ? 'select' : 'selected'} >Highest ratings</Button>
             </Box>
         </Box>
     )
 }
 
 export default Sorting;
+
+function useStae(arg0: string): [any, any] {
+    throw new Error('Function not implemented.');
+}
 
