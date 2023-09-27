@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
+import { useState } from "react";
 import {
     Modal,
     ModalOverlay,
@@ -9,7 +8,7 @@ import {
     ModalBody,
     ModalCloseButton,
     Button,
-    Center,
+    Image,
     FormControl,
     FormLabel,
     Input,
@@ -18,22 +17,26 @@ import {
   
   
   export default function Userpage() {
-    const pic_size = {
-        width: '20px',
-        height: '20px',
-        float: 'right',
-        cursor: 'pointer'
-    }
-
     const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
 
     const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const update_img_style = {
+      width: '1.25rem',
+      float: 'right',
+      cursor: 'pointer'
+    }
+
+    const avatar_img_style = {
+      width: '3rem',
+      cursor: 'pointer'
+    }
+
     return (
       <>
-        <Button onClick={onOpen}>My page</Button>
+        <Image src="assets/userLogo.svg" style={avatar_img_style} onClick={onOpen} />
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -44,12 +47,12 @@ import {
                   <FormLabel>Email</FormLabel>
                 {!isUpdatingEmail ? (
                   <FormLabel>__sampleemail@stud.kea.dk__
-                    <img src="/write.svg" style={pic_size} alt="write_svg" onClick={(e) => {e.preventDefault; setIsUpdatingEmail(true)} } />
+                    <img src="assets/write.svg" style={update_img_style} alt="assets/write_svg" onClick={(e) => {e.preventDefault; setIsUpdatingEmail(true)} } />
                   </FormLabel>
                 ) : (
                   <>
                     <FormLabel>Current email: __sampleemail@stud.kea.dk__
-                      <img src="/x-close.svg" style={pic_size} alt="x-close_svg" onClick={(e) => {e.preventDefault; setIsUpdatingEmail(false)}} />
+                      <img src="assets/x-close.svg" style={update_img_style} alt="assets/x-close_svg" onClick={(e) => {e.preventDefault; setIsUpdatingEmail(false)}} />
                     </FormLabel>
                     <FormControl id="email">
                       <FormLabel>New email</FormLabel>
@@ -63,12 +66,12 @@ import {
                   <FormLabel>Password</FormLabel>
                 {!isUpdatingPassword ? (
                   <FormLabel>*********
-                    <img src="/write.svg" style={pic_size} alt="write_svg" onClick={(e) => {e.preventDefault; setIsUpdatingPassword(true)} } />
+                    <img src="assets/write.svg" style={update_img_style} alt="assets/write_svg" onClick={(e) => {e.preventDefault; setIsUpdatingPassword(true)} } />
                   </FormLabel>
                 ) : (
                   <>
                     <FormLabel>Current password: __*******rd__
-                      <img src="/x-close.svg" style={pic_size} alt="x-close_svg" onClick={(e) => {e.preventDefault; setIsUpdatingPassword(false)}} />
+                      <img src="assets/x-close.svg" style={update_img_style} alt="assets/x-close_svg" onClick={(e) => {e.preventDefault; setIsUpdatingPassword(false)}} />
                     </FormLabel>
                     <FormControl>
                       <FormLabel>New Password</FormLabel>
