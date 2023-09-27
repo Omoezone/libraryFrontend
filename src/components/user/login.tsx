@@ -7,7 +7,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Center,
   FormControl,
   FormLabel,
   Input,
@@ -35,14 +34,12 @@ export default function Login() {
           </ModalBody>
   
           <ModalFooter>
-            <Center>
-              <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Log in
-              </Button>
-              <Button variant='ghost'>
-                Or sign up
-              </Button>
-            </Center>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Log in
+            </Button>
+            <Button variant='ghost'>
+              Or sign up
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
