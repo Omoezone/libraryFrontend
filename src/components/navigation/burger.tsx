@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { HamburgerIcon } from '@chakra-ui/icons'
 import BurgerConetnt from "../filter/burger_content";
 import { Image } from "@chakra-ui/react";
-import LogoBurger from "../../assets/logo_burger.svg"
+import LogoBurger from "../../../public/assets/logo_burger.svg"
 
 
 
