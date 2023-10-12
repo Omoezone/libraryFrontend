@@ -4,6 +4,7 @@ import SearchBar from "./searchbar";
 import Userpage from "../user/userpage";
 import useData from "../../hooks/useData";
 import { useState } from "react";
+import Login from "../user/login";
 
 interface Author {
   id: number;
@@ -31,6 +32,7 @@ const NavBar = () => {
       {/* make this shit match with a grid maybe?*/}
       <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
       <Spacer />
+      <Login />
       <Userpage />
       <SearchBar />
     </HStack>

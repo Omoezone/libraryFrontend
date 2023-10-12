@@ -12,10 +12,36 @@ import {
   Input,
   useDisclosure
 } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
 
-export default function Login() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const Login = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (e:any) => {
+    const value = e.target.value;
+    setData({
+      ...data,
+      [e.target.name]: value
+    });
+  };
+
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+    const userData = {
+      email: data.email,
+      password: data.password
+    };
+    axios.post("https://localhost:3010/login", userData).then((response) => {
+      console.log(response.status, response.data.token);
+    });
+  };
+
   return (
     <>
       <Button onClick={onOpen}>Log in</Button>
@@ -24,25 +50,29 @@ export default function Login() {
         <ModalContent>
           <ModalHeader>Log in</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Input type='email' placeholder='Email' />
-              <FormLabel>Password</FormLabel>
-              <Input type="password" placeholder='Password' />
-            </FormControl>
-          </ModalBody>
-  
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Log in
-            </Button>
-            <Button variant='ghost'>
-              Or sign up
-            </Button>
-          </ModalFooter>
+          <form onSubmit={handleSubmit}>
+            <ModalBody>
+              <FormControl>
+                <FormLabel htmlFor='email'>Email</FormLabel>
+                <Input type='email' name='email' placeholder='Email' value={data.email} onChange={handleChange} />
+                <FormLabel htmlFor='password'>Password</FormLabel>
+                <Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
+              </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme='blue' mr={3} type='submit' onClick={onClose}>
+                Log in  
+              </Button>
+            </ModalFooter>
+          </form>
+          <Button variant='ghost'>
+            Or sign up
+          </Button>
         </ModalContent>
       </Modal>
     </>
   )
-}
+};
+
+export default Login;
