@@ -83,17 +83,15 @@ import {
                   </>
                 )}  
                 </div>
-                
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Log out
-              </Button>
-              
-              <Button variant='ghost'>
-                Delete user
-              </Button>
             </ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Log out
+            </Button>
+            <Button variant='ghost'>
+              Delete user
+            </Button>
           </ModalContent>
         </Modal>
       </>
