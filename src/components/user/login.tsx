@@ -3,7 +3,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
@@ -14,7 +13,8 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import axios from 'axios'
-
+import Cookies from 'js-cookie'
+import { v4 as uuidv4 } from 'uuid';
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,15 +31,21 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     const userData = {
       email: data.email,
       password: data.password
     };
-    axios.post("https://localhost:3010/login", userData).then((response) => {
-      console.log(response.status, response.data.token);
-    });
+    try {
+      const response = await axios.post("localhost:3010/login", userData);
+      console.log("Axios response:", response);
+      Cookies.set('userCookie', uuidv4() /*, { expires: 7 }*/);
+      // Handle successful response here
+    } catch (error) {
+      // Handle the Axios error here
+      console.error("Axios Error:", error);
+    }
   };
 
   return (
@@ -50,7 +56,7 @@ const Login = () => {
         <ModalContent>
           <ModalHeader>Log in</ModalHeader>
           <ModalCloseButton />
-          <form onSubmit={handleSubmit}>
+          <form>
             <ModalBody>
               <FormControl>
                 <FormLabel htmlFor='email'>Email</FormLabel>
@@ -60,11 +66,9 @@ const Login = () => {
               </FormControl>
             </ModalBody>
 
-            <ModalFooter>
-              <Button colorScheme='blue' mr={3} type='submit' onClick={onClose}>
-                Log in  
-              </Button>
-            </ModalFooter>
+            <Button colorScheme='blue' type='submit' onClick={handleSubmit}>
+              Log in  
+            </Button>
           </form>
           <Button variant='ghost'>
             Or sign up
