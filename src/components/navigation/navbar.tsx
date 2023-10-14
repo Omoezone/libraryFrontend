@@ -29,6 +29,7 @@ const NavBar = () => {
           </Text>
         )}
       </div>
+
       {/* make this shit match with a grid maybe?*/}
       <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
       <Spacer />

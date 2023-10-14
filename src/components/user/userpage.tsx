@@ -47,12 +47,12 @@ import {
                   <FormLabel>Email</FormLabel>
                 {!isUpdatingEmail ? (
                   <FormLabel>__sampleemail@stud.kea.dk__
-                    <img src="assets/write.svg" style={update_img_style} alt="assets/write_svg" onClick={(e) => {e.preventDefault; setIsUpdatingEmail(true)} } />
+                    <img src="assets/write.svg" style={update_img_style} alt="assets/write_svg" onClick={(e) => { setIsUpdatingEmail(true)} } />
                   </FormLabel>
                 ) : (
                   <>
                     <FormLabel>Current email: __sampleemail@stud.kea.dk__
-                      <img src="assets/x-close.svg" style={update_img_style} alt="assets/x-close_svg" onClick={(e) => {e.preventDefault; setIsUpdatingEmail(false)}} />
+                      <img src="assets/x-close.svg" style={update_img_style} alt="assets/x-close_svg" onClick={(e) => { setIsUpdatingEmail(false)}} />
                     </FormLabel>
                     <FormControl id="email">
                       <FormLabel>New email</FormLabel>
