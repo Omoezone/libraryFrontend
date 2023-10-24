@@ -3,9 +3,12 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import Hero from "./hero"
 import GetFavoriteBooks from "./get_favorit_books"
 
+import { Box } from "@chakra-ui/react";
+
 export default function Home() {
   return (
     <>
+      <Box id="red_banner" bg={"red.solid"}></Box>
       <Hero />
       <GetFavoriteBooks />
 

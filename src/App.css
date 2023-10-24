@@ -35,6 +35,13 @@
 }
 
 /* ###################### */
+#red_banner {
+  position: absolute;
+  right: 0;
+  width: 10rem;
+  height: 100%;
+  z-index: -999;
+}
 .nav {
   position: fixed;
   background-color: white;
@@ -48,6 +55,8 @@
 .hero_text {
   text-align: center;
   margin-top: 3rem;
+  /* filter: invert(1);
+  mix-blend-mode: difference; */
 }
 
 .hero {
@@ -58,5 +67,12 @@
   display: grid;
   justify-content: center;
 }
+#slider img {
+  border-radius: 12px;
+}
 
+.banner_content {
+  color: white;
+  font-size: 1rem;
+}
 /* ###################### */

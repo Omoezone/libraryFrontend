@@ -13,7 +13,7 @@ function Hero() {
                 </div>
                 <Button variant="primary" width="100%" marginTop="30">Sign Up</Button>
             </Box>
-            <Box color="dark" bg="light.gradient" className="hero_book_container">
+            <Box color="dark" bg="light.gradient" className="hero_book_container" margin={3}>
                 <Box width={230} height={300} bg="gold.solid" borderRadius={3} marginTop={-5}></Box>
                 <Box className="flex" margin={3} justifyContent={"center"}>
                     <MdChevronLeft size={30} />
