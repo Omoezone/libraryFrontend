@@ -38,7 +38,7 @@ function App() {
         <GridItem gridArea="main">
 
           <div>
-            <h2>favorite books</h2>
+            {/* <h2>favorite books</h2> */}
             <ul>
               {getFavoriteBooks()}
             </ul>

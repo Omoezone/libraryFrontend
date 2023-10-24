@@ -33,3 +33,19 @@
 .bottom-row-margin {
   margin-bottom: 16rem;
 }
+
+/* ###################### */
+.hidden {
+  display: none;
+}
+
+.hero_text {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.hero {
+  margin: 3rem;
+}
+
+/* ###################### */
