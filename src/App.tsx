@@ -3,6 +3,7 @@ import { Show } from "@chakra-ui/media-query";
 import "./App.css";
 import NavBar from "./components/navigation/navbar";
 import FooterBar from "./components/navigation/footer"
+import Home from "./components/home/Home"
 
 import BurgerMenuFilter from "./components/filter/burger_content";
 import { Box, ChakraProvider } from "@chakra-ui/react"
@@ -31,14 +32,14 @@ function App() {
 
         }}
       >
-        <GridItem gridArea="nav" >
+        <GridItem gridArea="nav" className="nav">
           <NavBar />
         </GridItem>
 
         <GridItem gridArea="main">
-
+          <Home />
           <div>
-            {/* <h2>favorite books</h2> */}
+            <h2>favorite books</h2>
             <ul>
               {getFavoriteBooks()}
             </ul>

@@ -35,6 +35,12 @@
 }
 
 /* ###################### */
+.nav {
+  position: fixed;
+  background-color: white;
+  z-index: 999;
+}
+
 .hidden {
   display: none;
 }
@@ -45,7 +51,12 @@
 }
 
 .hero {
-  margin: 3rem;
+  margin: 6rem 3rem 3rem 3rem;
+}
+
+.hero_book_container {
+  display: grid;
+  justify-content: center;
 }
 
 /* ###################### */

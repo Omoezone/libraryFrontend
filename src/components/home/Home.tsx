@@ -1,8 +1,17 @@
 import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { Button } from "@chakra-ui/react";
+import Hero from "./hero"
+import GetFavoriteBooks from "./get_favorit_books"
 
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <GetFavoriteBooks />
 
+    </>
+  )
+}
 
 export function getFavoriteBooks() {
   const slideLeft = () => {
@@ -21,13 +30,6 @@ export function getFavoriteBooks() {
 
   return (
     <>
-      <div className="hero">
-        <h1 className="hero_text">Your Library</h1>
-        <div>
-          <p>Within 7 days of borrowing a book it will be delivered to you, for free. Unless of course you fail to deliver it back after 31 days. You understand. Enjoy! </p>
-        </div>
-        <Button variant="primary" width="100%" marginTop="30">Sign Up</Button>
-      </div>
       <div className='relative flex items-center'>
         <div
           id='slider'
