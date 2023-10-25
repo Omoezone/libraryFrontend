@@ -43,7 +43,7 @@ function Pages() {
                     textAlign='center'
                     bg='teal'
                     color='dark'
-                    background='gold.solid'
+                    background='gold.solid' 
                     mt='-10'
                     ml='-5'
                     w='12'

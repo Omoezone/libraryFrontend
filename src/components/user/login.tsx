@@ -38,7 +38,7 @@ const Login = () => {
       password: data.password
     };
     try {
-      const response = await axios.post("localhost:3010/login", userData);
+      const response = await axios.post("http://localhost:3000/login", userData);
       console.log("Axios response:", response);
       Cookies.set('userCookie', uuidv4() /*, { expires: 7 }*/);
       // Handle successful response here
