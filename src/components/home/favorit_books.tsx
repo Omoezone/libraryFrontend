@@ -1,6 +1,6 @@
 import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { Box } from "@chakra-ui/react";
+import { Box, Img } from "@chakra-ui/react";
 
 export default function FavoriteBooks() {
     const slideLeft = () => {
@@ -19,15 +19,16 @@ export default function FavoriteBooks() {
 
     return (
         <>
-            <Box margin={3}>
+            <Box margin={3} className="slider_container">
                 <Box className='relative flex items-center'>
                     <Box
                         id='slider'
-                        className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
+                        className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
                     >
                         {data.map((item) => (
-                            <img
-                                className='w-[10rem] h-[13rem] inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
+                            <Img
+                                shadow={1}
+                                className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
                                 src={item.img}
                                 alt='/'
                             />
@@ -35,7 +36,7 @@ export default function FavoriteBooks() {
                     </Box>
 
                 </Box>
-                <Box display={"grid"} justifyContent={"end"}>
+                <Box display={"grid"} justifyContent={"end"} className="slider_right">
                     <h3 className="banner_content">Favorit Books</h3>
                     <Box className="flex" justifyContent={"end"} color="white">
                         <MdChevronLeft className='cursor-pointer hover:opacity-100' onClick={slideLeft} size={30} />

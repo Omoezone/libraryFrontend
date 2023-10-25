@@ -4,14 +4,14 @@ import { Box } from "@chakra-ui/react";
 
 export default function TrendingBooks() {
     const slideLeft = () => {
-        const slider = document.getElementById('slider');
+        const slider = document.getElementById('slider2');
         if (slider) {
             slider.scrollLeft = slider.scrollLeft - 500;
         }
     }
 
     const slideRight = () => {
-        const slider = document.getElementById('slider');
+        const slider = document.getElementById('slider2');
         if (slider) {
             slider.scrollLeft = slider.scrollLeft + 500;
         }
@@ -19,10 +19,10 @@ export default function TrendingBooks() {
 
     return (
         <>
-            <Box margin={3}>
+            <Box margin={3} className="slider_container">
                 <Box className='relative flex items-center'>
                     <Box
-                        id='slider'
+                        id='slider2'
                         className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
                     >
                         {data.map((item) => (
@@ -35,7 +35,7 @@ export default function TrendingBooks() {
                     </Box>
 
                 </Box>
-                <Box display={"grid"} justifyContent={"end"}>
+                <Box display={"grid"} justifyContent={"end"} className="slider_right">
                     <h3 className="banner_content">Trending Books</h3>
                     <Box className="flex" justifyContent={"end"} color="white">
                         <MdChevronLeft className='cursor-pointer hover:opacity-100' onClick={slideLeft} size={30} />
