@@ -85,6 +85,9 @@
 }
 
 @media only screen and (min-width: 768px) {
+  #red_banner {
+    width: 18rem;
+  }
   #hero_container {
     margin: 8rem 5rem 5rem 5rem;
     display: grid;

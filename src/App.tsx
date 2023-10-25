@@ -20,17 +20,14 @@ function App() {
     <ChakraProvider theme={Theme}>
       <CSSReset />
       <QueryClientProvider client={queryClient}> {/* Wrap your app with QueryClientProvider */}
-        <div className="App">
-          {/* Your existing content */}
-        </div>
-
         <Grid
           templateAreas={{
             base: `"nav" "main" "footer"`,
             lg: `"nav nav" "aside main" "footer"`,
+
           }}
         >
-          <GridItem gridArea="nav">
+          <GridItem gridArea="nav" className="nav" width={"100%"}>
             <NavBar />
           </GridItem>
 
@@ -38,7 +35,7 @@ function App() {
             <Home />
           </GridItem>
 
-          <GridItem gridArea="footer">
+          <GridItem gridArea="footer" >
             <FooterBar />
           </GridItem>
         </Grid>
