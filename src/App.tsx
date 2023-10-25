@@ -13,7 +13,7 @@ import '@fontsource/libre-baskerville/700.css'
 import '@fontsource/libre-baskerville/400.css'
 import '@fontsource/lato/700.css'
 import '@fontsource/lato/400.css'
-import { getFavoriteBooks, getSavedBooks, getSubjectsBooks } from "./components/home/Home"
+
 
 function App() {
 
@@ -38,33 +38,7 @@ function App() {
 
         <GridItem gridArea="main">
           <Home />
-          <div>
-            <h2>favorite books</h2>
-            <ul>
-              {getFavoriteBooks()}
-            </ul>
-          </div>
 
-          <br />
-          <br />
-
-          <div>
-
-            <h2>Saved books</h2>
-            <ul>
-              {getSavedBooks()}
-            </ul>
-          </div>
-
-          <br />
-          <br />
-
-          <div>
-            <h2>Subjects</h2>
-            <ul>
-              {getSubjectsBooks()}
-            </ul>
-          </div>
 
         </GridItem>
 
