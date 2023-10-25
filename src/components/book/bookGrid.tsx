@@ -3,13 +3,22 @@ import BookCardSkeleton from "./bookCardSkeleton";
 import BookCardContainer from "./bookCardContainer";
 import useBooks from "../../hooks/useBooks";
 import { Grid, SimpleGrid } from "@chakra-ui/react";
+import { useState } from "react";
+import { BookModal } from "./bookModal";
 
 const BookGrid = () => {
-  const { data, error, isLoading } = useBooks(); // Assuming useBooks provides the entire array
+  const { data, error, isLoading } = useBooks();
+  const [selectedBook, setSelectedBook] = useState(null);
+  const skeletons = [...Array(20).keys()]; 
 
-  const skeletons = [...Array(20).keys()]; // Number of skeletons you want to show
-  console.log("DATA IS: ", data)
-  console.log("data.results is: ", data?.results)
+  const openModal = (book:any) => {
+    setSelectedBook(book);
+  };
+
+  const closeModal = () => {
+    setSelectedBook(null);
+  };
+
   return (
     <div>
       {error && <p>{error.message}</p>}
@@ -33,10 +42,13 @@ const BookGrid = () => {
         {data &&
           data.map((book, index) => (
             <BookCardContainer key={book.book_id || index}>
-              <BookCard book={book} />
+              <BookCard book={book} openModal={() => openModal(book)}/>
             </BookCardContainer>
           ))}
       </SimpleGrid>
+      {selectedBook && (
+          <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
+      )}
     </div>
   );
 };
