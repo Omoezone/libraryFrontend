@@ -1,18 +1,10 @@
-import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { Box, Img } from "@chakra-ui/react";
-
 import BookCard from "../book/bookCard"
 import BookCardSkeleton from "../book/bookCardSkeleton";
 import useBooks from "../../hooks/useBooks";
 
-import Book from "../../types/book"
-
-interface Props {
-    book: Book;
-}
-
-export default function FavoriteBooks({ book }: Props) {
+export default function FavoriteBooks() {
 
 
     const slideLeft = () => {

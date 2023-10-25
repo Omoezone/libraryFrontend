@@ -102,6 +102,10 @@
   grid-gap: 0.5rem;
 }
 
+.hide_on_mobil {
+  display: none;
+}
+
 @media only screen and (min-width: 768px) {
   #red_banner {
     width: 18rem;
@@ -166,6 +170,39 @@
   }
   .slider_right .flex {
     align-items: flex-end;
+  }
+
+  .all_books_top {
+    margin-bottom: 3rem;
+  }
+  .all_books_top h2 {
+    text-align: center;
+  }
+
+  #all_books_container {
+    grid-gap: 1rem;
+    /* margin: 0 8rem 8rem 3rem; */
+  }
+
+  #all_books_container_container {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    margin-bottom: 5rem;
+    margin-right: 1rem;
+  }
+
+  #all_books_container_container .button_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hide_on_mobil {
+    display: block;
+  }
+
+  #all_books_container_container .hide_on_mobil {
+    height: 7rem;
+    position: sticky;
+    top: 8rem;
   }
 }
 
