@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <Box id="red_banner" bg={"red.gradient"}></Box>
       <Hero />
-      <FavoriteBooks />
+      <FavoriteBooks book={undefined} />
       <TrendingBooks />
       <Subjeckts />
       <AllBooks />

@@ -9,7 +9,7 @@ interface Props {
   book: Book;
 }
 
-const GameCard = ({ book }: Props) => {
+const BookCard = ({ book }: Props) => {
   return (
     <>
       <Box>
@@ -21,4 +21,4 @@ const GameCard = ({ book }: Props) => {
   );
 };
 
-export default GameCard;
+export default BookCard;

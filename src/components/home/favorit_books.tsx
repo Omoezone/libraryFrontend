@@ -2,7 +2,19 @@ import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { Box, Img } from "@chakra-ui/react";
 
-export default function FavoriteBooks() {
+import BookCard from "../book/bookCard"
+import BookCardSkeleton from "../book/bookCardSkeleton";
+import useBooks from "../../hooks/useBooks";
+
+import Book from "../../types/book"
+
+interface Props {
+    book: Book;
+}
+
+export default function FavoriteBooks({ book }: Props) {
+
+
     const slideLeft = () => {
         const slider = document.getElementById('slider');
         if (slider) {
@@ -17,6 +29,9 @@ export default function FavoriteBooks() {
         }
     }
 
+    const { data, error, isLoading } = useBooks();
+    const skeleton = [...Array(8).keys()];
+
     return (
         <>
             <Box margin={3} className="slider_container">
@@ -25,14 +40,16 @@ export default function FavoriteBooks() {
                         id='slider'
                         className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
                     >
-                        {data.map((item) => (
-                            <Img
-                                shadow={1}
-                                className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
-                                src={item.img}
-                                alt='/'
-                            />
-                        ))}
+                        {data &&
+                            data.map((book, index) => (
+                                <Img
+                                    key={book.book_id || index}
+                                    shadow={1}
+                                    className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
+                                    src={"../../../public/assets/covers/" + book.picture}
+                                    alt='/'
+                                />
+                            ))}
                     </Box>
 
                 </Box>
