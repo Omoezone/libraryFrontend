@@ -2,7 +2,7 @@ import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { Box } from "@chakra-ui/react";
 
-export default function GetFavoriteBooks() {
+export default function FavoriteBooks() {
     const slideLeft = () => {
         const slider = document.getElementById('slider');
         if (slider) {

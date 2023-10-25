@@ -1,16 +1,22 @@
 import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import Hero from "./hero"
-import GetFavoriteBooks from "./get_favorit_books"
+import FavoriteBooks from "./favorit_books"
+import Subjeckts from "./subjects"
+import TrendingBooks from "./trending_books"
+import AllBooks from "./all_books"
 
 import { Box } from "@chakra-ui/react";
 
 export default function Home() {
   return (
     <>
-      <Box id="red_banner" bg={"red.solid"}></Box>
+      <Box id="red_banner" bg={"red.gradient"}></Box>
       <Hero />
-      <GetFavoriteBooks />
+      <FavoriteBooks />
+      <TrendingBooks />
+      <Subjeckts />
+      <AllBooks />
 
     </>
   )

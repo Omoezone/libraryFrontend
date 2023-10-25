@@ -20,13 +20,13 @@ const footer = () => {
                     <Image src="assets/LogoName.svg" w="8rem" h="8rem" />
                 </Box>
                 <Box h="20px" px="2rem" py="1rem">
-                    <Icon as={FaFacebook} fontSize="24px" mr="2" color="blue.500" />
-                    <Icon as={FaTwitter} fontSize="24px" mr="2" color="blue.400" />
-                    <Icon as={FaInstagram} fontSize="24px" mr="2" color="pink.500" />
-                    <Icon as={FaLinkedin} fontSize="24px" color="blue.800" />
+                    <Icon as={FaFacebook} fontSize="24px" mr="2" color="gold.solid" />
+                    <Icon as={FaTwitter} fontSize="24px" mr="2" color="gold.solid" />
+                    <Icon as={FaInstagram} fontSize="24px" mr="2" color="gold.solid" />
+                    <Icon as={FaLinkedin} fontSize="24px" color="gold.solid" />
                 </Box>
                 <Box>
-                    <Text fontSize="sm" color="white" textAlign="center">
+                    <Text fontSize="sm" color="gold.solid" textAlign="center">
                         © 2021 Kea Library Management System. All rights reserved.
                     </Text>
                 </Box>
