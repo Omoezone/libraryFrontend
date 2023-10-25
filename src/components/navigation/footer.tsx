@@ -16,9 +16,6 @@ const footer = () => {
         <VStack
         spacing={10}
         >
-            <VStack
-                spacing={10}
-            >
                 <Box h="1rem" marginBottom="3rem">
                     <Image src="assets/LogoName.svg" w="8rem" h="8rem" />
                 </Box>
