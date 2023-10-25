@@ -9,7 +9,6 @@ import '@fontsource/libre-baskerville/700.css'
 import '@fontsource/libre-baskerville/400.css'
 import '@fontsource/lato/700.css'
 import '@fontsource/lato/400.css'
-import BookGrid from "./components/book/bookGrid";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Home from "./components/home/Home"
 

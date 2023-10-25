@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react"
 import SearchBar from "../navigation/searchbar"
 import BookCard from "../book/bookCard"
 import BookCardSkeleton from "../book/bookCardSkeleton";
-import BookCardContainer from "../book/bookCardContainer";
 import useBooks from "../../hooks/useBooks";
 
 export default function AllBooks() {
@@ -20,16 +19,18 @@ export default function AllBooks() {
                 {error && <p>{error.message}</p>}
                 {isLoading &&
                     skeleton.map((skeleton) => (
-                        <BookCardContainer key={skeleton}>
+
+                        <Box key={skeleton}>
                             <BookCardSkeleton />
-                        </BookCardContainer>
+                        </Box>
+
                     ))}
 
                 {data &&
                     data.map((book, index) => (
-                        <BookCardContainer key={book.book_id || index}>
+                        <Box key={book.book_id || index}>
                             <BookCard book={book} />
-                        </BookCardContainer>
+                        </Box>
                     ))}
 
             </Box>
