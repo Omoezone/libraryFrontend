@@ -44,7 +44,8 @@
 }
 .nav {
   position: fixed;
-  background-color: white;
+  /*  background-color: white; */
+  backdrop-filter: blur(10px);
   z-index: 999;
 }
 
@@ -82,4 +83,38 @@
   grid-template-columns: repeat(auto-fill, 10rem);
   grid-gap: 0.5rem;
 }
+
+@media only screen and (min-width: 768px) {
+  #hero_container {
+    margin: 8rem 5rem 5rem 5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  #hero_element {
+    position: absolute;
+    top: 0;
+    left: 12rem;
+    width: 18rem;
+    height: 40rem;
+    z-index: -999;
+  }
+
+  .hero_text {
+    text-align: left;
+  }
+
+  #hero_container button {
+    width: 12rem;
+  }
+
+  .hero_p {
+    max-width: 500px;
+  }
+
+  .hero_book_container {
+    justify-items: center;
+  }
+}
+
 /* ###################### */

@@ -32,7 +32,7 @@ function App() {
 
         }}
       >
-        <GridItem gridArea="nav" className="nav">
+        <GridItem gridArea="nav" className="nav" width={"100%"}>
           <NavBar />
         </GridItem>
 

@@ -18,7 +18,7 @@ const NavBar = () => {
 
   return (
     <>
-      <HStack justifyContent="space-between" px={1} py={1}>
+      <HStack justifyContent="space-between" px={1} py={1} >
         <BurgerMenu />
         <button className="hidden" onClick={() => setId(id + 1)}>Click me</button>
         <div>
