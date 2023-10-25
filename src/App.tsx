@@ -11,6 +11,7 @@ import '@fontsource/lato/700.css'
 import '@fontsource/lato/400.css'
 import BookGrid from "./components/book/bookGrid";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Home from "./components/home/Home"
 
 const queryClient = new QueryClient();
 
@@ -34,7 +35,7 @@ function App() {
           </GridItem>
 
           <GridItem gridArea="main">
-            <BookGrid />
+            <Home />
           </GridItem>
 
           <GridItem gridArea="footer">

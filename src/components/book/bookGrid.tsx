@@ -29,7 +29,7 @@ const BookGrid = () => {
               <BookCardSkeleton />
             </BookCardContainer>
           ))}
-        
+
         {data &&
           data.map((book, index) => (
             <BookCardContainer key={book.book_id || index}>
