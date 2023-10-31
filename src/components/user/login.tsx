@@ -13,8 +13,6 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import axios from 'axios'
-import Cookies from 'js-cookie'
-import { v4 as uuidv4 } from 'uuid';
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,13 +38,16 @@ const Login = () => {
     try {
       const response = await axios.post("localhost:3010/login", userData);
       console.log("Axios response:", response);
-      Cookies.set('userCookie', uuidv4() /*, { expires: 7 }*/);
       // Handle successful response here
     } catch (error) {
       // Handle the Axios error here
       console.error("Axios Error:", error);
     }
   };
+
+  const buttonStyleLogin = {
+		width: '97.85%'
+	}
 
   return (
     <>
@@ -66,7 +67,7 @@ const Login = () => {
               </FormControl>
             </ModalBody>
 
-            <Button colorScheme='blue' type='submit' onClick={handleSubmit}>
+            <Button colorScheme='blue' style={buttonStyleLogin} type='submit' onClick={handleSubmit}>
               Log in  
             </Button>
           </form>

@@ -3,65 +3,92 @@ import {
 	ModalOverlay,
 	ModalContent,
 	ModalHeader,
-	ModalFooter,
 	ModalBody,
 	ModalCloseButton,
 	Button,
-	Center,
 	FormControl,
 	FormLabel,
 	Input,
 	useDisclosure
-} from '@chakra-ui/react'
-import React, { useState } from 'react';
+  } from '@chakra-ui/react'
+  import React, { useState } from 'react'
+  import axios from 'axios'
 
-
-	
-
-
-export default function Signup() {
-	const [formData, setFormData] = useState({
-		password: '',
-		confirmPassword: '',
+  const SignUp = () => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [data, setData] = useState({
+		first_name: "",
+		last_name: "",
+	  email: "",
+	  password: ""
 	});
+  
+	const handleChange = (e:any) => {
+	  const value = e.target.value;
+	  setData({
+			...data,
+			[e.target.name]: value
+	  });
+	};
+  
+	const handleSubmit = async (e:any) => {
+	  e.preventDefault();
+	  const userData = {
+			first_name: data.first_name,
+			last_name: data.last_name,
+			email: data.email,
+			password: data.password
+	  };
+	  try {
+			const response = await axios.post("http://localhost:3000/auth/signup", userData);
+			// Handle successful response here
+			console.log("Axios response:", response);
+			} catch (axiosError: any) {
+			// Handle the Axios error here
+			console.error("Axios Error:", axiosError);
+	  }
+	};
 
-	const [passwordsMatch, setPasswordsMatch] = useState(false);
+	const errorStyle = {
+		color: 'red'
+	}
 
-	const { isOpen, onOpen, onClose } = useDisclosure()
-	
+	const buttonStyleSignUp = {
+		width: '97.85%'
+	}
+  
 	return (
-		<>
-			<Button onClick={onOpen}>Sign in</Button>
-			<Modal isOpen={isOpen} onClose={onClose}>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalHeader>Sign in</ModalHeader>
-					<ModalCloseButton />
-					<ModalBody>
-						<FormControl>
-							<FormLabel>Username</FormLabel>
-							<Input type='text' placeholder='Username' />
-							<FormLabel>Email</FormLabel>
-							<Input type='text' placeholder='Email' />
-							<FormLabel>Password</FormLabel>
-							<Input type="password" placeholder='Password' />
-							<FormLabel>Confirm password</FormLabel>
-							<Input type="password" placeholder='Repeat assword' />
-						</FormControl>
-					</ModalBody>
-	
-					<ModalFooter>
-						<Center>
-							<Button colorScheme='blue' mr={3} onClick={onClose}>
-								Sign up
-							</Button>
-							<Button variant='ghost'>
-								Or log in
-							</Button>
-						</Center>
-					</ModalFooter>
-				</ModalContent>
-			</Modal>
-		</>
+	  <>
+		<Button onClick={onOpen}>Sign up</Button>
+		<Modal isOpen={isOpen} onClose={onClose}>
+		  <ModalOverlay />
+		  <ModalContent>
+			<ModalHeader>Sign up</ModalHeader>
+			<ModalCloseButton />
+			<form>
+			  <ModalBody>
+				<FormControl>
+					<FormLabel>First name</FormLabel>
+				  <Input type='text' name='first_name' placeholder='First name' value={data.first_name} onChange={handleChange} />
+					<FormLabel>Last name</FormLabel>
+				  <Input type='text' name='last_name' placeholder='Last name' value={data.last_name} onChange={handleChange} />
+				  <FormLabel htmlFor='email'>Email</FormLabel>
+				  <Input type='email' name='email' placeholder='Email' value={data.email} onChange={handleChange} />
+				  <FormLabel htmlFor='password'>Password</FormLabel>
+				  <Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
+				</FormControl>
+			  </ModalBody>
+			  <Button colorScheme='blue' style={buttonStyleSignUp} type='submit' onClick={handleSubmit}>
+					Sign up
+			  </Button>
+			</form>
+			<Button variant='ghost'>
+			  Or log in
+			</Button>
+		  </ModalContent>
+		</Modal>
+	  </>
 	)
-}
+  };
+  
+  export default SignUp;

@@ -5,6 +5,7 @@ import Userpage from "../user/userpage";
 import useData from "../../hooks/useData";
 import { useState } from "react";
 import Login from "../user/login";
+import SignUp from "../user/signup";
 
 interface Author {
   id: number;
@@ -33,6 +34,7 @@ const NavBar = () => {
       {/* make this shit match with a grid maybe?*/}
       <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
       <Spacer />
+      <SignUp />
       <Login />
       <Userpage />
       <SearchBar />
