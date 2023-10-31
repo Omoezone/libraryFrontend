@@ -1,4 +1,4 @@
-import { HStack, Image, Spacer, Text} from "@chakra-ui/react";
+import { HStack, Image, Spacer, Text } from "@chakra-ui/react";
 import BurgerMenu from "./burger";
 import SearchBar from "./searchbar";
 import Userpage from "../user/userpage";
@@ -14,32 +14,32 @@ interface Author {
 }
 
 const NavBar = () => {
-  const [id, setId] = useState(1); 
+  const [id, setId] = useState(1);
   const { data, error } = useData<Author>("author/" + id);
 
   return (
-  <>
-    <HStack justifyContent="space-between" px={1} py={1}>
-      <BurgerMenu />
-      <button onClick={() => setId(id + 1)}>Click me</button>
-      <div>
-        {data && (
-          <Text fontSize="lg" fontWeight="bold">
-            <p>{(data as Author).username}</p>
-            <p>{(data as Author).total_books}</p>
-          </Text>
-        )}
-      </div>
+    <>
+      <HStack justifyContent="space-between" px={1} py={1} >
+        <BurgerMenu />
+        <button className="hidden" onClick={() => setId(id + 1)}>Click me</button>
+        <div>
+          {data && (
+            <Text fontSize="lg" fontWeight="bold">
+              <p>{(data as Author).username}</p>
+              <p>{(data as Author).total_books}</p>
+            </Text>
+          )}
+        </div>
 
-      {/* make this shit match with a grid maybe?*/}
-      <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
-      <Spacer />
-      <SignUp />
-      <Login />
-      <Userpage />
-      <SearchBar />
-    </HStack>
-  </>
+
+        {/* make this shit match with a grid maybe?*/}
+        <Image src="assets/LogoName.svg" w="100" py={1} />
+        <Spacer />
+        <Login />
+        <Userpage />
+        <SearchBar />
+      </HStack>
+    </>
   );
 };
-  export default NavBar;
+export default NavBar;
