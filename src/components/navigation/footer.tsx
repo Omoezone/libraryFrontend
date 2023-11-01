@@ -5,17 +5,17 @@ const footer = () => {
 
     return (
         <Flex
-            align="center"
-            justify="center"
-            bg="#6F0000"
-            height="200px"
-            bottom="0"
-            left="0"
-            right="0"
+        align="center"
+        justify="center"
+        bg="#6F0000" 
+        height="200px"   
+        bottom="0" 
+        left="0" 
+        right="0" 
+    >   
+        <VStack
+        spacing={10}
         >
-            <VStack
-                spacing={10}
-            >
                 <Box h="1rem" marginBottom="3rem">
                     <Image src="assets/LogoName.svg" w="8rem" h="8rem" />
                 </Box>
