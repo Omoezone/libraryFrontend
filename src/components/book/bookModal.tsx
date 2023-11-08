@@ -1,6 +1,7 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, Spacer, Icon, VStack, StackDivider } from '@chakra-ui/react';
+import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, Spacer, Icon, VStack, StackDivider, Flex } from '@chakra-ui/react';
 import StarRating from './stars';
+import TagButton from './bookModalTags';
 
 export const BookModal = ({ book, isOpen, onClose }) => {   
     const amountAvailable = book.available_amount;
@@ -42,6 +43,11 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     <Box padding={5}>
                         <Text>{book.summary || "No Description"}</Text>
                     </Box>
+                    <Flex justifyContent="space-between">
+                        {book.Tags.map((tag) => (
+                            <TagButton key={tag.title} tag={tag} />
+                        )) || "No Genres"}
+                    </Flex>
                 </VStack>
                 </ModalBody>
             </ModalContent>
