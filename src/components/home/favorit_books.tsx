@@ -3,9 +3,20 @@ import { Box, Img } from "@chakra-ui/react";
 import BookCard from "../book/bookCard"
 import BookCardSkeleton from "../book/bookCardSkeleton";
 import useBooks from "../../hooks/useBooks";
+import { useState } from "react";
+import { BookModal } from "../book/bookModal";
 
 export default function FavoriteBooks() {
 
+    const [selectedBook, setSelectedBook] = useState(null);
+
+    const openModal = (book: any) => {
+        setSelectedBook(book);
+    };
+
+    const closeModal = () => {
+        setSelectedBook(null);
+    };
 
     const slideLeft = () => {
         const slider = document.getElementById('slider');
@@ -34,16 +45,22 @@ export default function FavoriteBooks() {
                     >
                         {data &&
                             data.map((book, index) => (
-                                <Img
-                                    key={book.book_id || index}
-                                    shadow={1}
-                                    className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
-                                    src={"../../../public/assets/covers/" + book.picture}
-                                    alt='/'
-                                />
+                                /*  <Img
+                                     key={book.book_id || index}
+                                     shadow={1}
+                                     className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
+                                     src={"../../../public/assets/covers/" + book.picture}
+                                     alt='/'
+                                 /> */
+                                <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
+                                    <BookCard book={book} openModal={() => openModal(book)} />
+                                </Box>
+
                             ))}
                     </Box>
-
+                    {selectedBook && (
+                        <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
+                    )}
                 </Box>
                 <Box display={"grid"} justifyContent={"end"} className="slider_right">
                     <h3 className="banner_content">Favorit Books</h3>
