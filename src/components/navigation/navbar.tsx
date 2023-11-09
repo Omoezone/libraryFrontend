@@ -3,9 +3,9 @@ import BurgerMenu from "./burger";
 import SearchBar from "./searchbar";
 import Userpage from "../user/userpage";
 import Login from "../user/login";
+import SignUp from "../user/signup";
 
 const NavBar = () => {
-
 
   return (
   <>
@@ -18,6 +18,7 @@ const NavBar = () => {
       <SearchBar />
     </HStack>
   </>
+
   );
 };
 export default NavBar;

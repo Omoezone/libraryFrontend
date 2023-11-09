@@ -17,6 +17,7 @@ import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
 import { useUser } from './userContext';
 
+
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [data, setData] = useState({
@@ -43,16 +44,21 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:3000/auth/login", userData);
       console.log("Axios response:", response);
-
+      
       // Set the user state (data) in the userContext
       dispatch({ type: 'LOGIN', user: response.data });
       // Set the user cookie. For now just email
       Cookies.set('userCookie', userData.email);
+
     } catch (error) {
       // Handle the Axios error here
       console.error("Axios Error:", error);
     }
   };
+
+  const buttonStyleLogin = {
+		width: '97.85%'
+	}
 
   return (
     <>
@@ -71,9 +77,8 @@ const Login = () => {
                 <Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
               </FormControl>
             </ModalBody>
-
-            <Button colorScheme='blue' type='submit' onClick={handleSubmit}>
-              Log in
+            <Button colorScheme='blue' style={buttonStyleLogin} type='submit' onClick={handleSubmit}>
+              Log in  
             </Button>
           </form>
           <Button variant='ghost'>
