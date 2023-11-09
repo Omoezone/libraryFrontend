@@ -14,7 +14,6 @@ import {
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { v4 as uuidv4 } from 'uuid';
 import { useUser } from './userContext';
 
 
@@ -47,9 +46,9 @@ const Login = () => {
       
       // Set the user state (data) in the userContext
       dispatch({ type: 'LOGIN', user: response.data });
-      // Set the user cookie. For now just email
-      Cookies.set('userCookie', userData.email);
-
+      // Set the user cookie. JWT encrypted
+      Cookies.set("userToken", response.data.authToken);
+      onClose();
     } catch (error) {
       // Handle the Axios error here
       console.error("Axios Error:", error);
