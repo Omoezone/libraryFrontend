@@ -11,8 +11,12 @@ import {
   Input,
   useDisclosure
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { v4 as uuidv4 } from 'uuid';
+import { useUser } from './userContext';
+
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,11 +25,13 @@ const Login = () => {
     password: ""
   });
 
+  const { dispatch } = useUser(); 
+
   const handleChange = (e:any) => {
-    const value = e.target.value;
+    const { name, value } = e.target;
     setData({
       ...data,
-      [e.target.name]: value
+      [name]: value
     });
   };
 
@@ -36,9 +42,14 @@ const Login = () => {
       password: data.password
     };
     try {
-      const response = await axios.post("http://localhost:3000/login", userData);
+      const response = await axios.post("http://localhost:3000/auth/login", userData);
       console.log("Axios response:", response);
-      // Handle successful response here
+      
+      // Set the user state (data) in the userContext
+      dispatch({ type: 'LOGIN', user: response.data });
+      // Set the user cookie. For now just email
+      Cookies.set('userCookie', userData.email);
+
     } catch (error) {
       // Handle the Axios error here
       console.error("Axios Error:", error);
@@ -66,7 +77,6 @@ const Login = () => {
                 <Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
               </FormControl>
             </ModalBody>
-
             <Button colorScheme='blue' style={buttonStyleLogin} type='submit' onClick={handleSubmit}>
               Log in  
             </Button>
@@ -77,7 +87,7 @@ const Login = () => {
         </ModalContent>
       </Modal>
     </>
-  )
+  );
 };
 
 export default Login;

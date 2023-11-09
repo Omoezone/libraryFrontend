@@ -1,16 +1,17 @@
-import { StarIcon } from '@chakra-ui/icons';
-import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, Spacer, Icon, VStack, StackDivider } from '@chakra-ui/react';
+import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, VStack, Flex } from '@chakra-ui/react';
 import StarRating from './stars';
+import TagButton from './bookModalTags';
+import { useUser } from '../user/userContext';  
 
 export const BookModal = ({ book, isOpen, onClose }) => {   
     const amountAvailable = book.available_amount;
-    console.log(book);
     const amountStyles = {
         color: amountAvailable === 0 ? "red" : amountAvailable <= 3 ? "yellow" : "green",
         padding: "1rem",
         textAlign: "center",
     };
-
+    const { user } = useUser(); 
+    console.log("user", user);
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -42,6 +43,11 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     <Box padding={5}>
                         <Text>{book.summary || "No Description"}</Text>
                     </Box>
+                    <Flex justifyContent="space-between">
+                        {book.Tags.map((tag: any) => (
+                            <TagButton key={tag.title} tag={tag} />
+                        )) || "No Genres"}
+                    </Flex>
                 </VStack>
                 </ModalBody>
             </ModalContent>
