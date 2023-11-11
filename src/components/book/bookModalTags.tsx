@@ -4,9 +4,7 @@ import { Button } from '@chakra-ui/react';
 const TagButton = ({ tag }) => {
     return (
         <Button
-            variant="outline"
-            size="sm"
-            colorScheme="teal"
+            variant="confirm"
         >
             {tag.title}
         </Button>

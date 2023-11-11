@@ -123,9 +123,6 @@ const Theme = extendTheme({
                 },
             },
         },
-
-
-
     }
 })
 
