@@ -26,9 +26,9 @@ export function UserProvider({ children }) {
 function userReducer(state:any, action:any) {
     switch (action.type) {
         case 'LOGIN':
-            return action.user;
+            return { user: action.user };
         case 'LOGOUT':
-            return null;
+            return { user: null };
         default:
             return state;
     }
