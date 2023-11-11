@@ -32,7 +32,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     That is 50 kr. 
                     Please respect our books, and we will respect you. Enjoy!`);
                 } else if (buttonClicked === 1) {
-                    const response = await axios.post(`http://localhost:3000/user/${user.user_id}/borrow/${book.book_id}`);
+                    const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/borrow/${book.book_id}`);
                     setAvailableAmount((prevAmount: number) => prevAmount - 1);
                     setFirstMessage('');
                     setSecondMessage('You have confirmed! An email has been sent to you. Enjoy!');
@@ -73,7 +73,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     <HStack spacing={4}>
                         <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
                         <Text as="u">{book.Author.username || "No Author"}</Text>
-                        <StarRating value={book.Reviews[0].stars || 3} />
+                        <StarRating value={book.Reviews[0].stars || 3} bookId={book.book_id} />
                     </HStack>
                     <Box padding={5}>
                         <Text>{book.summary || "No Description"}</Text>
