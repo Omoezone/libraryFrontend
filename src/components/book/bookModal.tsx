@@ -82,13 +82,12 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                             <TagButton key={tag.title} tag={tag}/>
                         )) || "No Genres"}
                     </Flex>
-                    <Divider my={4} borderColor="black.500" opacity={0.3}/>
-                    <Box padding={5} display="flex" flexDirection="column" alignItems="center">
+                    <Box padding={2} display="flex" flexDirection="column" alignItems="center">
                         {firstMessage && <Text>{firstMessage}</Text>}
                         {secondMessage && <Text>{secondMessage}</Text>}
                     </Box>
                     {buttonClicked < 2 && (
-                        <Button w="30%" left="30%" marginTop="1rem" marginBottom="1rem" 
+                        <Button w="30%" left="30%" marginBottom="2rem" 
                         variant="primary" onClick={handleClick} isDisabled={availableAmount <= 0}>              
                         {availableAmount <= 0 ? 'Out of stock' : buttonClicked ? 'Confirm' : 'Borrow Book'}
                         </Button>
