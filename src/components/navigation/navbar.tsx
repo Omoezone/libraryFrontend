@@ -4,8 +4,11 @@ import SearchBar from "./searchbar";
 import Userpage from "../user/userpage";
 import Login from "../user/login";
 import SignUp from "../user/signup";
+import { useUser } from "../user/userContext";
 
 const NavBar = () => {
+  const { user } = useUser();
+  console.log("NavBar user:", user.email)
 
   return (
   <>
@@ -13,8 +16,14 @@ const NavBar = () => {
       <BurgerMenu />
       <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
       <Spacer />
-      <Login />
-      <Userpage />
+      {/* {user ? ( */}
+        <Userpage />
+      {/* ) : ( */}
+        <>
+        <Login />
+        <SignUp />
+        </>
+      {/* )} */}
       <SearchBar />
     </HStack>
   </>

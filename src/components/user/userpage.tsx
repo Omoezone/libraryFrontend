@@ -16,7 +16,6 @@ import {
   } from '@chakra-ui/react'
   import { useUser } from '../user/userContext';  
 
-  
   export default function Userpage() {
     const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
     const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
