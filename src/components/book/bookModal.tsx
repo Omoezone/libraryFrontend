@@ -4,6 +4,7 @@ import TagButton from './bookModalTags';
 import { useUser } from '../user/userContext';  
 import axios from 'axios';
 import { useState } from 'react';
+import Theme from '../../theme';
 
 export const BookModal = ({ book, isOpen, onClose }) => {   
     const [availableAmount, setAvailableAmount] = useState(book.available_amount);
@@ -49,7 +50,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent bg="light.gradient">
                 <ModalCloseButton />
                 <ModalBody style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <img 
@@ -70,7 +71,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                         </Box>
                     </Box>
                     <HStack spacing={4}>
-                        <Text as="b" fontSize="md">{book.title || "No Title"}</Text>
+                        <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
                         <Text as="u">{book.Author.username || "No Author"}</Text>
                         <StarRating value={book.Reviews[0].stars || 3} />
                     </HStack>

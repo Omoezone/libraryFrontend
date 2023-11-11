@@ -5,7 +5,7 @@ const Theme = extendTheme({
         red: {
             solid: "#6F0000",
             gradient: "linear-gradient(174deg, rgba(111,0,0,1) 0%, rgba(15,12,41,1) 100%)",
-        },
+        }, 
         light: {
             solid: "#FFEFBA",
             gradient: "linear-gradient(174deg, rgba(255,255,255,1) 0%, rgba(255,239,186,1) 100%)",
