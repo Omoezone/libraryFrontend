@@ -1,16 +1,18 @@
-import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, VStack, Flex, Button, Center, Divider } from '@chakra-ui/react';
+import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, VStack, Flex, Button, Center, Divider, Link } from '@chakra-ui/react';
 import StarRating from './stars';
 import TagButton from './bookModalTags';
 import { useUser } from '../user/userContext';  
 import axios from 'axios';
 import { useState } from 'react';
 import Theme from '../../theme';
+import AuthorInfoModal from './authorModal';
 
 export const BookModal = ({ book, isOpen, onClose }) => {   
     const [availableAmount, setAvailableAmount] = useState(book.available_amount);
     const [buttonClicked, setButtonClicked] = useState(0);
     const [firstMessage, setFirstMessage] = useState('');
     const [secondMessage, setSecondMessage] = useState('');
+    const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
     const { user } = useUser(); 
     const amountAvailable = book.available_amount;
     const amountStyles = {
@@ -47,6 +49,9 @@ export const BookModal = ({ book, isOpen, onClose }) => {
             console.error('Error making Axios call for borrowBook:', error);
         }
     };
+    const handleClickableAuthor = () => {
+        setIsAuthorModalOpen(true);
+    };
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -72,9 +77,16 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     </Box>
                     <HStack spacing={4}>
                         <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
-                        <Text as="u">{book.Author.username || "No Author"}</Text>
+                        <Link as="u" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleClickableAuthor(); }}>{book.Author.username || "No Author"}</Link>
                         <StarRating value={book.Reviews[0].stars || 3} bookId={book.book_id} />
                     </HStack>
+                    {isAuthorModalOpen && (
+                        <AuthorInfoModal
+                            isOpen={isAuthorModalOpen}
+                            onClose={() => setIsAuthorModalOpen(false)}
+                            author={book.Author}
+                        />
+                    )}
                     <Box padding={5}>
                         <Text>{book.summary || "No Description"}</Text>
                     </Box>
