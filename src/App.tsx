@@ -21,16 +21,15 @@ const queryClient = new QueryClient();
 
 function App() {
 
-  const { dispatch } = useUser();
-
-  let { user } = useUser(); 
+  let { user, dispatch } = useUser(); 
+  console.log("User context value:", user);
 
   async function verifyUser() {
-    if (Cookies.get('userToken') && user) {
+    if (Cookies.get('userToken')) {
       try {
         const response = await axios.post("http://localhost:3000/auth/verify", { "authToken": Cookies.get('userToken') });
-        console.log("Axios response:", response);
-        dispatch({ type: 'LOGIN', user: response.data.user });
+        dispatch({ type: 'LOGIN', user: response.data });
+        console.log("user info after axios: ", user, "Axios response:", response.data)
       } catch (error) {
         Cookies.remove('userToken');
         console.error("Axios Error or expired token:", error);
@@ -42,6 +41,10 @@ function App() {
     verifyUser();
   }, []);
 
+  React.useEffect(() => {
+    console.log("User after axios:", user);
+  }, [user]);
+
   return (
     <ChakraProvider theme={Theme}>
       <UserProvider>
@@ -51,7 +54,6 @@ function App() {
           templateAreas={{
             base: `"nav" "main" "footer"`,
             lg: `"nav nav" "aside main" "footer"`,
-
           }}
         >
           <GridItem gridArea="nav" className="nav" width={"100%"}>

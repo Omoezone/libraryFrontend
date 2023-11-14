@@ -32,12 +32,11 @@ import {
       cursor: 'pointer'
     }
     let { user } = useUser(); 
-    console.log("user", user)
     let userEmail;
     let userPassword;
-    if(user) {
-      userEmail = (user && user.email) || "Email missing";
-      userPassword = (user && user.pass) || "Password missing";
+    if(user.user) {
+      userEmail = (user.user.email) || "Email missing";
+      userPassword = (user.user.pass) || "Password missing";
     }else{
       userEmail = "Email missing";
       userPassword = "Password missing";

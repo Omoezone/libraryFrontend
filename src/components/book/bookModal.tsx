@@ -22,7 +22,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
     };
     const handleClick = async () => {
         try {
-            if(user != null){
+            if(user.user != null){
                 if (buttonClicked === 0) {
                     setFirstMessage(`
                     After you confirm, you will receive an email with a receipt and tracking information.
@@ -34,7 +34,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     That is 50 kr. 
                     Please respect our books, and we will respect you. Enjoy!`);
                 } else if (buttonClicked === 1) {
-                    const response = await axios.post(`http://localhost:3000/user/${user.user_id}/borrow/${book.book_id}`);
+                    const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/borrow/${book.book_id}`);
                     setAvailableAmount((prevAmount: number) => prevAmount - 1);
                     setFirstMessage('');
                     setSecondMessage('You have confirmed! An email has been sent to you. Enjoy!');
