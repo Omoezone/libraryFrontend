@@ -32,8 +32,9 @@ import {
       cursor: 'pointer'
     }
     let { user } = useUser(); 
-    const userEmail = user ? user.email : "Email missing";
-    const userPassword = user ? user.pass : "Password missing";
+    console.log("user", user)
+    const userEmail = user ? user.user.user.email : "Email missing";
+    const userPassword = user ? user.user.user.pass : "Password missing";
     return (
       <>
         <Image src="assets/userLogo.svg" style={avatar_img_style} onClick={onOpen} />
