@@ -30,7 +30,7 @@ function App() {
       try {
         const response = await axios.post("http://localhost:3000/auth/verify", { "authToken": Cookies.get('userToken') });
         console.log("Axios response:", response);
-        dispatch({ type: 'LOGIN', user: response.data });
+        dispatch({ type: 'LOGIN', user: response.data.user });
       } catch (error) {
         Cookies.remove('userToken');
         console.error("Axios Error or expired token:", error);
@@ -46,7 +46,7 @@ function App() {
     <ChakraProvider theme={Theme}>
       <UserProvider>
       <CSSReset />
-      <QueryClientProvider client={queryClient}> {/* Wrap your app with QueryClientProvider */}
+      <QueryClientProvider client={queryClient}> 
         <Grid
           templateAreas={{
             base: `"nav" "main" "footer"`,

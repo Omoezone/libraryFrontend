@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer } from 'react';
 
 const UserContext = createContext({
     user: null,
+    auth: null,
     dispatch: (action: any) => {}, 
 });
 
@@ -26,9 +27,9 @@ export function UserProvider({ children }) {
 function userReducer(state:any, action:any) {
     switch (action.type) {
         case 'LOGIN':
-            return { user: action.user };
+            return  action.user;
         case 'LOGOUT':
-            return { user: null };
+            return null;
         default:
             return state;
     }

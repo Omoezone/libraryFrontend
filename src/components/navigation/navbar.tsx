@@ -8,22 +8,21 @@ import { useUser } from "../user/userContext";
 
 const NavBar = () => {
   const { user } = useUser();
-  console.log("NavBar user:", user.email)
-
+  console.log("user Nav", user)
   return (
   <>
     <HStack justifyContent="space-between" px={1} py={1}>
       <BurgerMenu />
       <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
       <Spacer />
-      {/* {user ? ( */}
+      {(user && user.email) ? (
         <Userpage />
-      {/* ) : ( */}
+      ) : (
         <>
         <Login />
         <SignUp />
         </>
-      {/* )} */}
+      )}
       <SearchBar />
     </HStack>
   </>

@@ -45,7 +45,7 @@ const Login = () => {
       console.log("Axios response:", response);
       
       // Set the user state (data) in the userContext
-      dispatch({ type: 'LOGIN', user: response.data });
+      dispatch({ type: 'LOGIN', user: response.data.user });
       // Set the user cookie. JWT encrypted
       Cookies.set("userToken", response.data.authToken);
       onClose();
