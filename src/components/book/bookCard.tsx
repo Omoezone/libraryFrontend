@@ -1,8 +1,8 @@
 
 import { Image } from "@chakra-ui/image";
 import { Book } from "../../types/book";
-import { Box, Card, CardBody, HStack, Heading } from "@chakra-ui/react";
-import Cover from "../../../public/assets/covers/book1.jpg"
+import { Box, Card, CardBody, Flex, HStack, Heading } from "@chakra-ui/react";
+
 
 
 interface Props {
@@ -13,10 +13,10 @@ interface Props {
 const BookCard = ({ book, openModal }: Props) => {
   return (
     <>
-      <Card maxW="sm"
+      <Card
         onClick={openModal}
         cursor="pointer">
-        <Image src={"/assets/covers/" + book.picture} alt="cover" />        
+        <Image src={"/assets/covers/" + book.picture} alt="cover" />
       </Card>
     </>
   );
