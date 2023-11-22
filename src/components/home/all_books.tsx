@@ -8,6 +8,9 @@ import { useState } from "react";
 import { BookModal } from "../book/bookModal";
 import { Card } from "@chakra-ui/react";
 
+import Results from "./results";
+
+
 
 export default function AllBooks() {
 
@@ -32,6 +35,8 @@ export default function AllBooks() {
         setVisible(!visible);
     };
 
+
+
     return (
         <>
             <Box className="all_books_top">
@@ -47,19 +52,12 @@ export default function AllBooks() {
                         }} />
                 </Box>
                 <h3 className={`hidden ${visible ? "hidden" : "show"}`}>{ } Results for "{searchTerm}":</h3>
+
             </Box>
 
             <Box id="all_books_container_container">
-                {data &&
-                    data.map((book, index) => (
-                        <Box className="result_container">
-                            {book.filter((val: any) => {
-                                return val;
-                            })}
-                            <BookCard book={book} openModal={() => openModal(book)} />
 
-                        </Box>
-                    ))}
+
                 <Box id="all_books_container">
                     {error && <p>{error.message}</p>}
                     {isLoading &&
