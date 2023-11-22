@@ -16,10 +16,12 @@ const BookCard = ({ book, openModal }: Props) => {
       <Card
         onClick={openModal}
         cursor="pointer">
-        <Image src={"/assets/covers/" + book.picture} alt="cover" />
+        <Image width={"10rem"} src={"/assets/covers/" + book.picture} alt="cover" />
       </Card>
     </>
   );
 };
+
+
 
 export default BookCard;
