@@ -25,13 +25,13 @@ function App() {
   console.log("User context value:", user);
 
   async function verifyUser() {
-    if (Cookies.get('userToken')) {
+    if (Cookies.get('authToken')) {
       try {
-        const response = await axios.post("http://localhost:3000/auth/verify", { "authToken": Cookies.get('userToken') });
+        const response = await axios.post("http://localhost:3000/auth/verify", { "authToken": Cookies.get('authtoken') });
         dispatch({ type: 'LOGIN', user: response.data });
         console.log("user info after axios: ", user, "Axios response:", response.data)
       } catch (error) {
-        Cookies.remove('userToken');
+        Cookies.remove('authToken');
         console.error("Axios Error or expired token:", error);
       }
     }

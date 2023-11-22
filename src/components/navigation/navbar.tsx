@@ -1,7 +1,7 @@
 import { HStack, Image, Spacer, Text } from "@chakra-ui/react";
 import BurgerMenu from "./burger";
 import SearchBar from "./searchbar";
-import Userpage from "../user/userpage";
+import Usertab from "../user/usertab/usertab";
 import Login from "../user/login";
 import SignUp from "../user/signup";
 import { useUser } from "../user/userContext";
@@ -15,14 +15,14 @@ const NavBar = () => {
       <BurgerMenu />
       <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
       <Spacer />
-      {(user.user) ? (
-        <Userpage />
-      ) : (
+      {/* {(user.user) ? ( */}
+        <Usertab />
+      {/* ) : ( */}
         <>
         <Login />
         <SignUp />
         </>
-      )}
+      {/* )} */}
       <SearchBar />
     </HStack>
   </>

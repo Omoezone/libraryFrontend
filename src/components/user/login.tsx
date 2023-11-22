@@ -47,7 +47,7 @@ const Login = () => {
       // Set the user state (data) in the userContext
       dispatch({ type: 'LOGIN', user: response.data.user });
       // Set the user cookie. JWT encrypted
-      Cookies.set("userToken", response.data.authToken);
+      Cookies.set("authToken", response.data.authToken);
       onClose();
     } catch (error) {
       // Handle the Axios error here
