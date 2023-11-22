@@ -69,7 +69,7 @@ import {
   
 	return (
 	  <>
-		<Button onClick={onOpen}>Sign up</Button>
+		<Button variant="primary" onClick={onOpen}>Sign up</Button>
 		<Modal isOpen={isOpen} onClose={onClose}>
 		  <ModalOverlay />
 		  <ModalContent>

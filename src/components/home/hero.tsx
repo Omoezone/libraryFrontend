@@ -1,9 +1,12 @@
-import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { RiNumber1, RiNumber0 } from 'react-icons/ri'
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, Text } from "@chakra-ui/react";
+import { useUser } from "../../components/user/userContext";
+import SignUp from '../user/signup';
 
 function Hero() {
+    const { user } = useUser();
+    console.log("user", user)
     return (
         <>
             <Box id="hero_container">
@@ -13,7 +16,12 @@ function Hero() {
                     <Box className="hero_p">
                         <p>Within 7 days of borrowing a book it will be delivered to you, for free. Unless of course you fail to deliver it back after 31 days. You understand. Enjoy! </p>
                     </Box>
-                    <Button variant="primary" width="100%" marginTop="30">Sign Up</Button>
+                    <br/> 
+                    {user.user ? (
+                        <h3>Welcome {user.user.UserName.first_name + " " + user.user.UserName.last_name} </h3>  
+                    ):(
+                        <SignUp/>
+                    )}
                 </Box>
                 <Box id="hero_right" color="dark" bg="light.gradient" className="hero_book_container" margin={3}>
                     <Box width={230} height={300} bg="gold.solid" borderRadius={3} marginTop={-5}></Box>

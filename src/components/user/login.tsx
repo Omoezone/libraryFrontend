@@ -61,7 +61,7 @@ const Login = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Log in</Button>
+      <Button variant="primary" onClick={onOpen}>Log in</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

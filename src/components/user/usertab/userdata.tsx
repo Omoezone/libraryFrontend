@@ -25,10 +25,10 @@ import {
     const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { dispatch } = useUser(); 
-
     let { user } = useUser(); 
-    const userEmail = user ? user.email : "Email missing";
-    const userPassword = user ? user.pass : "Password missing";
+
+    const userEmail = user ? user.user.email : "Email missing";
+    const userPassword = user ? user.user.pass : "Password missing";
     const scrollBehavior = 'inside';
 
     const update_img_style = {
