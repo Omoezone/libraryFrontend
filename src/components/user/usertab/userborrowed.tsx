@@ -12,11 +12,13 @@ import { BookModal } from '../../book/bookModal';
 import BookCard from '../../book/bookCard';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useEffect, useState } from 'react';
+import { useUser } from '../userContext'
 
 export default function Userborrowed() {
     const [selectedBook, setSelectedBook] = useState(null);
     const [borrowed, setBorrowed] = useState([]);
     const scrollBehavior = 'inside';
+    const { user } = useUser()
 
     const openModal = (book: any) => {
         setSelectedBook(book);
@@ -42,9 +44,9 @@ export default function Userborrowed() {
 
     const getBorrowed = async () => {
         try {
-            const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/borrowed`, { "authToken": Cookies.get('authtoken') });
+            const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/borrowed`, { "authToken": Cookies.get('authToken') });
             setBorrowed(response.data);
-            console.log("Reviews:", response.data);
+            console.log("Borrowed books", response.data);
         } catch (error) {
             console.error("Axios Error:", error);
         }
@@ -66,18 +68,10 @@ export default function Userborrowed() {
                         className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
                     >
                         {borrowed.map((book, index) => (
-                                /*  <Img
-                                     key={book.book_id || index}
-                                     shadow={1}
-                                     className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
-                                     src={"../../../public/assets/covers/" + book.picture}
-                                     alt='/'
-                                 /> */
-                                <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
-                                    <BookCard book={book} openModal={() => openModal(book)} />
-                                </Box>
-
-                            ))}
+                            <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
+                                <BookCard book={book} openModal={() => openModal(book)} />
+                            </Box>
+                        ))}
                     </Box>
                     {selectedBook && (
                         <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
