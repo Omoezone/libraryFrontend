@@ -28,7 +28,7 @@ const StarRating = ({ value, bookId }) => {
     const handleStarClick = async (clickedValue: any) => {
         // Notify the parent component about the changed value
         try {
-            const response = await axios.post(`http://localhost:3000/user/${user.user_id}/review/${bookId}/${clickedValue}`);
+            const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/review/${bookId}/${clickedValue}`);
             setIsModalOpen(true);
             console.log(response.data);
         } catch (error) {
