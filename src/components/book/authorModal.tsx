@@ -24,12 +24,12 @@ const AuthorInfoModal = ({ isOpen, onClose, author }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="light.gradient">
             <ModalCloseButton />
             <ModalBody>
             <VStack spacing={4}>
-                <Text><b>{author.username || "No Author Information"}</b></Text>
-                <Text>{author.total_books}: Published Books</Text>
+                <h2><b>{author.username || "No Author Information"}</b></h2>
+                <p>{author.total_books}: Published Books</p>
                 <Box id='slider'
                         className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'> 
                     {booksByAuthor.map(book => (
