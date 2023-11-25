@@ -7,7 +7,7 @@ import '@fontsource/lato/700.css'
 import '@fontsource/lato/400.css'
 import Theme from "./theme";
 
-import React from "react";
+import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -17,11 +17,14 @@ import FooterBar from "./components/navigation/footer"
 import { UserProvider } from "./components/user/userContext";
 import { useUser } from "./components/user/userContext";
 
+import { useQuery } from 'react-query';
+
+
 const queryClient = new QueryClient();
 
 function App() {
 
-  let { user, dispatch } = useUser(); 
+  let { user, dispatch } = useUser();
   console.log("User context value:", user);
 
   async function verifyUser() {
@@ -45,30 +48,32 @@ function App() {
     console.log("User after axios:", user);
   }, [user]);
 
+
+
   return (
     <ChakraProvider theme={Theme}>
       <UserProvider>
-      <CSSReset />
-      <QueryClientProvider client={queryClient}> 
-        <Grid
-          templateAreas={{
-            base: `"nav" "main" "footer"`,
-            lg: `"nav nav" "aside main" "footer"`,
-          }}
-        >
-          <GridItem gridArea="nav" className="nav" width={"100%"}>
-            <NavBar />
-          </GridItem>
+        <CSSReset />
+        <QueryClientProvider client={queryClient}>
+          <Grid
+            templateAreas={{
+              base: `"nav" "main" "footer"`,
+              lg: `"nav nav" "aside main" "footer"`,
+            }}
+          >
+            <GridItem gridArea="nav" className="nav" width={"100%"}>
+              <NavBar />
+            </GridItem>
 
-          <GridItem gridArea="main">
-            <Home />
-          </GridItem>
+            <GridItem gridArea="main">
+              <Home />
+            </GridItem>
 
-          <GridItem gridArea="footer" >
-            <FooterBar />
-          </GridItem>
-        </Grid>
-      </QueryClientProvider>
+            <GridItem gridArea="footer" >
+              <FooterBar />
+            </GridItem>
+          </Grid>
+        </QueryClientProvider>
       </UserProvider>
     </ChakraProvider>
   );

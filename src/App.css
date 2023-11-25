@@ -50,7 +50,7 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .hero_text {
@@ -95,7 +95,8 @@
   font-size: 1rem;
 }
 
-#all_books_container {
+#all_books_container,
+#filtered_books_container {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, 10rem);
@@ -179,7 +180,8 @@
     text-align: center;
   }
 
-  #all_books_container {
+  #all_books_container,
+  #filtered_books_container {
     grid-gap: 1rem;
     /* margin: 0 8rem 8rem 3rem; */
   }

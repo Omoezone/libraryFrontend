@@ -3,18 +3,24 @@ import { LuListTodo } from 'react-icons/lu';
 import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
 import { useState } from 'react';
 
+
 function Subdjekt() {
 
-    const [selectedSub1, setSelectedSub1] = useState(true);
-    const [selectedSub2, setSelectedSub2] = useState(true);
-    const [selectedSub3, setSelectedSub3] = useState(true);
-    const [selectedSub4, setSelectedSub4] = useState(true);
-    const [selectedSub5, setSelectedSub5] = useState(true);
-    const [selectedSub6, setSelectedSub6] = useState(true);
+    const [selectedSub1, setSelectedSub1] = useState(false);
+    const [selectedSub2, setSelectedSub2] = useState(false);
+    const [selectedSub3, setSelectedSub3] = useState(false);
+    const [selectedSub4, setSelectedSub4] = useState(false);
+    const [selectedSub5, setSelectedSub5] = useState(false);
+    const [selectedSub6, setSelectedSub6] = useState(false);
 
     /*  const selectOnClick = () => {
          setSelected(!selected)
      }; */
+
+    const [filterTerm, setFilterTerm] = useState("");
+    const [show, setShow] = useState(false);
+
+
 
     return (
 
@@ -28,9 +34,11 @@ function Subdjekt() {
 
                 <Button onClick={() => {
                     setSelectedSub1(!selectedSub1)
+                    setShow(!show)
+
                 }}
                     variant={selectedSub1 ? 'select' : 'selected'}>
-                    Subject 1
+                    Fantasy
                     {selectedSub1 ? <SmallAddIcon /> : <CheckIcon />}
                 </Button>
                 <Button onClick={() => {

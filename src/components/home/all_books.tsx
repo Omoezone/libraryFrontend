@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react"
+import { Box, Button, Flex } from "@chakra-ui/react"
 import SearchBar from "../navigation/searchbar"
 import BookCard from "../book/bookCard"
 import BookCardSkeleton from "../book/bookCardSkeleton";
@@ -8,11 +8,12 @@ import { useState } from "react";
 import { BookModal } from "../book/bookModal";
 import { Card } from "@chakra-ui/react";
 
-import Results from "./results";
+
+import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
 
 
 
-export default function AllBooks() {
+export default function AllBooks(props) {
 
     const { data, error, isLoading } = useBooks();
     const [selectedBook, setSelectedBook] = useState(null);
@@ -30,12 +31,15 @@ export default function AllBooks() {
     const [filterTerm, setFilterTerm] = useState("");
     const [visible, setVisible] = useState(true);
     const [visible2, setVisible2] = useState(true);
+    const [show, setShow] = useState(false);
 
     const onChangeSearch = () => {
         setVisible(!visible);
     };
 
+    const [selectedSub1, setSelectedSub1] = useState(true);
 
+    const { bookData } = props;
 
     return (
         <>
@@ -58,7 +62,7 @@ export default function AllBooks() {
             <Box id="all_books_container_container">
 
 
-                <Box id="all_books_container">
+                <Box id="all_books_container" className={` ${show ? "hidden" : "show"}`}>
                     {error && <p>{error.message}</p>}
                     {isLoading &&
                         skeleton.map((skeleton) => (
@@ -71,15 +75,46 @@ export default function AllBooks() {
                         data.map((book, index) => (
                             <Box key={book.book_id || index}>
                                 <BookCard book={book} openModal={() => openModal(book)} />
+
                             </Box>
                         ))}
                 </Box>
+
+
+
                 {selectedBook && (
                     <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
                 )}
+
+                <Box id="filtered_books_container" className={` ${show ? "show" : "hidden"}`}>
+
+
+                    {data &&
+                        data.map((book, index) => (
+                            <Box key={book.book_id || index}>
+                                <BookCard book={book} openModal={() => openModal(book)} />
+                                <p>
+                                    {book.Tags.map((tag: any) => (
+                                        <p>{tag.title}</p>
+                                    ))}
+                                </p>
+                            </Box>
+                        ))}
+                </Box>
                 <Box className="hide_on_mobil">
                     <Sorting />
+                    {/* <Subdjekt show={show} onShowChange={setShow} /> */}
+                    <Button onClick={() => {
+                        setSelectedSub1(!selectedSub1)
+                        setShow(!show)
+
+                    }}
+                        variant={selectedSub1 ? 'select' : 'selected'}>
+                        Fantasy
+                        {selectedSub1 ? <SmallAddIcon /> : <CheckIcon />}
+                    </Button>
                 </Box>
+
             </Box>
         </>
     )
