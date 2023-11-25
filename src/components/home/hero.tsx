@@ -21,7 +21,11 @@ function Hero() {
     const fetchBooksFromBackend = () => {
     fetch('http://localhost:3000/books')
         .then(response => response.json())
-        .then(data => setBooks(data))
+        .then(data =>  {
+            console.log('Received data:', data);
+            setBooks(data);
+            console.log('Books:', data[0])
+        })
         .catch(error => console.error('Error fetching books:', error));
     };
 
@@ -56,12 +60,14 @@ function Hero() {
                         width={230} height={340} bg="gold.solid" borderRadius={3} marginTop={-10}
                         className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
                     >
-                        <BookCard book={data[0]} openModal={() => openModal(data[0])}/>
+                        {data.length > 0 && (
+                            <BookCard book={data[0]} openModal={() => openModal(data[0])}/>
+                        )}
                     </Box>
                     {selectedBook && (
                         <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
                     )}
-                    <Box className="flex" marginBottom={3} marginTop={3}>
+                    <Box className="flex" margin="0rem 1rem 2rem 2rem">
                         <h3>
                             Top Book
                             of the 
