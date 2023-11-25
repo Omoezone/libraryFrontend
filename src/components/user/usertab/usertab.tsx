@@ -12,6 +12,7 @@ import Theme from '../../../theme';
 import Userdata from './userdata';
 import Userborrowed from './userborrowed';
 import UserReviews from "./userreviews";
+import UserBookmarked from "./userbookmarks";
 
 export default function usertab() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -49,7 +50,7 @@ export default function usertab() {
                 </div>
                 <div>
                     {activeTab === 'bookmarks' ?
-                        <div>Tab content1</div>
+                        <UserBookmarked/>
                     : activeTab === 'borrowed' ? 
                         <Userborrowed />
                     : activeTab === 'authors' ? 
