@@ -13,7 +13,7 @@ import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
 
 
 
-export default function AllBooks(props) {
+export default function AllBooks() {
 
     const { data, error, isLoading } = useBooks();
     const [selectedBook, setSelectedBook] = useState(null);
@@ -39,7 +39,25 @@ export default function AllBooks(props) {
 
     const [selectedSub1, setSelectedSub1] = useState(true);
 
-    const { bookData } = props;
+    /* console.log(Array.isArray(data)); */
+
+    const myfilter = data && data.map((book: any) => {
+        return Object.values(book.Tags.map((tag: any) => {
+            /*   return tag.map((val: [any]) => { return val }) */
+            return tag.title
+
+
+            /* tag.title.filter((tag.title) => tag.title.length > 6) */
+
+        }))[0]
+    });
+
+
+
+
+    console.log("filter");
+    console.log(myfilter);
+    console.log("filter");
 
     return (
         <>
@@ -91,15 +109,35 @@ export default function AllBooks(props) {
 
                     {data &&
                         data.map((book, index) => (
+
                             <Box key={book.book_id || index}>
                                 <BookCard book={book} openModal={() => openModal(book)} />
-                                <p>
-                                    {book.Tags.map((tag: any) => (
-                                        <p>{tag.title}</p>
-                                    ))}
-                                </p>
+
+                                {book.Tags.map((tag: any) => (
+                                    /*   <p> {tag.filter((val: any) => { console.log(val); })}</p> */
+                                    <p> {tag.title}</p>
+                                ))}
+
                             </Box>
+
                         ))}
+                    {data && data.map((book) => (
+                        <Box key={book.book_id}>
+                            <Box>
+                                {/*   {book.filter(book.pages > 10)} */}
+                            </Box>
+                        </Box>
+                        /*  if (val.Tags.title.includes("Fantacy")) {
+                             return val;
+                         }
+                     )
+                         .map((val: any, key: any) => {
+                             return (
+                                 <BookCard {...val} key={key.book_id} book={val} />
+                             )
+                         }
+                         ) */
+                    ))}
                 </Box>
                 <Box className="hide_on_mobil">
                     <Sorting />
