@@ -37,7 +37,50 @@ export default function AllBooks() {
         setVisible(!visible);
     };
 
-    const [fantasy, setFantasy] = useState(true);
+    const [themeList, setThemeList] = useState([]);
+
+
+
+    const addTheme = (e: any) => {
+        if (themeList.includes(e) === true) {
+            themeList.map((theme: any) => {
+                /*   console.log(theme) */
+                for (let key in themeList) {
+                    if (themeList[key] === e) {
+                        const newArr = [...themeList]
+
+                        for (let key in themeList) {
+                            if (newArr[key] === undefined) {
+                                delete newArr[key]
+                            }
+                        }
+
+                        delete themeList[key]
+                        setThemeList(newArr)
+                        console.log(e)
+                        console.log(newArr)
+                    }
+
+                }
+
+
+            })
+        } else if (themeList.includes(e) === false) {
+            const newArr = [...themeList]
+            console.log(e)
+            newArr.push(e)
+            setThemeList(newArr)
+            console.log(newArr + "lå")
+        }
+
+    };
+
+
+    /*   console.log(theme) */
+
+
+    const [fantasy, setFantasy] = useState(false);
+    const [nonFiction, setNonFiction] = useState(false);
 
     /* console.log(Array.isArray(data)); */
 
@@ -52,11 +95,12 @@ export default function AllBooks() {
 
         }))[0]
     });
+    /*    console.log(tags) */
 
     /*   const cleanTags = tags.filter((x: any) => x !== undefined);
-  
+     
       const fantasy = cleanTags.filter((cleanTags: string) => cleanTags == "Fantasy");
-  
+     
       console.log("filter");
       console.log(cleanTags);
       console.log("filter"); */
@@ -116,9 +160,10 @@ export default function AllBooks() {
                                     if (data[key] === undefined) {
                                         delete data[key];
                                     } else {
-                                        if (tag.title == filterTerm) {
-                                            return (<BookCard book={book} openModal={() => openModal(book)} />)
 
+                                        if (tag.title == filterTerm) {
+
+                                            return (<BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />)
                                         }
                                     }
                                 }
@@ -142,12 +187,23 @@ export default function AllBooks() {
                     <Button onClick={() => {
                         setFantasy(!fantasy)
                         setShow(!show)
-                        setFilterTerm("Fantasy");
-
+                        setFilterTerm("Fantasy")
+                        addTheme(filterTerm);
                     }}
                         variant={fantasy ? 'select' : 'selected'}>
                         Fantasy
                         {fantasy ? <SmallAddIcon /> : <CheckIcon />}
+                    </Button>
+                    <Button onClick={() => {
+                        setNonFiction(!nonFiction)
+                        setShow(!show)
+                        setFilterTerm("Non-Fiction")
+                        addTheme(filterTerm);
+
+                    }}
+                        variant={nonFiction ? 'select' : 'selected'}>
+                        Non-Fiction
+                        {nonFiction ? <SmallAddIcon /> : <CheckIcon />}
                     </Button>
                 </Box>
 
