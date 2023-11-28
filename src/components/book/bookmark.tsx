@@ -6,7 +6,6 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 const BookmarkButton = ({ book, user }) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
-
     useEffect(() => {
         // Check if the book is already bookmarked by the user
         // You may need to adjust the condition based on your data structure

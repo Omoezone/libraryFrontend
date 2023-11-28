@@ -75,7 +75,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     <Spacer/>
                     <HStack justifyContent="center">
                             <Text style={amountStyles}>Available: {availableAmount || 0}</Text>
-                            <BookMarkButton book={book} user={user.user} />                    
+                            {user.user && <BookMarkButton book={book} user={user.user} />}              
                     </HStack>
                     <HStack justifyContent="center">
                         <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
