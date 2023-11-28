@@ -37,13 +37,14 @@ export default function AllBooks() {
         setVisible(!visible);
     };
 
-    const [selectedSub1, setSelectedSub1] = useState(true);
+    const [fantasy, setFantasy] = useState(true);
 
     /* console.log(Array.isArray(data)); */
 
     const tags = data && data.map((book: any) => {
         return Object.values(book.Tags.map((tag: any) => {
             /*   return tag.map((val: [any]) => { return val }) */
+
             return tag.title
 
 
@@ -52,13 +53,13 @@ export default function AllBooks() {
         }))[0]
     });
 
-    const cleanTags = tags.filter(function (x: any) { return x !== undefined; });
-
-    const fantasy = cleanTags.filter((cleanTags) => cleanTags == "Fantasy");
-
-    console.log("filter");
-    console.log(fantasy);
-    console.log("filter");
+    /*   const cleanTags = tags.filter((x: any) => x !== undefined);
+  
+      const fantasy = cleanTags.filter((cleanTags: string) => cleanTags == "Fantasy");
+  
+      console.log("filter");
+      console.log(cleanTags);
+      console.log("filter"); */
 
     return (
         <>
@@ -108,28 +109,45 @@ export default function AllBooks() {
                 <Box id="filtered_books_container" className={` ${show ? "show" : "hidden"}`}>
 
                     {data &&
-                        data.map((book, index) => (
-                            <Box key={book.book_id || index}>
-                                <BookCard book={book} openModal={() => openModal(book)} />
-                                {/* {book.Tags.map((tag: any) => (
-                                    <p>{tag.title}</p>
-                                ))} */}
-                                { }
-                                <p>låå</p>
-                            </Box>
-                        ))}
+                        data.map((book: any) => {
+                            return Object.values(book.Tags.map((tag: any) => {
+
+                                for (let key in data) {
+                                    if (data[key] === undefined) {
+                                        delete data[key];
+                                    } else {
+                                        if (tag.title == filterTerm) {
+                                            return (<BookCard book={book} openModal={() => openModal(book)} />)
+
+                                        }
+                                    }
+                                }
+
+                            }))
+                        })}
+                    {/*         <Box key={book.book_id || index}>
+
+                        <BookCard book={book} openModal={() => openModal(book)} />
+                        {book.Tags.map((tag: any) => {
+                            return tag.title
+                        })}
+
+
+                    </Box>
+                        ))}  */}
                 </Box>
                 <Box className="hide_on_mobil">
                     <Sorting />
                     {/* <Subdjekt show={show} onShowChange={setShow} /> */}
                     <Button onClick={() => {
-                        setSelectedSub1(!selectedSub1)
+                        setFantasy(!fantasy)
                         setShow(!show)
+                        setFilterTerm("Fantasy");
 
                     }}
-                        variant={selectedSub1 ? 'select' : 'selected'}>
+                        variant={fantasy ? 'select' : 'selected'}>
                         Fantasy
-                        {selectedSub1 ? <SmallAddIcon /> : <CheckIcon />}
+                        {fantasy ? <SmallAddIcon /> : <CheckIcon />}
                     </Button>
                 </Box>
 
