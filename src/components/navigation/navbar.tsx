@@ -8,7 +8,6 @@ import { useUser } from "../user/userContext";
 
 const NavBar = () => {
   const { user } = useUser();
-  console.log("user Nav", user)
   return (
   <>
     <HStack justifyContent="space-between" px={1} py={1}>
