@@ -22,7 +22,6 @@ export default function UserReviews() {
     try {
       const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/reviews`, { "authToken": Cookies.get('authToken') });
       setReviews(response.data);
-      console.log("Reviews:", response.data);
     } catch (error) {
       console.error("Axios Error:", error);
     }

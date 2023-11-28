@@ -10,7 +10,6 @@ import { BookModal } from '../book/bookModal';
 
 function Hero() {
     const { user } = useUser();
-    console.log("user", user)
     const [selectedBook, setSelectedBook] = useState(null);
     const [data, setBooks] = useState([]);
 
@@ -22,9 +21,7 @@ function Hero() {
     fetch('http://localhost:3000/books')
         .then(response => response.json())
         .then(data =>  {
-            console.log('Received data:', data);
             setBooks(data);
-            console.log('Books:', data[0])
         })
         .catch(error => console.error('Error fetching books:', error));
     };

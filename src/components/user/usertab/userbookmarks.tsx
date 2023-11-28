@@ -18,14 +18,14 @@ const [bookmarks, setBookmarks] = useState([]);
 const { user } = useUser();
 
 const getBookmarks = async () => {
-try {
-    const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/bookmarks/`, { "authToken": Cookies.get('authToken') });
-    setBookmarks(response.data);
-    console.log("Response:", response.data)
-    console.log("user:", user);
-} catch (error) {
-    console.error("Axios Error:", error);
-}
+    try {
+        const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/bookmarks/`, { "authToken": Cookies.get('authToken') });
+        setBookmarks(response.data);
+        console.log("Response:", response.data)
+        console.log("user:", user);
+    } catch (error) {
+        console.error("Axios Error:", error);
+    }
 }
 
 useEffect(() => {

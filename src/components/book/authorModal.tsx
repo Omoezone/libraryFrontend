@@ -1,10 +1,14 @@
 import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Text, VStack, UnorderedList, ListItem, Box } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Book } from '../../types/book';
 import BookCard from './bookCard';
+import FavoritedButton from './favorited';
+import { useUser } from '../user/userContext';
 
 const AuthorInfoModal = ({ isOpen, onClose, author }) => {
     const [booksByAuthor, setBooksByAuthor] = useState([]);
+    const { user } = useUser();
 
     useEffect(() => {
         if (isOpen) {
@@ -28,7 +32,9 @@ const AuthorInfoModal = ({ isOpen, onClose, author }) => {
             <ModalCloseButton />
             <ModalBody>
             <VStack spacing={4}>
-                <h2><b>{author.username || "No Author Information"}</b></h2>
+                <h2><b>{author.username || "No Author Information"}</b></h2>{user.user ? (
+                        <FavoritedButton author={author} user={user.user} />
+                    ) : (<></>)}
                 <p>{author.total_books}: Published Books</p>
                 <Box id='slider'
                         className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'> 

@@ -11,6 +11,7 @@ import {
 import Theme from '../../../theme';
 import Userdata from './userdata';
 import Userborrowed from './userborrowed';
+import UserFavoritedAuthors from "./userauthors";
 import UserReviews from "./userreviews";
 import UserBookmarked from "./userbookmarks";
 
@@ -54,7 +55,7 @@ export default function usertab() {
                     : activeTab === 'borrowed' ? 
                         <Userborrowed />
                     : activeTab === 'authors' ? 
-                        <div>Tab content3</div>
+                        <UserFavoritedAuthors />
                     : activeTab === 'reviews' ?
                         <UserReviews />
                     : activeTab === 'userinfo' ?
