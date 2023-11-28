@@ -41,7 +41,7 @@ export default function AllBooks() {
 
     /* console.log(Array.isArray(data)); */
 
-    const myfilter = data && data.map((book: any) => {
+    const tags = data && data.map((book: any) => {
         return Object.values(book.Tags.map((tag: any) => {
             /*   return tag.map((val: [any]) => { return val }) */
             return tag.title
@@ -52,11 +52,12 @@ export default function AllBooks() {
         }))[0]
     });
 
+    const cleanTags = tags.filter(function (x: any) { return x !== undefined; });
 
-
+    const fantasy = cleanTags.filter((cleanTags) => cleanTags == "Fantasy");
 
     console.log("filter");
-    console.log(myfilter);
+    console.log(fantasy);
     console.log("filter");
 
     return (
@@ -106,38 +107,17 @@ export default function AllBooks() {
 
                 <Box id="filtered_books_container" className={` ${show ? "show" : "hidden"}`}>
 
-
                     {data &&
                         data.map((book, index) => (
-
                             <Box key={book.book_id || index}>
                                 <BookCard book={book} openModal={() => openModal(book)} />
-
-                                {book.Tags.map((tag: any) => (
-                                    /*   <p> {tag.filter((val: any) => { console.log(val); })}</p> */
-                                    <p> {tag.title}</p>
-                                ))}
-
+                                {/* {book.Tags.map((tag: any) => (
+                                    <p>{tag.title}</p>
+                                ))} */}
+                                { }
+                                <p>låå</p>
                             </Box>
-
                         ))}
-                    {data && data.map((book) => (
-                        <Box key={book.book_id}>
-                            <Box>
-                                {/*   {book.filter(book.pages > 10)} */}
-                            </Box>
-                        </Box>
-                        /*  if (val.Tags.title.includes("Fantacy")) {
-                             return val;
-                         }
-                     )
-                         .map((val: any, key: any) => {
-                             return (
-                                 <BookCard {...val} key={key.book_id} book={val} />
-                             )
-                         }
-                         ) */
-                    ))}
                 </Box>
                 <Box className="hide_on_mobil">
                     <Sorting />
