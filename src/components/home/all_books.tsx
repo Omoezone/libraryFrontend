@@ -30,16 +30,20 @@ export default function AllBooks() {
 
     const [searchTerm, setsearchTerm] = useState("");
 
-    const [visible, setVisible] = useState(true);
-    const [visible2, setVisible2] = useState(true);
-    const [show, setShow] = useState(false);
-
-    const onChangeSearch = () => {
-        setVisible(!visible);
-    };
-
+    const [show, setShow] = useState("All books");
     const [filterTerm, setFilterTerm] = useState("All");
+    /*  const [visible, setVisible] = useState(true);
+ 
+     const onChangeSearch = () => {
+         setVisible(!visible);
+     }; */
+    const removeValue = () => {
+        setsearchTerm("")
+        console.log(searchTerm)
+    }
 
+
+    console.log(searchTerm)
 
     return (
         <>
@@ -47,22 +51,23 @@ export default function AllBooks() {
                 <h2 className="hero_text">All Books</h2>
                 <Box className="flex" justifyContent={"center"} marginBottom={3}>
                     {/* <SearchBar /> */}
+
                     <input type="text" className="shade" placeholder="Search for book title"
+                        value={searchTerm}
+                        onBlurCapture={removeValue}
                         onChange={(event) => {
                             setsearchTerm(event.target.value);
                             if (searchTerm.length < 1) {
-                                onChangeSearch();
+                                setShow("Searched books");
                             }
                         }} />
                 </Box>
-                <h3 className={`hidden ${visible ? "hidden" : "show"}`}>{ } Results for "{searchTerm}":</h3>
 
             </Box>
 
+
             <Box id="all_books_container_container">
-
-
-                <Box id="all_books_container" className={` ${show ? "hidden" : "show"}`}>
+                <Box id="all_books_container" className={` ${show === "All books" ? "show" : "hidden"}`}>
                     {error && <p>{error.message}</p>}
                     {isLoading &&
                         skeleton.map((skeleton) => (
@@ -79,19 +84,16 @@ export default function AllBooks() {
                             </Box>
                         ))}
                 </Box>
-
-
-
                 {selectedBook && (
                     <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
                 )}
 
-                <Box id="filtered_books_container" className={` ${show ? "show" : "hidden"}`}>
+                <Box id="filtered_books_container" className={` ${show === "Filtered books" ? "show" : "hidden"}`}>
 
                     {data &&
                         data.map((book: any) => {
                             return Object.values(book.Tags.map((tag: any) => {
-                                console.log(tag.title)
+
                                 for (let key in data) {
                                     if (data[key] === undefined) {
                                         delete data[key];
@@ -109,12 +111,32 @@ export default function AllBooks() {
                         })}
 
                 </Box>
+                <Box id="searched_books_container" className={` ${show === "Searched books" ? "show" : "hidden"}`}>
+                    {/*  <h3 className={` ${show === "Searched books" ? "show" : "hidden"}`}>{ } Results for "{searchTerm}":</h3> */}
+                    {data &&
+                        data.map((book: any) => {
+                            if (searchTerm === "") {
+                                if (show === "Searched books") {
+                                    setShow("All books");
+                                }
+                            } else if (book.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                return <BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />
+                            }
+
+
+
+
+                            /* return (
+                                <BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />) */
+                        })}
+
+                </Box>
                 <Box className="hide_on_mobil">
                     {/*  <Sorting /> */}
                     {/* <Subdjekt show={show} onShowChange={setShow} /> */}
                     <Button onClick={() => {
                         setFilterTerm("All")
-                        setShow(false)
+                        setShow("All books")
                     }}
                         variant={filterTerm === 'All' ? 'selected' : 'select'}>
                         All
@@ -122,7 +144,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Fantasy")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Fantasy' ? 'selected' : 'select'}>
                         Fantasy
@@ -130,7 +152,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Non-Fiction")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Non-Fiction' ? 'selected' : 'select'}>
                         Non-Fiction
@@ -138,7 +160,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Biography")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Biography' ? 'selected' : 'select'}>
                         Biography
@@ -146,7 +168,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Mystery")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Mystery' ? 'selected' : 'select'}>
                         Mystery
@@ -154,7 +176,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Self-Help")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Self-Help' ? 'selected' : 'select'}>
                         Self-Help
@@ -162,7 +184,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Romance")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Romance' ? 'selected' : 'select'}>
                         Romance
@@ -170,7 +192,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Science Fiction")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Science Fiction' ? 'selected' : 'select'}>
                         Science Fiction
@@ -178,7 +200,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("Adventure")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'Adventure' ? 'selected' : 'select'}>
                         Adventure
@@ -186,7 +208,7 @@ export default function AllBooks() {
 
                     <Button onClick={() => {
                         setFilterTerm("History")
-                        setShow(true)
+                        setShow("Filtered books")
                     }}
                         variant={filterTerm === 'History' ? 'selected' : 'select'}>
                         History

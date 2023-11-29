@@ -96,7 +96,8 @@
 }
 
 #all_books_container,
-#filtered_books_container {
+#filtered_books_container,
+#searched_books_container {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, 10rem);
@@ -181,7 +182,8 @@
   }
 
   #all_books_container,
-  #filtered_books_container {
+  #filtered_books_container,
+  #searched_books_container {
     grid-gap: 1rem;
     /* margin: 0 8rem 8rem 3rem; */
   }
