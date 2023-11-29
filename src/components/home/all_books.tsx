@@ -9,7 +9,8 @@ import { BookModal } from "../book/bookModal";
 import { Card } from "@chakra-ui/react";
 
 
-import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons'
+import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons';
+
 
 
 
@@ -28,7 +29,7 @@ export default function AllBooks() {
     };
 
     const [searchTerm, setsearchTerm] = useState("");
-    const [filterTerm, setFilterTerm] = useState("");
+
     const [visible, setVisible] = useState(true);
     const [visible2, setVisible2] = useState(true);
     const [show, setShow] = useState(false);
@@ -37,73 +38,8 @@ export default function AllBooks() {
         setVisible(!visible);
     };
 
-    const [themeList, setThemeList] = useState([]);
+    const [filterTerm, setFilterTerm] = useState("All");
 
-
-
-    const addTheme = (e: any) => {
-        if (themeList.includes(e) === true) {
-            themeList.map((theme: any) => {
-                /*   console.log(theme) */
-                for (let key in themeList) {
-                    if (themeList[key] === e) {
-                        const newArr = [...themeList]
-
-                        for (let key in themeList) {
-                            if (newArr[key] === undefined) {
-                                delete newArr[key]
-                            }
-                        }
-
-                        delete themeList[key]
-                        setThemeList(newArr)
-                        console.log(e)
-                        console.log(newArr)
-                    }
-
-                }
-
-
-            })
-        } else if (themeList.includes(e) === false) {
-            const newArr = [...themeList]
-            console.log(e)
-            newArr.push(e)
-            setThemeList(newArr)
-            console.log(newArr + "lå")
-        }
-
-    };
-
-
-    /*   console.log(theme) */
-
-
-    const [fantasy, setFantasy] = useState(false);
-    const [nonFiction, setNonFiction] = useState(false);
-
-    /* console.log(Array.isArray(data)); */
-
-    const tags = data && data.map((book: any) => {
-        return Object.values(book.Tags.map((tag: any) => {
-            /*   return tag.map((val: [any]) => { return val }) */
-
-            return tag.title
-
-
-            /* tag.title.filter((tag.title) => tag.title.length > 6) */
-
-        }))[0]
-    });
-    /*    console.log(tags) */
-
-    /*   const cleanTags = tags.filter((x: any) => x !== undefined);
-     
-      const fantasy = cleanTags.filter((cleanTags: string) => cleanTags == "Fantasy");
-     
-      console.log("filter");
-      console.log(cleanTags);
-      console.log("filter"); */
 
     return (
         <>
@@ -155,56 +91,107 @@ export default function AllBooks() {
                     {data &&
                         data.map((book: any) => {
                             return Object.values(book.Tags.map((tag: any) => {
-
+                                console.log(tag.title)
                                 for (let key in data) {
                                     if (data[key] === undefined) {
                                         delete data[key];
                                     } else {
 
-                                        if (tag.title == filterTerm) {
+                                        if (tag.title == filterTerm /* || filterTerm.includes.(tag.title) */) {
 
-                                            return (<BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />)
+                                            return (
+                                                <BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />)
                                         }
                                     }
                                 }
 
                             }))
                         })}
-                    {/*         <Box key={book.book_id || index}>
 
-                        <BookCard book={book} openModal={() => openModal(book)} />
-                        {book.Tags.map((tag: any) => {
-                            return tag.title
-                        })}
-
-
-                    </Box>
-                        ))}  */}
                 </Box>
                 <Box className="hide_on_mobil">
-                    <Sorting />
+                    {/*  <Sorting /> */}
                     {/* <Subdjekt show={show} onShowChange={setShow} /> */}
                     <Button onClick={() => {
-                        setFantasy(!fantasy)
-                        setShow(!show)
-                        setFilterTerm("Fantasy")
-                        addTheme(filterTerm);
+                        setFilterTerm("All")
+                        setShow(false)
                     }}
-                        variant={fantasy ? 'select' : 'selected'}>
-                        Fantasy
-                        {fantasy ? <SmallAddIcon /> : <CheckIcon />}
+                        variant={filterTerm === 'All' ? 'selected' : 'select'}>
+                        All
                     </Button>
-                    <Button onClick={() => {
-                        setNonFiction(!nonFiction)
-                        setShow(!show)
-                        setFilterTerm("Non-Fiction")
-                        addTheme(filterTerm);
 
+                    <Button onClick={() => {
+                        setFilterTerm("Fantasy")
+                        setShow(true)
                     }}
-                        variant={nonFiction ? 'select' : 'selected'}>
-                        Non-Fiction
-                        {nonFiction ? <SmallAddIcon /> : <CheckIcon />}
+                        variant={filterTerm === 'Fantasy' ? 'selected' : 'select'}>
+                        Fantasy
                     </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("Non-Fiction")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'Non-Fiction' ? 'selected' : 'select'}>
+                        Non-Fiction
+                    </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("Biography")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'Biography' ? 'selected' : 'select'}>
+                        Biography
+                    </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("Mystery")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'Mystery' ? 'selected' : 'select'}>
+                        Mystery
+                    </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("Self-Help")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'Self-Help' ? 'selected' : 'select'}>
+                        Self-Help
+                    </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("Romance")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'Romance' ? 'selected' : 'select'}>
+                        Romance
+                    </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("Science Fiction")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'Science Fiction' ? 'selected' : 'select'}>
+                        Science Fiction
+                    </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("Adventure")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'Adventure' ? 'selected' : 'select'}>
+                        Adventure
+                    </Button>
+
+                    <Button onClick={() => {
+                        setFilterTerm("History")
+                        setShow(true)
+                    }}
+                        variant={filterTerm === 'History' ? 'selected' : 'select'}>
+                        History
+                    </Button>
+
                 </Box>
 
             </Box>
