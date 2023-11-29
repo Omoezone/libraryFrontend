@@ -51,7 +51,7 @@ import {
 			// Set the user state (data) in the userContext
 			dispatch({ type: 'LOGIN', user: response.data.user });
 			// Set the user cookie. JWT encrypted
-			Cookies.set("userToken", response.data.authToken);
+			Cookies.set("authToken", response.data.authToken);
 			onClose();
 			} catch (axiosError: any) {
 			// Handle the Axios error here
@@ -69,7 +69,7 @@ import {
   
 	return (
 	  <>
-		<Button onClick={onOpen}>Sign up</Button>
+		<Button variant="primary" onClick={onOpen}>Sign up</Button>
 		<Modal isOpen={isOpen} onClose={onClose}>
 		  <ModalOverlay />
 		  <ModalContent>

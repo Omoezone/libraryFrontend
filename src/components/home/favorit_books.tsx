@@ -45,13 +45,6 @@ export default function FavoriteBooks() {
                     >
                         {data &&
                             data.map((book, index) => (
-                                /*  <Img
-                                     key={book.book_id || index}
-                                     shadow={1}
-                                     className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
-                                     src={"../../../public/assets/covers/" + book.picture}
-                                     alt='/'
-                                 /> */
                                 <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
                                     <BookCard book={book} openModal={() => openModal(book)} />
                                 </Box>
@@ -63,7 +56,7 @@ export default function FavoriteBooks() {
                     )}
                 </Box>
                 <Box display={"grid"} justifyContent={"end"} className="slider_right">
-                    <h3 className="banner_content">Favorit Books</h3>
+                    <h3 className="banner_content">Favorite Books</h3>
                     <Box className="flex" justifyContent={"end"} color="white">
                         <MdChevronLeft className='cursor-pointer hover:opacity-100' onClick={slideLeft} size={30} />
                         <MdChevronRight className='cursor-pointer hover:opacity-100' onClick={slideRight} size={30} />

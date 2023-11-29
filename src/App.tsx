@@ -1,5 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/layout";
-import { Box, CSSReset, ChakraProvider, HStack } from "@chakra-ui/react"
+import { Box, CSSReset, ChakraProvider } from "@chakra-ui/react"
 import "./App.css";
 import '@fontsource/libre-baskerville/700.css'
 import '@fontsource/libre-baskerville/400.css'
@@ -7,48 +7,15 @@ import '@fontsource/lato/700.css'
 import '@fontsource/lato/400.css'
 import Theme from "./theme";
 
-import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Cookies from "js-cookie";
-import axios from "axios";
 import Home from "./components/home/Home"
 import NavBar from "./components/navigation/navbar";
 import FooterBar from "./components/navigation/footer"
 import { UserProvider } from "./components/user/userContext";
-import { useUser } from "./components/user/userContext";
-
-import { useQuery } from 'react-query';
-
 
 const queryClient = new QueryClient();
 
 function App() {
-
-  let { user, dispatch } = useUser();
-  console.log("User context value:", user);
-
-  async function verifyUser() {
-    if (Cookies.get('userToken')) {
-      try {
-        const response = await axios.post("http://localhost:3000/auth/verify", { "authToken": Cookies.get('userToken') });
-        dispatch({ type: 'LOGIN', user: response.data });
-        console.log("user info after axios: ", user, "Axios response:", response.data)
-      } catch (error) {
-        Cookies.remove('userToken');
-        console.error("Axios Error or expired token:", error);
-      }
-    }
-  }
-
-  React.useEffect(() => {
-    verifyUser();
-  }, []);
-
-  React.useEffect(() => {
-    console.log("User after axios:", user);
-  }, [user]);
-
-
 
   return (
     <ChakraProvider theme={Theme}>

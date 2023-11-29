@@ -44,10 +44,8 @@ const Login = () => {
       const response = await axios.post("http://localhost:3000/auth/login", userData);
       console.log("Axios response:", response);
       
-      // Set the user state (data) in the userContext
       dispatch({ type: 'LOGIN', user: response.data.user });
-      // Set the user cookie. JWT encrypted
-      Cookies.set("userToken", response.data.authToken);
+      Cookies.set("authToken", response.data.authToken);
       onClose();
     } catch (error) {
       // Handle the Axios error here
@@ -61,7 +59,7 @@ const Login = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Log in</Button>
+      <Button variant="primary" onClick={onOpen}>Log in</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

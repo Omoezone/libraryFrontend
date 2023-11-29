@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, VStack, Flex, Button, Center, Divider, Link } from '@chakra-ui/react';
+import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, VStack, Flex, Button, Center, Divider, Link, Spacer } from '@chakra-ui/react';
 import StarRating from './stars';
 import TagButton from './bookModalTags';
 import { useUser } from '../user/userContext';  
@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import Theme from '../../theme';
 import AuthorInfoModal from './authorModal';
+import BookMarkButton  from './bookmark';
 
 export const BookModal = ({ book, isOpen, onClose }) => {   
     const [availableAmount, setAvailableAmount] = useState(book.available_amount);
@@ -52,6 +53,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
     const handleClickableAuthor = () => {
         setIsAuthorModalOpen(true);
     };
+
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -70,12 +72,12 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                 <VStack 
                 spacing={4}
                 align='stretch'>
-                    <Box>
-                        <Box>
+                    <Spacer/>
+                    <HStack justifyContent="center">
                             <Text style={amountStyles}>Available: {availableAmount || 0}</Text>
-                        </Box>
-                    </Box>
-                    <HStack spacing={4}>
+                            {user.user && <BookMarkButton book={book} user={user.user} />}              
+                    </HStack>
+                    <HStack justifyContent="center">
                         <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
                         <Link as="u" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleClickableAuthor(); }}>{book.Author.username || "No Author"}</Link>
                         <StarRating value={book.Reviews[0].stars || 3} bookId={book.book_id} />

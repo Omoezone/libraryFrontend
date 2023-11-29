@@ -1,8 +1,23 @@
-import { data } from "../../mockData/data"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { Box } from "@chakra-ui/react";
+import { Box, Img } from "@chakra-ui/react";
+import BookCard from "../book/bookCard"
+import BookCardSkeleton from "../book/bookCardSkeleton";
+import useBooks from "../../hooks/useBooks";
+import { useState } from "react";
+import { BookModal } from "../book/bookModal";
 
-export default function Subjeckts() {
+export default function FavoriteBooks() {
+
+    const [selectedBook, setSelectedBook] = useState(null);
+
+    const openModal = (book: any) => {
+        setSelectedBook(book);
+    };
+
+    const closeModal = () => {
+        setSelectedBook(null);
+    };
+
     const slideLeft = () => {
         const slider = document.getElementById('slider3');
         if (slider) {
@@ -17,26 +32,31 @@ export default function Subjeckts() {
         }
     }
 
+    const { data, error, isLoading } = useBooks();
+    const skeleton = [...Array(8).keys()];
+
     return (
         <>
             <Box margin={3} className="slider_container">
                 <Box className='relative flex items-center'>
                     <Box
                         id='slider3'
-                        className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
+                        className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
                     >
-                        {data.map((item) => (
-                            <img
-                                className='w-[10rem] h-[13rem] inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
-                                src={item.img}
-                                alt='/'
-                            />
-                        ))}
-                    </Box>
+                        {data &&
+                            data.map((book, index) => (
+                                <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
+                                    <BookCard book={book} openModal={() => openModal(book)} />
+                                </Box>
 
+                            ))}
+                    </Box>
+                    {selectedBook && (
+                        <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
+                    )}
                 </Box>
-                <Box display={"grid"} justifyContent={"end"} className="slider_right">
-                    <h3 className="banner_content">Subjects</h3>
+                <Box width="15%" display={"grid"} justifyContent={"end"} className="slider_right">
+                    <h3 className="banner_content">Subject</h3>
                     <Box className="flex" justifyContent={"end"} color="white">
                         <MdChevronLeft className='cursor-pointer hover:opacity-100' onClick={slideLeft} size={30} />
                         <MdChevronRight className='cursor-pointer hover:opacity-100' onClick={slideRight} size={30} />
