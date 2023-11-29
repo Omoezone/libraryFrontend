@@ -4,13 +4,16 @@ import {
     ModalBody,
     ModalCloseButton,
     Link,
-    HStack
+    HStack,
+	Box,
+	Spacer
   } from '@chakra-ui/react'
 import { useUser } from '../userContext';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import AuthorInfoModal from '../../book/authorModal';
+import FavoritedButton from '../../book/favorited';
 
 export default function UserFavoritedAuthors() {
 	const [favAuthors, setFavAuthors] = useState([]);
@@ -57,6 +60,11 @@ export default function UserFavoritedAuthors() {
 						}}
 						author={author.Author}
 					/>
+					<Spacer />
+					<Box>
+						<FavoritedButton author={author.Author} user={user.user}/>
+					</Box>
+					
 				</ HStack>
 				))} 
 			</ModalBody>
