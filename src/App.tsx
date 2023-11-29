@@ -21,7 +21,7 @@ function App() {
     <ChakraProvider theme={Theme}>
       <UserProvider>
         <CSSReset />
-        <QueryClientProvider client={queryClient}> 
+        <QueryClientProvider client={queryClient}>
           <Grid
             templateAreas={{
               base: `"nav" "main" "footer"`,

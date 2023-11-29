@@ -1,7 +1,10 @@
 
 import { Image } from "@chakra-ui/image";
 import { Book } from "../../types/book";
-import { Card } from "@chakra-ui/react";
+import { Box, Card, CardBody, Flex, HStack, Heading } from "@chakra-ui/react";
+import TagButton from "../book/bookModalTags";
+
+
 
 
 interface Props {
@@ -12,15 +15,16 @@ interface Props {
 const BookCard = ({ book, openModal }: Props) => {
   return (
     <>
-      <Card 
-        maxW="sm"
+      <Card
         onClick={openModal}
-        cursor="pointer"
-        >
-        <Image src={"/assets/covers/" + book.picture} alt="cover"/>        
+        cursor="pointer">
+        <Image width={"10rem"} src={"/assets/covers/" + book.picture} alt="cover" />
+
       </Card>
     </>
   );
 };
+
+
 
 export default BookCard;

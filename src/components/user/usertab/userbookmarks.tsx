@@ -46,8 +46,7 @@ return (
         <h3>{bookmark.Book.title}</h3>
         </Box>
         <Spacer />
-        <Box
-        pb='0.5rem'>
+        <Box>
             <BookmarkButton book={bookmark} user={user.user} />
         </Box>
         </ HStack>
