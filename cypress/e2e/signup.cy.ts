@@ -18,9 +18,8 @@ describe('template spec', () => {
     cy.get('[name="email"]').should('have.value', "cypress@mail.dk");
     cy.get('[name="password"]').should('have.value', "test");
 
-    cy.wait(2500)
     // TODO: Dette skal med når vi er klar
-    //cy.get('[type="submit"]').click();
+    // cy.get('[type="submit"]').click();
   })
 })
 
