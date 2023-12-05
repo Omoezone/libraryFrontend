@@ -1,25 +1,19 @@
 import { useState } from "react";
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
-  Image,
   FormControl,
   FormLabel,
   Input,
   useDisclosure,
-  LightMode,
   Box,
 } from '@chakra-ui/react'
-import Theme from '../../../theme';
 import { useUser } from '../userContext'; 
 import axios from 'axios';
-import Cookies from 'js-cookie'; 
+import Cookies from "js-cookie";
 
 export default function Userdata() {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
@@ -29,7 +23,6 @@ export default function Userdata() {
   let { user } = useUser(); 
 
   const userEmail = user ? user.user.email : "Email missing";
-  const userPassword = user ? user.user.pass : "Password missing";
   const scrollBehavior = 'inside';
 
   const update_img_style = {
@@ -66,11 +59,12 @@ export default function Userdata() {
     };
 
     try {
-      const response = await axios.post(`http://localhost:3000/user/${user.id}`, userData);
+      let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
+      const response = await axios.post(`http://localhost:3000/user/${user.id}/update`, userDataWithToken);
       console.log("Axios response:", response);
       
-      dispatch({ type: 'LOGIN', user: response.data });
-      Cookies.set("authToken", response.data.authToken);
+      dispatch({ type: 'LOGIN', user: response.data.userData });
+      Cookies.set('authToken', response.data.authToken);
       onClose();
     } catch (error) {
       console.error("Axios Error:", error);
@@ -91,18 +85,18 @@ export default function Userdata() {
           </Box>
         )}
 
+      <form >
         {(isUpdatingEmail) && (
           <Box>
             <FormLabel fontWeight="bold">Current email: {userEmail || "Email missing"}
               <img src="assets/x-close.svg" style={update_img_style} alt="assets/x-close_svg" onClick={() => { setIsUpdatingEmail(false)}} />
             </FormLabel>
-            <form>
+            
               <FormControl id="email" marginTop="0.5rem">
                 <FormLabel fontWeight="bold">New email</FormLabel>
                 <Input type="email" placeholder="New email" />
                 <Button fontWeight="bold" marginTop="2rem" variant="confirm">Save new email</Button>
               </FormControl>
-            </form>
           </Box>
         )}
 
@@ -121,18 +115,17 @@ export default function Userdata() {
               <img src="assets/x-close.svg" style={update_img_style} alt="assets/x-close_svg" onClick={() => {setIsUpdatingPassword(false)}} />
             </FormLabel>
             <Box marginTop="2rem">
-              <form>
-                <FormControl id="password">
-                  <FormLabel fontWeight="bold">New password</FormLabel>
-                  <Input type='password' name='new_password' placeholder='New password' value={data.new_password} onChange={handleChange} />
-                  <FormLabel fontWeight="bold">Confirm new password</FormLabel>
-                  <Input type="password" placeholder="New password" />
-                  <Button fontWeight="bold" onClick={handleSubmit} variant="confirm" marginTop="2rem">Save new password</Button>
-                </FormControl>
-              </form>
+              <FormControl id="password">
+                <FormLabel fontWeight="bold">New password</FormLabel>
+                <Input type='password' name='new_password' placeholder='New password' value={data.new_password} onChange={handleChange} />
+                <FormLabel fontWeight="bold">Confirm new password</FormLabel>
+                <Input type="password" placeholder="New password" />
+                <Button fontWeight="bold" onClick={handleSubmit} variant="confirm" marginTop="2rem">Save new password</Button>
+              </FormControl>
             </Box>
           </Box>
         )}
+      </form>
       </ModalBody>
       <ModalFooter>
         <Button variant="primary" mr={3} onClick={onClose}>
