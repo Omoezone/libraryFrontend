@@ -53,17 +53,22 @@ export default function Userdata() {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     const userData = {
+      name_id: user.name_id,
+      user_id: user.user_id,
+      first_name: user.first_name,
+      last_name: user.last_name,
       email: data.email,
-      password: data.password,
-      new_password: data.new_password
+      password: data.new_password
     };
 
     try {
       let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
       const response = await axios.post(`http://localhost:3000/user/${user.id}/update`, userDataWithToken);
       console.log("Axios response:", response);
+      user.email = response.data.userData.email;
+      user.password = response.data.userData.password;
       
-      dispatch({ type: 'LOGIN', user: response.data.userData });
+      dispatch({ type: 'LOGIN', user: user });
       Cookies.set('authToken', response.data.authToken);
       onClose();
     } catch (error) {
@@ -95,7 +100,7 @@ export default function Userdata() {
               <FormControl id="email" marginTop="0.5rem">
                 <FormLabel fontWeight="bold">New email</FormLabel>
                 <Input type="email" placeholder="New email" />
-                <Button fontWeight="bold" marginTop="2rem" variant="confirm">Save new email</Button>
+                <Button fontWeight="bold" marginTop="2rem" variant="confirm" onClick={handleSubmit}>Save new email</Button>
               </FormControl>
           </Box>
         )}
