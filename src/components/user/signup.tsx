@@ -11,7 +11,7 @@ import {
 	Input,
 	useDisclosure
   } from '@chakra-ui/react'
-  import React, { useState } from 'react'
+  import { useState } from 'react'
   import axios from 'axios'
   import Cookies from 'js-cookie'
   import { useUser } from './userContext';
@@ -44,18 +44,18 @@ import {
 			password: data.password
 	  };
 	  try {
-			const response = await axios.post("http://localhost:3000/auth/signup", userData);
-			// Handle successful response here
-			console.log("Axios response:", response);
+      const response = await axios.post("http://localhost:3000/auth/signup", userData);
+      // Handle successful response here
+      console.log("Axios response:", response);
 
-			// Set the user state (data) in the userContext
-			dispatch({ type: 'LOGIN', user: response.data.user });
-			// Set the user cookie. JWT encrypted
-			Cookies.set("authToken", response.data.authToken);
-			onClose();
-			} catch (axiosError: any) {
-			// Handle the Axios error here
-			console.error("Axios Error:", axiosError);
+      // Set the user state (data) in the userContext
+      dispatch({ type: 'LOGIN', user: response.data.user });
+      // Set the user cookie. JWT encrypted
+      Cookies.set("authToken", response.data.authToken);
+      onClose();
+		} catch (axiosError: any) {
+      // Handle the Axios error here
+      console.error("Axios Error:", axiosError);
 	  }
 	};
 
