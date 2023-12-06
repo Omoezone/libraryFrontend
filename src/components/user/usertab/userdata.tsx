@@ -21,8 +21,7 @@ export default function Userdata() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { dispatch } = useUser(); 
   let { user } = useUser(); 
-
-  const userEmail = user ? user.user.email : "Email missing";
+  const userEmail = user.user ? user.user.email : "Email missing";
   const scrollBehavior = 'inside';
 
   const update_img_style = {
@@ -53,22 +52,20 @@ export default function Userdata() {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     const userData = {
-      name_id: user.name_id,
-      user_id: user.user_id,
-      first_name: user.first_name,
-      last_name: user.last_name,
+      name_id: user.user.name_id,
+      user_id: user.user.user_id,
+      first_name: user.user.UserName.first_name,
+      last_name: user.user.UserName.last_name,
       email: data.email,
       password: data.new_password
     };
 
     try {
       let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
-      const response = await axios.post(`http://localhost:3000/user/${user.id}/update`, userDataWithToken);
+      const response = await axios.post(`http://localhost:3000/user/${user.user.users_data_id}/update`, userDataWithToken);
       console.log("Axios response:", response);
-      user.email = response.data.userData.email;
-      user.password = response.data.userData.password;
       
-      dispatch({ type: 'LOGIN', user: user });
+      dispatch({ type: 'LOGIN', user: user.user });
       Cookies.set('authToken', response.data.authToken);
       onClose();
     } catch (error) {
@@ -99,7 +96,7 @@ export default function Userdata() {
             
               <FormControl id="email" marginTop="0.5rem">
                 <FormLabel fontWeight="bold">New email</FormLabel>
-                <Input type="email" placeholder="New email" />
+                <Input type="email" name="email" placeholder="New email" value={data.email} onChange={handleChange}/>
                 <Button fontWeight="bold" marginTop="2rem" variant="confirm" onClick={handleSubmit}>Save new email</Button>
               </FormControl>
           </Box>
@@ -124,7 +121,7 @@ export default function Userdata() {
                 <FormLabel fontWeight="bold">New password</FormLabel>
                 <Input type='password' name='new_password' placeholder='New password' value={data.new_password} onChange={handleChange} />
                 <FormLabel fontWeight="bold">Confirm new password</FormLabel>
-                <Input type="password" placeholder="New password" />
+                <Input type="password" name="new_password" placeholder="New password" />
                 <Button fontWeight="bold" onClick={handleSubmit} variant="confirm" marginTop="2rem">Save new password</Button>
               </FormControl>
             </Box>
