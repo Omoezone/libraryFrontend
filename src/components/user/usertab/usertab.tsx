@@ -17,7 +17,7 @@ import UserBookmarked from "./userbookmarks";
 
 export default function usertab() {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [activeTab, setActiveTab] = useState("bookmarks");
+    const [activeTab, setActiveTab] = useState("userinfo");
 
     const avatar_img_style = {
         width: '3rem',
@@ -59,7 +59,7 @@ export default function usertab() {
                     : activeTab === 'reviews' ?
                         <UserReviews />
                     : activeTab === 'userinfo' ?
-                        <Userdata />
+                        <Userdata onClose={onClose} />
                     : null}
                 </div>
             </ModalContent>

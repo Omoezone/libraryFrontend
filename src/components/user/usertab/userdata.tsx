@@ -14,11 +14,11 @@ import {
 import { useUser } from '../userContext'; 
 import axios from 'axios';
 import Cookies from "js-cookie";
+import { log } from "console";
 
-export default function Userdata() {
+export default function Userdata({onClose}) {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const { dispatch } = useUser(); 
   let { user } = useUser(); 
   const userEmail = user.user ? user.user.email : "Email missing";
@@ -72,6 +72,12 @@ export default function Userdata() {
       console.error("Axios Error:", error);
     }
   };
+
+  const logoutUser = () => {
+    dispatch({ type: 'LOGOUT' });
+    Cookies.remove('authToken');
+    onClose();
+  }
 
   return (
     <>
@@ -130,7 +136,7 @@ export default function Userdata() {
       </form>
       </ModalBody>
       <ModalFooter>
-        <Button variant="primary" mr={3} onClick={onClose}>
+        <Button variant="primary" mr={3} onClick={logoutUser}>
           Log out
         </Button>
         <Button variant='ghost'>
