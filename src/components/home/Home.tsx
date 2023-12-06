@@ -6,13 +6,13 @@ import TrendingBooks from "./trending_books"
 import AllBooks from "./all_books"
 import axios from "axios"
 import Cookies from "js-cookie"
-import { useUser } from "../user/userContext" 
+import { useUser } from "../user/userContext"
 
 import { Box } from "@chakra-ui/react";
 
 export default function Home() {
 
-  let { user, dispatch } = useUser(); 
+  let { user, dispatch } = useUser();
 
   async function verifyUser() {
     if (Cookies.get('authToken')) {
@@ -34,9 +34,9 @@ export default function Home() {
     <>
       <Box id="red_banner" bg={"red.gradient"}></Box>
       <Hero />
-      <FavoriteBooks />
+      {/*  <FavoriteBooks /> */}
       <TrendingBooks />
-      <Subjeckts />
+      {/* <Subjeckts /> */}
       <AllBooks />
 
     </>
