@@ -29,55 +29,63 @@ const SignUp = () => {
   
 	
 
-  const validateForm = (data) => {
-    let errorlist = [];
+	const validateForm = (data) => {
+		let errorlist = [];
+	
+		// Validate first name
+		if (!data.first_name.trim()) {
+		  errorlist.push('First name is required');
+		} else if (!/^[a-zA-Z]+$/.test(data.first_name)) {
+		  errorlist.push('First name should only contain letters');
+		} else if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(data.first_name)) {
+		  errorlist.push('First name should contain capital letters only at the beginning of each word');
+		}
+	
+		// Validate last name
+		if (!data.last_name.trim()) {
+		  errorlist.push('Last name is required');
+		} else if (!/^[a-zA-Z]+$/.test(data.last_name)) {
+		  errorlist.push('Last name should only contain letters');
+		} else if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(data.last_name)) {
+		  errorlist.push('Last name should contain capital letters only at the beginning of each word');
+		}
+	
+		// Validate email
+		if (!data.email.trim()) {
+		  errorlist.push('Email is required');
+		} else if (!/.*@.*\..*/.test(data.email)) {
+		  errorlist.push('Email must contain at least an @ and a .');
+		}
+	
+		// Validate password
+		if (!data.password.trim()) {
+		  errorlist.push('Password is required');
+		} else if (data.password.length < 6) {
+		  errorlist.push('Password must be at least 6 characters long');
+		}
+	
+		return errorlist;
+	  };
 
-    // Validate first name
-    if (!data.first_name.trim()) {
-      errorlist.push('First name is required');
-    } else if (!/^[a-zA-Z]+$/.test(data.first_name)) {
-      errorlist.push('First name should only contain letters');
-    } else if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(data.first_name)) {
-      errorlist.push('First name should contain capital letters only at the beginning of each word');
-    }
-
-    // Validate last name
-    if (!data.last_name.trim()) {
-      errorlist.push('Last name is required');
-    } else if (!/^[a-zA-Z]+$/.test(data.last_name)) {
-      errorlist.push('Last name should only contain letters');
-    } else if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(data.last_name)) {
-      errorlist.push('Last name should contain capital letters only at the beginning of each word');
-    }
-
-    // Validate email
-    if (!data.email.trim()) {
-      errorlist.push('Email is required');
-    } else if (!/.*@.*\..*/.test(data.last_name)) {
-      errorlist.push('Email must contain at least an @ and a .');
-    }
-
-    // Validate password
-    if (!data.password.trim()) {
-      errorlist.push('Password is required');
-    } else if (data.password.length < 6) {
-      errorlist.push('Password must be at least 6 characters long');
-    }
-
-    return errorlist;
-  };
-
-  const handleChange = (e:any) => {
-	  const value = e.target.value;
-	  setData({
-			...data,
-			[e.target.name]: value
+	  const handleChange = (e:any) => {
+		const value = e.target.value;
+		setData({
+			  ...data,
+			  [e.target.name]: value
 		});
-    setErrors(validateForm(data));
-	};
+	  setErrors(validateForm(data));
+	  };
 
+	const isFormValid = errors.length === 0;
+	const isAllFieldsFilled = Object.values(data).every(value => value.trim() !== '');
 	const handleSubmit = async (e:any) => {
 		e.preventDefault();
+
+		if (!isAllFieldsFilled) {
+			setErrors(validateForm(data));
+			return;
+		}
+
 		const userData = {
 			first_name: data.first_name,
 			last_name: data.last_name,
@@ -96,7 +104,8 @@ const SignUp = () => {
 	};
 
 	const errorStyle = {
-		color: 'red'
+		color: 'red',
+		marginLeft: '15%',
 	}
 
 	const buttonStyleSignUp = {
@@ -126,14 +135,17 @@ const SignUp = () => {
 					<Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
 					</FormControl>
 				</ModalBody>
-        {errors.map((error) => (
-          <p style={errorStyle}>{error}</p>
-        ))}
-				<Button colorScheme='blue' style={buttonStyleSignUp} type='submit' variant='confirm' onClick={handleSubmit}>
+					{errors.map((error) => (
+					<li style={errorStyle}>{error}</li>
+					))}
+				<Button colorScheme='blue' style={buttonStyleSignUp} type='submit'           
+				variant={isFormValid && isAllFieldsFilled ? 'confirm' : 'ghost'} 
+				disabled={!isFormValid || !isAllFieldsFilled}
+				onClick={handleSubmit}>
 					Sign up
-				</Button>
+				</Button> 
 				</form>
-				<Button variant='ghost'>
+				<Button variant='ghost' >
 					Or log in
 				</Button>
 			</ModalContent>

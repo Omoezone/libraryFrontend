@@ -19,6 +19,7 @@ import { useUser } from './userContext';
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [errors, setErrors] = useState([]);
   const [data, setData] = useState({
     email: "",
     password: ""
@@ -26,16 +27,48 @@ const Login = () => {
 
   const { dispatch } = useUser(); 
 
+  const validateForm = (data) => {
+		let errorlist = [];
+	
+		// Validate email
+		if (!data.email.trim()) {
+		  errorlist.push('Email is required');
+		} else if (!/.*@.*\..*/.test(data.email)) {
+		  errorlist.push('Email must contain at least an @ and a .');
+      errorlist.push('Email must not be empty');
+		}
+	
+		// Validate password
+		if (!data.password.trim()) {
+		  errorlist.push('Password is required');
+		} else if (data.password.length < 6) {
+		  errorlist.push('Password must be at least 6 characters long');
+      errorlist.push('Password must not be empty');
+		}
+	
+		return errorlist;
+	  };
+
   const handleChange = (e:any) => {
     const { name, value } = e.target;
     setData({
       ...data,
       [name]: value
     });
+    setErrors(validateForm(data));
   };
+
+  const isFormValid = errors.length === 0;
+	const isAllFieldsFilled = Object.values(data).every(value => value.trim() !== '');
 
   const handleSubmit = async (e:any) => {
     e.preventDefault();
+
+    if (!isAllFieldsFilled) {
+			setErrors(validateForm(data));
+			return;
+		}
+
     const userData = {
       email: data.email,
       password: data.password,
@@ -59,6 +92,11 @@ const Login = () => {
     marginTop: '2rem'
 	}
 
+  const errorStyle = {
+		color: 'red',
+		marginLeft: '15%',
+	}
+
   return (
     <>
       <Button variant="primary" onClick={onOpen}>Log in</Button>
@@ -76,8 +114,15 @@ const Login = () => {
                 <Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
               </FormControl>
             </ModalBody>
-            <Button colorScheme='blue' style={buttonStyleLogin} type='submit' variant="confirm" onClick={handleSubmit}>
-              Log in  
+            {errors.map((error) => (
+					<li style={errorStyle}>{error}</li>
+					))}
+            <Button colorScheme='blue' 
+            style={buttonStyleLogin} 
+            type='submit' 
+            variant={isFormValid && isAllFieldsFilled ? 'confirm' : 'ghost'} 
+            disabled={!isFormValid || !isAllFieldsFilled} onClick={handleSubmit}>
+              Log in
             </Button>
           </form>
           <Button variant='ghost'>
