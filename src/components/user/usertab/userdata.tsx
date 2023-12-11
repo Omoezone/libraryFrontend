@@ -71,6 +71,19 @@ export default function Userdata() {
     }
   };
 
+  const deleteUser = async () => {
+    try {
+      let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": user}
+      const response = await axios.post(`http://localhost:3000/deleteUser/${user.user.user_id}`, userDataWithToken);
+      console.log("Axios response:", response);
+      dispatch({ type: 'LOGOUT' });
+      Cookies.remove('authToken');
+      onClose();
+    } catch (error) {
+      console.error("Axios Error:", error);
+    }
+  }
+
   return (
     <>
       <ModalHeader fontWeight="bold">Your info</ModalHeader>
@@ -131,7 +144,7 @@ export default function Userdata() {
         <Button variant="primary" mr={3} onClick={onClose}>
           Log out
         </Button>
-        <Button variant='ghost'>
+        <Button variant='ghost' onClick={deleteUser}>
           Delete user
         </Button>
       </ModalFooter>
