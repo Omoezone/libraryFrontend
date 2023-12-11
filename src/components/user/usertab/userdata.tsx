@@ -83,6 +83,11 @@ export default function Userdata() {
       console.error("Axios Error:", error);
     }
   }
+  const logOut = () => {
+    dispatch({ type: 'LOGOUT' });
+    Cookies.remove('authToken');
+    onClose();
+  }
 
   return (
     <>
@@ -141,7 +146,7 @@ export default function Userdata() {
       </form>
       </ModalBody>
       <ModalFooter>
-        <Button variant="primary" mr={3} onClick={onClose}>
+        <Button variant="primary" mr={3} onClick={logOut}>
           Log out
         </Button>
         <Button variant='ghost' onClick={deleteUser}>
