@@ -19,6 +19,10 @@ export default function Userdata() {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [data, setData] = useState({
+    new_email: "",
+    new_password: "",
+  });
   const { dispatch } = useUser(); 
   let { user } = useUser(); 
 
@@ -36,20 +40,51 @@ export default function Userdata() {
     cursor: 'pointer'
   }
 
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-    new_password: ""
-  });
-
-  const handleChange = (e:any) => {
-    const { name, value } = e.target;
+  const handleChange = (e: any) => {
     setData({
       ...data,
-      [name]: value
+      [e.target.name]: e.target.value,
     });
   };
+  const handleSubmit = async () => {
+    let userData = {};
+    try {
+    // Check if updating email or password and send the appropriate data to the backend
+    console.log("Userdata for the data update:", userData)
+      if (isUpdatingEmail) {
+        userData = {
+          new_email: data.new_email,
+          user: user.user
+        };
+        console.log('Updating email:', data.new_email);
 
+      } else if (isUpdatingPassword) {
+        userData = {
+          new_password: data.new_password,
+          user: user.user
+        };
+        console.log('Updating password:', data.new_password, 1);
+
+        let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
+        const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/updatePassword`, userDataWithToken);
+        console.log("TESTING RESPONSE PASSWORD: ", response.data, " plus: ", user.user)
+        user.user.pass = response.data.user;
+        dispatch({ type: 'LOGIN', user: user.user });
+        Cookies.set('authToken', response.data.authToken);
+        onClose();
+      }
+    } catch (error) {
+      console.error("Axios Error:", error);
+    }
+    // Reset the form and state after submitting
+    setIsUpdatingEmail(false);
+    setIsUpdatingPassword(false);
+    setData({
+      new_email: '',
+      new_password: '',
+    });
+  };
+  /*
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     const userData = {
@@ -69,7 +104,7 @@ export default function Userdata() {
     } catch (error) {
       console.error("Axios Error:", error);
     }
-  };
+  };*/
 
   const deleteUser = async () => {
     try {
