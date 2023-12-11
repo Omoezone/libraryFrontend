@@ -54,7 +54,9 @@ const Login = () => {
   };
 
   const buttonStyleLogin = {
-		width: '97.85%'
+		width: '50%',
+    marginLeft: '25%',
+    marginTop: '2rem'
 	}
 
   return (
@@ -62,7 +64,7 @@ const Login = () => {
       <Button variant="primary" onClick={onOpen}>Log in</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg='light.gradient'>
           <ModalHeader>Log in</ModalHeader>
           <ModalCloseButton />
           <form>
@@ -74,7 +76,7 @@ const Login = () => {
                 <Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
               </FormControl>
             </ModalBody>
-            <Button colorScheme='blue' style={buttonStyleLogin} type='submit' onClick={handleSubmit}>
+            <Button colorScheme='blue' style={buttonStyleLogin} type='submit' variant="confirm" onClick={handleSubmit}>
               Log in  
             </Button>
           </form>
