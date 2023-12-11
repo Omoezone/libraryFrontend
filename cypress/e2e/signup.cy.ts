@@ -1,6 +1,6 @@
 
 describe('template spec', () => {
-  beforeEach(() => {
+  before(() => {
     cy.clearAllCookies()
     cy.visit('http://localhost:5173/')
   });
@@ -11,14 +11,13 @@ describe('template spec', () => {
     cy.get('[name="first_name"]').type("cypress_first")
     cy.get('[name="last_name"]').type("cypress_last")
     cy.get('[name="email"]').type("cypress@mail.dk")
-    cy.get('[name="password"]').type("test")
+    cy.get('[name="password"]').type("admin")
     
     cy.get('[name="first_name"]').should('have.value', "cypress_first");
     cy.get('[name="last_name"]').should('have.value', "cypress_last");
     cy.get('[name="email"]').should('have.value', "cypress@mail.dk");
-    cy.get('[name="password"]').should('have.value', "test");
+    cy.get('[name="password"]').should('have.value', "admin");
 
-    // TODO: Dette skal med når vi er klar
     // cy.get('[type="submit"]').click();
   })
 })
