@@ -14,15 +14,14 @@ import {
 import { useUser } from '../userContext'; 
 import axios from 'axios';
 import Cookies from "js-cookie";
+import { log } from "console";
 
-export default function Userdata() {
+export default function Userdata({onClose}) {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const { dispatch } = useUser(); 
   let { user } = useUser(); 
-
-  const userEmail = user ? user.user.email : "Email missing";
+  const userEmail = user.user ? user.user.email : "Email missing";
   const scrollBehavior = 'inside';
 
   const update_img_style = {
@@ -53,17 +52,20 @@ export default function Userdata() {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     const userData = {
+      name_id: user.user.name_id,
+      user_id: user.user.user_id,
+      first_name: user.user.UserName.first_name,
+      last_name: user.user.UserName.last_name,
       email: data.email,
-      password: data.password,
-      new_password: data.new_password
+      password: data.new_password
     };
 
     try {
       let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
-      const response = await axios.post(`http://localhost:3000/user/${user.id}/update`, userDataWithToken);
+      const response = await axios.post(`http://localhost:3000/user/${user.user.users_data_id}/update`, userDataWithToken);
       console.log("Axios response:", response);
       
-      dispatch({ type: 'LOGIN', user: response.data.userData });
+      dispatch({ type: 'LOGIN', user: user.user });
       Cookies.set('authToken', response.data.authToken);
       onClose();
     } catch (error) {
@@ -112,8 +114,8 @@ export default function Userdata() {
             
               <FormControl id="email" marginTop="0.5rem">
                 <FormLabel fontWeight="bold">New email</FormLabel>
-                <Input type="email" placeholder="New email" />
-                <Button fontWeight="bold" marginTop="2rem" variant="confirm">Save new email</Button>
+                <Input type="email" name="email" placeholder="New email" value={data.email} onChange={handleChange}/>
+                <Button fontWeight="bold" marginTop="2rem" variant="confirm" onClick={handleSubmit}>Save new email</Button>
               </FormControl>
           </Box>
         )}
@@ -137,7 +139,7 @@ export default function Userdata() {
                 <FormLabel fontWeight="bold">New password</FormLabel>
                 <Input type='password' name='new_password' placeholder='New password' value={data.new_password} onChange={handleChange} />
                 <FormLabel fontWeight="bold">Confirm new password</FormLabel>
-                <Input type="password" placeholder="New password" />
+                <Input type="password" name="new_password" placeholder="New password" />
                 <Button fontWeight="bold" onClick={handleSubmit} variant="confirm" marginTop="2rem">Save new password</Button>
               </FormControl>
             </Box>

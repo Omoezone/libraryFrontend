@@ -24,15 +24,57 @@ import {
 	  email: "",
 	  password: ""
 	});
+  const [errors, setErrors] = useState([]);
 
 	const { dispatch } = useUser(); 
   
-	const handleChange = (e:any) => {
+	
+
+  const validateForm = (data) => {
+    let errorlist = [];
+
+    // Validate first name
+    if (!data.first_name.trim()) {
+      errorlist.push('First name is required');
+    } else if (!/^[a-zA-Z]+$/.test(data.first_name)) {
+      errorlist.push('First name should only contain letters');
+    } else if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(data.first_name)) {
+      errorlist.push('First name should contain capital letters only at the beginning of each word');
+    }
+
+    // Validate last name
+    if (!data.last_name.trim()) {
+      errorlist.push('Last name is required');
+    } else if (!/^[a-zA-Z]+$/.test(data.last_name)) {
+      errorlist.push('Last name should only contain letters');
+    } else if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(data.last_name)) {
+      errorlist.push('Last name should contain capital letters only at the beginning of each word');
+    }
+
+    // Validate email
+    if (!data.email.trim()) {
+      errorlist.push('Email is required');
+    } else if (!/.*@.*\..*/.test(data.last_name)) {
+      errorlist.push('Email must contain at least an @ and a .');
+    }
+
+    // Validate password
+    if (!data.password.trim()) {
+      errorlist.push('Password is required');
+    } else if (data.password.length < 6) {
+      errorlist.push('Password must be at least 6 characters long');
+    }
+
+    return errorlist;
+  };
+
+  const handleChange = (e:any) => {
 	  const value = e.target.value;
 	  setData({
 			...data,
 			[e.target.name]: value
 	  });
+    setErrors(validateForm(data));
 	};
   
 	const handleSubmit = async (e:any) => {
@@ -88,6 +130,9 @@ import {
 				  <Input type='password' name='password' placeholder='Password' value={data.password} onChange={handleChange} />
 				</FormControl>
 			  </ModalBody>
+        {errors.map((error) => (
+          <p style={errorStyle}>{error}</p>
+        ))}
 			  <Button colorScheme='blue' style={buttonStyleSignUp} type='submit' onClick={handleSubmit}>
 					Sign up
 			  </Button>

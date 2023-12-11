@@ -38,7 +38,7 @@ const Login = () => {
     e.preventDefault();
     const userData = {
       email: data.email,
-      password: data.password
+      password: data.password,
     };
     try {
       const response = await axios.post("http://localhost:3000/auth/login", userData);
