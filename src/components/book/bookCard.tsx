@@ -1,11 +1,7 @@
 
 import { Image } from "@chakra-ui/image";
 import { Book } from "../../types/book";
-import { Box, Card, CardBody, Flex, HStack, Heading } from "@chakra-ui/react";
-import TagButton from "../book/bookModalTags";
-
-
-
+import { Card } from "@chakra-ui/react";
 
 interface Props {
   book: Book;

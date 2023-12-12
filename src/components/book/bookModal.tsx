@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Theme from '../../theme';
 import AuthorInfoModal from './authorModal';
 import BookMarkButton  from './bookmark';
+import { currentConfig } from '../../../config';
 
 export const BookModal = ({ book, isOpen, onClose }) => {   
     const [availableAmount, setAvailableAmount] = useState(book.available_amount);
@@ -15,6 +16,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
     const [secondMessage, setSecondMessage] = useState('');
     const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
     const { user } = useUser(); 
+    const endpoint = currentConfig.apiEnvEndpoint;
     const amountAvailable = book.available_amount;
     const amountStyles = {
         color: amountAvailable === 0 ? "red" : amountAvailable <= 3 ? "yellow" : "green",
@@ -35,7 +37,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                     That is 50 kr. 
                     Please respect our books, and we will respect you. Enjoy!`);
                 } else if (buttonClicked === 1) {
-                    const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/borrow/${book.book_id}`);
+                    const response = await axios.post(`${endpoint}/user/${user.user.user_id}/borrow/${book.book_id}`);
                     setAvailableAmount((prevAmount: number) => prevAmount - 1);
                     setFirstMessage('');
                     setSecondMessage('You have confirmed! An email has been sent to you. Enjoy!');

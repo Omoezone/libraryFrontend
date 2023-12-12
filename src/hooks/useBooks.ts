@@ -8,6 +8,4 @@ const useBooks = () => {
   return useQuery<FetchResponse<Book>, Error>('books', () => apiClient.getAll());
 };
 
-
-
 export default useBooks;

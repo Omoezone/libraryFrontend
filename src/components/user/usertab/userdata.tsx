@@ -14,7 +14,7 @@ import {
 import { useUser } from '../userContext'; 
 import axios from 'axios';
 import Cookies from "js-cookie";
-import { log } from "console";
+import { currentConfig } from '../../../../config';
 
 export default function Userdata({onClose}) {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
@@ -23,6 +23,7 @@ export default function Userdata({onClose}) {
   let { user } = useUser(); 
   const userEmail = user.user ? user.user.email : "Email missing";
   const scrollBehavior = 'inside';
+  const endpoint = currentConfig.apiEnvEndpoint;
 
   const update_img_style = {
     width: '1.25rem',
@@ -62,7 +63,7 @@ export default function Userdata({onClose}) {
 
     try {
       let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
-      const response = await axios.post(`http://localhost:3000/user/${user.user.users_data_id}/update`, userDataWithToken);
+      const response = await axios.post(`${endpoint}/user/${user.user.users_data_id}/update`, userDataWithToken);
       console.log("Axios response:", response);
       
       dispatch({ type: 'LOGIN', user: user.user });
@@ -76,7 +77,7 @@ export default function Userdata({onClose}) {
   const deleteUser = async () => {
     try {
       let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": user}
-      const response = await axios.post(`http://localhost:3000/deleteUser/${user.user.user_id}`, userDataWithToken);
+      const response = await axios.post(`${endpoint}/deleteUser/${user.user.user_id}`, userDataWithToken);
       console.log("Axios response:", response);
       dispatch({ type: 'LOGOUT' });
       Cookies.remove('authToken');

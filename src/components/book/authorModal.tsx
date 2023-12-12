@@ -1,12 +1,13 @@
 import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Text, VStack, UnorderedList, ListItem, Box } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Book } from '../../types/book';
 import BookCard from './bookCard';
 import FavoritedButton from './favorited';
 import { useUser } from '../user/userContext';
+import { currentConfig } from '../../../config';
 
 const AuthorInfoModal = ({ isOpen, onClose, author }) => {
+    const endpoint = currentConfig.apiEnvEndpoint;
     const [booksByAuthor, setBooksByAuthor] = useState([]);
     const { user } = useUser();
 
@@ -14,7 +15,7 @@ const AuthorInfoModal = ({ isOpen, onClose, author }) => {
         if (isOpen) {
             // Adjust the API endpoint based on your server logic
             console.log("author: ", author);
-            axios.get(`http://localhost:3000/author/${author.author_id}/books`)
+            axios.get(`${endpoint}/author/${author.author_id}/books`)
                 .then(response => {
                     console.log(response)
                     setBooksByAuthor(response.data);
