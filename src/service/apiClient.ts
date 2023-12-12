@@ -1,4 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { currentConfig } from '../../config';
+
+const endpoint = currentConfig.apiEnvEndpoint;
 
 export interface FetchResponse<T> {
   map(arg0: (book: any, index: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
@@ -8,7 +11,7 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: endpoint,
 });
 
 class ApiClient<T> {

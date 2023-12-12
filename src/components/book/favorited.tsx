@@ -4,14 +4,16 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Cookies from 'js-cookie';
+import { currentConfig } from '../../../config';
 
 const FavoritedButton = ({ author, user }) => {
     const [isFavorited, setIsFavorited] = useState(false);
+    const endpoint = currentConfig.apiEnvEndpoint;
 
     useEffect(() => {
         // Check if the book is already bookmarked by the user
         // You may need to adjust the condition based on your data structure
-        axios.get(`http://localhost:3000/user/${user.user_id}/author/${author.author_id}`)
+        axios.get(`${endpoint}/user/${user.user_id}/author/${author.author_id}`)
         .then((response) => {
             if(response.data.favorited_id){
                 setIsFavorited(true);
@@ -26,7 +28,7 @@ const FavoritedButton = ({ author, user }) => {
 
     const toggleFavorited = () => {
         if(isFavorited){
-            axios.delete(`http://localhost:3000/user/${user.user_id}/author/${author.author_id}`)
+            axios.delete(`${endpoint}/user/${user.user_id}/author/${author.author_id}`)
             .then((response) => {
                 console.log("IsFavorited", response);
             }).catch((error) => {
@@ -34,7 +36,7 @@ const FavoritedButton = ({ author, user }) => {
             });
         }
         else if(!isFavorited){
-            axios.post(`http://localhost:3000/user/${user.user_id}/author/${author.author_id}`, { "authToken": Cookies.get('authToken') })
+            axios.post(`${endpoint}/user/${user.user_id}/author/${author.author_id}`, { "authToken": Cookies.get('authToken') })
             .then((response) => {
                 console.log("IsNotFavorited", response);
             }).catch((error) => {

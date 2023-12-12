@@ -15,8 +15,10 @@ import { useState } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useUser } from './userContext';
+import { currentConfig } from '../../../config';
 
 const SignUp = () => {
+	const endpoint = currentConfig.apiEnvEndpoint;
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [data, setData] = useState({
 		first_name: "",
@@ -93,7 +95,7 @@ const SignUp = () => {
 			password: data.password
 		};
 		try {
-			const response = await axios.post("http://localhost:3000/auth/signup", userData);
+			const response = await axios.post(`${endpoint}/auth/signup`, userData);
 			console.log("Axios response:", response);
 			dispatch({ type: 'LOGIN', user: response.data.user });
 			Cookies.set("authToken", response.data.authToken);

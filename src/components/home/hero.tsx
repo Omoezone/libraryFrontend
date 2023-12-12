@@ -1,24 +1,23 @@
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { RiNumber1, RiNumber0 } from 'react-icons/ri'
-import { Button, Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useUser } from "../../components/user/userContext";
 import SignUp from '../user/signup';
 import { useEffect, useState } from 'react';
-import useBooks from '../../hooks/useBooks';
 import BookCard from '../book/bookCard';
 import { BookModal } from '../book/bookModal';
+import { currentConfig } from '../../../config';
 
 function Hero() {
     const { user } = useUser();
     const [selectedBook, setSelectedBook] = useState(null);
     const [data, setBooks] = useState([]);
+    const endpoint = currentConfig.apiEnvEndpoint;
 
     useEffect(() => {
         fetchBooksFromBackend();
     }, []);
     
     const fetchBooksFromBackend = () => {
-    fetch('http://localhost:3000/books')
+    fetch(`${endpoint}/books`)
         .then(response => response.json())
         .then(data =>  {
             setBooks(data);

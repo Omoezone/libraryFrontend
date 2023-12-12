@@ -13,14 +13,16 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { StarIcon } from '@chakra-ui/icons';
+import { currentConfig } from '../../../../config';
 
 export default function UserReviews() {
   const [reviews, setReviews] = useState([]);
   const { user } = useUser();
-  
+  const endpoint = currentConfig.apiEnvEndpoint;
+
   const getReviews = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/reviews`, { "authToken": Cookies.get('authToken') });
+      const response = await axios.post(`${endpoint}/user/${user.user.user_id}/reviews`, { "authToken": Cookies.get('authToken') });
       setReviews(response.data);
     } catch (error) {
       console.error("Axios Error:", error);

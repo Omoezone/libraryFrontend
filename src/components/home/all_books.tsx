@@ -1,24 +1,17 @@
 import { Box, Button, Flex } from "@chakra-ui/react"
-import SearchBar from "../navigation/searchbar"
 import BookCard from "../book/bookCard"
 import BookCardSkeleton from "../book/bookCardSkeleton";
 import useBooks from "../../hooks/useBooks";
-import Sorting from "../filter/sorting"
 import { useState } from "react";
 import { BookModal } from "../book/bookModal";
-import { Card } from "@chakra-ui/react";
-
-
-import { CheckIcon, SmallAddIcon } from '@chakra-ui/icons';
-
-
-
 
 export default function AllBooks() {
-
     const { data, error, isLoading } = useBooks();
     const [selectedBook, setSelectedBook] = useState(null);
     const skeleton = [...Array(20).keys()];
+    const [searchTerm, setsearchTerm] = useState("");
+    const [show, setShow] = useState("All books");
+    const [filterTerm, setFilterTerm] = useState("All");
 
     const openModal = (book: any) => {
         setSelectedBook(book);
@@ -28,22 +21,9 @@ export default function AllBooks() {
         setSelectedBook(null);
     };
 
-    const [searchTerm, setsearchTerm] = useState("");
-
-    const [show, setShow] = useState("All books");
-    const [filterTerm, setFilterTerm] = useState("All");
-    /*  const [visible, setVisible] = useState(true);
- 
-     const onChangeSearch = () => {
-         setVisible(!visible);
-     }; */
     const removeValue = () => {
         setsearchTerm("")
-        console.log(searchTerm)
     }
-
-
-    console.log(searchTerm)
 
     return (
         <>
@@ -62,9 +42,7 @@ export default function AllBooks() {
                             }
                         }} />
                 </Box>
-
             </Box>
-
 
             <Box id="all_books_container_container">
                 <Box id="all_books_container" className={` ${show === "All books" ? "show" : "hidden"}`}>
@@ -122,12 +100,6 @@ export default function AllBooks() {
                             } else if (book.title.toLowerCase().includes(searchTerm.toLowerCase())) {
                                 return <BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />
                             }
-
-
-
-
-                            /* return (
-                                <BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />) */
                         })}
 
                 </Box>
@@ -213,9 +185,7 @@ export default function AllBooks() {
                         variant={filterTerm === 'History' ? 'selected' : 'select'}>
                         History
                     </Button>
-
                 </Box>
-
             </Box>
         </>
     )

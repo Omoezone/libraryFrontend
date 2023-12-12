@@ -13,20 +13,21 @@ import axios from 'axios';
 import Cookies from 'js-cookie'; 
 import { useEffect, useState } from 'react';
 import { useUser } from '../userContext'
+import { currentConfig } from '../../../../config';
 
 export default function Userborrowed() {
     const [borrowed, setBorrowed] = useState([]);
     const [hasBorrowed, setHasBorrowed] = useState([]);
     const [history, setHistory] = useState(true);
     const { user } = useUser()
-
+    const endpoint = currentConfig.apiEnvEndpoint;
 
     const getBorrowed = async () => {
         try {
-            const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/borrowed`, { "authToken": Cookies.get('authToken') });
+            const response = await axios.post(`${endpoint}/user/${user.user.user_id}/borrowed`, { "authToken": Cookies.get('authToken') });
             setBorrowed(response.data);
             // 
-            const response2 = await axios.post(`http://localhost:3000/user/${user.user.user_id}/hasborrowed`, { "authToken": Cookies.get('authToken') });
+            const response2 = await axios.post(`${endpoint}/user/${user.user.user_id}/hasborrowed`, { "authToken": Cookies.get('authToken') });
             setHasBorrowed(response2.data);
         } catch (error) {
             console.error("Axios Error:", error);
@@ -35,7 +36,7 @@ export default function Userborrowed() {
     const returnBook = async (book: string) => {
         try {
             console.log("Book to return", book);
-            const response = await axios.put(`http://localhost:3000/user/${user?.user?.user_id}/return/${book}`, { "authToken": Cookies.get('authToken') });
+            const response = await axios.put(`${endpoint}/user/${user?.user?.user_id}/return/${book}`, { "authToken": Cookies.get('authToken') });
             getBorrowed();
             console.log("Returned book", response.data);
         } catch (error) {
