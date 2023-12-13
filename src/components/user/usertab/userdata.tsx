@@ -49,30 +49,25 @@ export default function Userdata() {
   const handleSubmit = async () => {
     let userData = {};
     try {
-    // Check if updating email or password and send the appropriate data to the backend
-    console.log("Userdata for the data update:", userData)
+      // Check if updating email or password and send the appropriate data to the backend
+      console.log("Userdata for the data update:", userData)
       if (isUpdatingEmail) {
+        user.user.new_email = data.new_email;
         userData = {
-          new_email: data.new_email,
           user: user.user
         };
-        console.log('Updating email:', data.new_email);
-
       } else if (isUpdatingPassword) {
+        user.user.new_password = data.new_password;
         userData = {
-          new_password: data.new_password,
           user: user.user
         };
-        console.log('Updating password:', data.new_password, 1);
-
+      }
         let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
-        const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/updatePassword`, userDataWithToken);
-        console.log("TESTING RESPONSE PASSWORD: ", response.data, " plus: ", user.user)
-        user.user.pass = response.data.user;
-        dispatch({ type: 'LOGIN', user: user.user });
+        const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/update`, userDataWithToken);
+        console.log(response)
+        dispatch({ type: 'LOGIN', user: response.data.user });
         Cookies.set('authToken', response.data.authToken);
         onClose();
-      }
     } catch (error) {
       console.error("Axios Error:", error);
     }
@@ -84,27 +79,6 @@ export default function Userdata() {
       new_password: '',
     });
   };
-  /*
-  const handleSubmit = async (e:any) => {
-    e.preventDefault();
-    const userData = {
-      email: data.email,
-      password: data.password,
-      new_password: data.new_password
-    };
-
-    try {
-      let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
-      const response = await axios.post(`http://localhost:3000/user/${user.id}/update`, userDataWithToken);
-      console.log("Axios response:", response);
-      
-      dispatch({ type: 'LOGIN', user: response.data.userData });
-      Cookies.set('authToken', response.data.authToken);
-      onClose();
-    } catch (error) {
-      console.error("Axios Error:", error);
-    }
-  };*/
 
   const deleteUser = async () => {
     try {
@@ -147,8 +121,8 @@ export default function Userdata() {
             
               <FormControl id="email" marginTop="0.5rem">
                 <FormLabel fontWeight="bold">New email</FormLabel>
-                <Input type="email" placeholder="New email" />
-                <Button fontWeight="bold" marginTop="2rem" variant="confirm">Save new email</Button>
+                <Input type="email" name='new_email' placeholder="New email" value={data.new_email} onChange={handleChange}/>
+                <Button fontWeight="bold" marginTop="2rem" variant="confirm" onClick={handleSubmit}>Save new email</Button>
               </FormControl>
           </Box>
         )}
