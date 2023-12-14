@@ -14,8 +14,9 @@ import {
 import { useUser } from '../userContext'; 
 import axios from 'axios';
 import Cookies from "js-cookie";
+import { currentConfig } from '../../../../config';
 
-export default function Userdata() {
+export default function Userdata({onClose}) {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -25,9 +26,9 @@ export default function Userdata() {
   });
   const { dispatch } = useUser(); 
   let { user } = useUser(); 
-
-  const userEmail = user ? user.user.email : "Email missing";
+  const userEmail = user.user ? user.user.email : "Email missing";
   const scrollBehavior = 'inside';
+  const endpoint = currentConfig.apiEnvEndpoint;
 
   const update_img_style = {
     width: '1.25rem',
@@ -83,7 +84,7 @@ export default function Userdata() {
   const deleteUser = async () => {
     try {
       let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": user}
-      const response = await axios.post(`http://localhost:3000/deleteUser/${user.user.user_id}`, userDataWithToken);
+      const response = await axios.post(`${endpoint}/deleteUser/${user.user.user_id}`, userDataWithToken);
       console.log("Axios response:", response);
       dispatch({ type: 'LOGOUT' });
       Cookies.remove('authToken');
@@ -146,7 +147,7 @@ export default function Userdata() {
                 <FormLabel fontWeight="bold">New password</FormLabel>
                 <Input type='password' name='new_password' placeholder='New password' value={data.new_password} onChange={handleChange} />
                 <FormLabel fontWeight="bold">Confirm new password</FormLabel>
-                <Input type="password" placeholder="New password" />
+                <Input type="password" name="new_password" placeholder="New password" />
                 <Button fontWeight="bold" onClick={handleSubmit} variant="confirm" marginTop="2rem">Save new password</Button>
               </FormControl>
             </Box>

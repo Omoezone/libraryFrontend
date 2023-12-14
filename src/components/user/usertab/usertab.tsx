@@ -59,7 +59,7 @@ export default function usertab() {
                     : activeTab === 'reviews' ?
                         <UserReviews />
                     : activeTab === 'userinfo' ?
-                        <Userdata />
+                        <Userdata onClose={onClose} />
                     : null}
                 </div>
             </ModalContent>

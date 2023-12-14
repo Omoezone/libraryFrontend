@@ -3,12 +3,14 @@ import { StarIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { useUser } from '../user/userContext';
 import { useState } from 'react';
+import { currentConfig } from '../../../config';
 
 const StarRating = ({ value, bookId }) => {
     const maxStars = 5;
     const { user } = useUser();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const endpoint = currentConfig.apiEnvEndpoint;
+
   // Ensure the value is within the range [0, 5]
     const normalizedValue = Math.min(Math.max(value, 0), maxStars);
 
@@ -28,7 +30,7 @@ const StarRating = ({ value, bookId }) => {
     const handleStarClick = async (clickedValue: any) => {
         // Notify the parent component about the changed value
         try {
-            const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/review/${bookId}/${clickedValue}`);
+            const response = await axios.post(`${endpoint}/user/${user.user.user_id}/review/${bookId}/${clickedValue}`);
             setIsModalOpen(true);
             console.log(response.data);
         } catch (error) {

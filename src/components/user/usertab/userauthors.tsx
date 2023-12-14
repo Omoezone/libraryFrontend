@@ -14,11 +14,13 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import AuthorInfoModal from '../../book/authorModal';
 import FavoritedButton from '../../book/favorited';
+import { currentConfig } from '../../../../config';
 
 export default function UserFavoritedAuthors() {
 	const [favAuthors, setFavAuthors] = useState([]);
 	const { user } = useUser();
 	const [isAuthorModalOpenArray, setIsAuthorModalOpenArray] = useState(Array(favAuthors.length).fill(false));
+    const endpoint = currentConfig.apiEnvEndpoint;
 
 	const handleClickableAuthor = (index: any) => {
 		const newIsAuthorModalOpenArray = [...isAuthorModalOpenArray];
@@ -28,7 +30,7 @@ export default function UserFavoritedAuthors() {
 	
 	const getFavoritedAuthors = async () => {
 		try {
-		const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/favoritedAuthors`, { "authToken": Cookies.get('authToken') });
+		const response = await axios.post(`${endpoint}/user/${user.user.user_id}/favoritedAuthors`, { "authToken": Cookies.get('authToken') });
 		console.log("Favauthor", response.data)
 		setFavAuthors(response.data);
 		} catch (error) {

@@ -12,14 +12,16 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import BookmarkButton from '../../book/bookmark';
+import { currentConfig } from '../../../../config';
 
 export default function UserBookmarked() {
 const [bookmarks, setBookmarks] = useState([]);
 const { user } = useUser();
+const endpoint = currentConfig.apiEnvEndpoint;
 
 const getBookmarks = async () => {
     try {
-        const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/bookmarks/`, { "authToken": Cookies.get('authToken') });
+        const response = await axios.post(`${endpoint}/user/${user.user.user_id}/bookmarks/`, { "authToken": Cookies.get('authToken') });
         setBookmarks(response.data);
         console.log("Response:", response.data)
         console.log("user:", user);
