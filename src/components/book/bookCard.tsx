@@ -1,7 +1,7 @@
 
 import { Image } from "@chakra-ui/image";
 import { Book } from "../../types/book";
-import { Card } from "@chakra-ui/react";
+import { Box, Card, CardBody, Flex, HStack, Heading } from "@chakra-ui/react";
 
 interface Props {
   book: Book;

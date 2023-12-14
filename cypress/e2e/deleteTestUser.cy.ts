@@ -1,3 +1,4 @@
+export {};
 /*describe('deleteTestUser', () => {
     before(() => {
         cy.clearAllCookies()

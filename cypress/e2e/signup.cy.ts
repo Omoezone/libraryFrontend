@@ -1,4 +1,4 @@
-
+export {};
 describe('template spec', () => {
   before(() => {
     cy.clearAllCookies()

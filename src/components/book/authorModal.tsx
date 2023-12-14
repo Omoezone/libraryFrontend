@@ -6,10 +6,16 @@ import FavoritedButton from './favorited';
 import { useUser } from '../user/userContext';
 import { currentConfig } from '../../../config';
 
-const AuthorInfoModal = ({ isOpen, onClose, author }) => {
-    const endpoint = currentConfig.apiEnvEndpoint;
+interface AuthorInfoModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    author: any;
+}
+
+const AuthorInfoModal: React.FC<AuthorInfoModalProps> = ({ isOpen, onClose, author }) => {
     const [booksByAuthor, setBooksByAuthor] = useState([]);
     const { user } = useUser();
+    const endpoint = currentConfig.apiEnvEndpoint;
 
     useEffect(() => {
         if (isOpen) {

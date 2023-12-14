@@ -19,7 +19,6 @@ import { currentConfig } from '../../../../config';
 export default function Userdata({onClose}) {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const [data, setData] = useState({
     new_email: "",
     new_password: "",
