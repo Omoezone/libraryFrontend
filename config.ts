@@ -7,7 +7,7 @@ const config: Record<string, Config> = {
         apiEnvEndpoint: "http://localhost:3000" ,
     },
     production: {
-        apiEnvEndpoint: "https://your-production-api.com",
+        apiEnvEndpoint: "https://library-backend.azurewebsites.net",
     },
 };
 

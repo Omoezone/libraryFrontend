@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode development",
-    "devProd": "vite --mode production",
-    "build:azure": "tsc",
+    "prod": "vite --mode production",
     "preview": "vite preview",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
