@@ -19,6 +19,11 @@ import { currentConfig } from '../../../../config';
 export default function Userdata({onClose}) {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [data, setData] = useState({
+    new_email: "",
+    new_password: "",
+  });
   const { dispatch } = useUser(); 
   let { user } = useUser(); 
   const userEmail = user.user ? user.user.email : "Email missing";
@@ -36,42 +41,44 @@ export default function Userdata({onClose}) {
     cursor: 'pointer'
   }
 
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-    new_password: ""
-  });
-
-  const handleChange = (e:any) => {
-    const { name, value } = e.target;
+  const handleChange = (e: any) => {
     setData({
       ...data,
-      [name]: value
+      [e.target.name]: e.target.value,
     });
   };
-
-  const handleSubmit = async (e:any) => {
-    e.preventDefault();
-    const userData = {
-      name_id: user.user.name_id,
-      user_id: user.user.user_id,
-      first_name: user.user.UserName.first_name,
-      last_name: user.user.UserName.last_name,
-      email: data.email,
-      password: data.new_password
-    };
-
+  const handleSubmit = async () => {
+    let userData = {};
     try {
-      let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
-      const response = await axios.post(`${endpoint}/user/${user.user.users_data_id}/update`, userDataWithToken);
-      console.log("Axios response:", response);
-      
-      dispatch({ type: 'LOGIN', user: user.user });
-      Cookies.set('authToken', response.data.authToken);
-      onClose();
+      // Check if updating email or password and send the appropriate data to the backend
+      console.log("Userdata for the data update:", userData)
+      if (isUpdatingEmail) {
+        user.user.new_email = data.new_email;
+        userData = {
+          user: user.user
+        };
+      } else if (isUpdatingPassword) {
+        user.user.new_password = data.new_password;
+        userData = {
+          user: user.user
+        };
+      }
+        let userDataWithToken = {"authToken": Cookies.get("authToken"), "user": userData}
+        const response = await axios.post(`http://localhost:3000/user/${user.user.user_id}/update`, userDataWithToken);
+        console.log(response)
+        dispatch({ type: 'LOGIN', user: response.data.user });
+        Cookies.set('authToken', response.data.authToken);
+        onClose();
     } catch (error) {
       console.error("Axios Error:", error);
     }
+    // Reset the form and state after submitting
+    setIsUpdatingEmail(false);
+    setIsUpdatingPassword(false);
+    setData({
+      new_email: '',
+      new_password: '',
+    });
   };
 
   const deleteUser = async () => {
@@ -115,7 +122,7 @@ export default function Userdata({onClose}) {
             
               <FormControl id="email" marginTop="0.5rem">
                 <FormLabel fontWeight="bold">New email</FormLabel>
-                <Input type="email" name="email" placeholder="New email" value={data.email} onChange={handleChange}/>
+                <Input type="email" name='new_email' placeholder="New email" value={data.new_email} onChange={handleChange}/>
                 <Button fontWeight="bold" marginTop="2rem" variant="confirm" onClick={handleSubmit}>Save new email</Button>
               </FormControl>
           </Box>
