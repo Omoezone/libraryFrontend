@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --mode development",
     "devProd": "vite --mode production",
+    "build:azure": "tsc",
     "preview": "vite preview",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
