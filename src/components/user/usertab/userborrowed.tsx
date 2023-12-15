@@ -8,9 +8,9 @@ import {
     HStack,
     Button,
     Text,
-  } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 import axios from 'axios';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useUser } from '../userContext'
 import { currentConfig } from '../../../../config';
@@ -43,7 +43,7 @@ export default function Userborrowed() {
             console.error("Axios Error:", error);
         }
     }
-        
+
 
     useEffect(() => {
         getBorrowed();
@@ -52,7 +52,7 @@ export default function Userborrowed() {
     return (
         <>
             <ModalHeader fontWeight="bold">These are your current books</ModalHeader>
-            <ModalCloseButton />
+            <ModalCloseButton color='light.solid' />
             <ModalBody>
                 <HStack marginBottom="2rem">
                     {history ? (
@@ -60,53 +60,53 @@ export default function Userborrowed() {
                             <Text>To see your borrow history, click here</Text>
                             <Button variant="selected" onClick={() => setHistory(false)}>History</Button>
                         </>
-                    ) : (                  
+                    ) : (
                         <>
                             <Text>To see your current books, click here</Text>
                             <Button variant="selected" onClick={() => setHistory(true)}>Current books</Button>
-                        </>                    )}
+                        </>)}
                 </HStack>
                 {history ? (
                     <>
-                    {borrowed.length != 0 ? (
-                        <>
-                        {borrowed.map((borrow, i) => (
-                            <HStack 
-                            borderColor='black'
-                            borderWidth='1px'
-                            p='1rem'>
-                                <Box>
-                                    <h3>{borrow.Book.title}</h3>
-                                </Box>
-                                <Spacer />
-                                <Box>
-                                    <Button variant="selected" onClick={() => returnBook(borrow.book_id)}>Return</Button>
-                                </Box>
-                            </ HStack>
-                        ))}
-                        </>
-                    ) : (
-                        <Text>You have no current books</Text>
-                    )}
+                        {borrowed.length != 0 ? (
+                            <>
+                                {borrowed.map((borrow, i) => (
+                                    <HStack
+                                        borderColor='black'
+                                        borderWidth='1px'
+                                        p='1rem'>
+                                        <Box>
+                                            <h3>{borrow.Book.title}</h3>
+                                        </Box>
+                                        <Spacer />
+                                        <Box>
+                                            <Button variant="selected" onClick={() => returnBook(borrow.book_id)}>Return</Button>
+                                        </Box>
+                                    </ HStack>
+                                ))}
+                            </>
+                        ) : (
+                            <Text>You have no current books</Text>
+                        )}
                     </>
                 ) : (
                     <>
-                    {hasBorrowed.map((borrow, i) => (
-                        <HStack 
-                        borderColor='black'
-                        borderWidth='1px'
-                        p='1rem'>
-                            <Box>
-                                <h3>{borrow.Book.title}</h3>
-                            </Box>
-                        </ HStack>
-                    )
-                    )} 
+                        {hasBorrowed.map((borrow, i) => (
+                            <HStack
+                                borderColor='black'
+                                borderWidth='1px'
+                                p='1rem'>
+                                <Box>
+                                    <h3>{borrow.Book.title}</h3>
+                                </Box>
+                            </ HStack>
+                        )
+                        )}
                     </>
                 )}
             </ModalBody>
             <ModalFooter>
-            
+
             </ModalFooter>
         </>
     );

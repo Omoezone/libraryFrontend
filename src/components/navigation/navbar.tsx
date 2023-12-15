@@ -9,22 +9,22 @@ import { useUser } from "../user/userContext";
 const NavBar = () => {
   const { user } = useUser();
   return (
-  <>
-    <HStack justifyContent="space-between" px={1} py={1}>
-      <BurgerMenu />
-      <Image src="assets/LogoName.svg" w="10%" h="10%" px={1} py={1} />
-      <Spacer />
-      {(user.user) ? (
-        <Usertab />
-      ) : (
-        <>
-        <Login />
-        <SignUp />
-        </>
-      )}
-      <SearchBar />
-    </HStack>
-  </>
+    <>
+      <HStack justifyContent="space-between" px={1} py={1}>
+        <BurgerMenu />
+        <Image src="assets/LogoName.svg" />
+        <Spacer />
+        {(user.user) ? (
+          <Usertab />
+        ) : (
+          <>
+            <Login />
+            <SignUp />
+          </>
+        )}
+        {/* <SearchBar /> */}
+      </HStack>
+    </>
 
   );
 };

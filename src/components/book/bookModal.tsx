@@ -1,21 +1,21 @@
-import { Modal, ModalOverlay,ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, VStack, Flex, Button, Center, Divider, Link, Spacer } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, Box, ModalBody, ModalCloseButton, Text, HStack, VStack, Flex, Button, Center, Divider, Link, Spacer } from '@chakra-ui/react';
 import StarRating from './stars';
 import TagButton from './bookModalTags';
-import { useUser } from '../user/userContext';  
+import { useUser } from '../user/userContext';
 import axios from 'axios';
 import { useState } from 'react';
 import Theme from '../../theme';
 import AuthorInfoModal from './authorModal';
-import BookMarkButton  from './bookmark';
+import BookMarkButton from './bookmark';
 import { currentConfig } from '../../../config';
 
-export const BookModal = ({ book, isOpen, onClose }) => {   
+export const BookModal = ({ book, isOpen, onClose }) => {
     const [availableAmount, setAvailableAmount] = useState(book.available_amount);
     const [buttonClicked, setButtonClicked] = useState(0);
     const [firstMessage, setFirstMessage] = useState('');
     const [secondMessage, setSecondMessage] = useState('');
     const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
-    const { user } = useUser(); 
+    const { user } = useUser();
     const endpoint = currentConfig.apiEnvEndpoint;
     const amountAvailable = book.available_amount;
     const amountStyles = {
@@ -25,7 +25,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
     };
     const handleClick = async () => {
         try {
-            if(user.user != null){
+            if (user.user != null) {
                 if (buttonClicked === 0) {
                     setFirstMessage(`
                     After you confirm, you will receive an email with a receipt and tracking information.
@@ -45,7 +45,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                 }
                 // Toggle the buttonClicked state
                 setButtonClicked((prevClickCount) => prevClickCount + 1);
-            }else {
+            } else {
                 setFirstMessage('You must be logged in to borrow a book');
             }
         } catch (error) {
@@ -62,54 +62,54 @@ export const BookModal = ({ book, isOpen, onClose }) => {
             <ModalContent bg="light.gradient">
                 <ModalCloseButton />
                 <ModalBody style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <img 
-                src={"/assets/covers/" + book.picture} 
-                alt={book.picture} 
-                style= {{
-                    maxWidth: '100%',
-                    maxHeight: '70vh', 
-                    alignSelf: 'center',
-                }}>
-                </img>
-                <VStack 
-                spacing={4}
-                align='stretch'>
-                    <Spacer/>
-                    <HStack justifyContent="center">
+                    <img className='book_modal'
+                        src={"/assets/covers/" + book.picture}
+                        alt={book.picture}
+                        style={{
+                            maxWidth: '100%',
+                            maxHeight: '70vh',
+                            alignSelf: 'center',
+                        }}>
+                    </img>
+                    <VStack
+                        spacing={4}
+                        align='stretch'>
+                        <Spacer />
+                        <HStack justifyContent="center">
                             <Text style={amountStyles}>Available: {availableAmount || 0}</Text>
-                            {user.user && <BookMarkButton book={book} user={user.user} />}              
-                    </HStack>
-                    <HStack justifyContent="center">
-                        <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
-                        <Link as="u" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleClickableAuthor(); }}>{book.Author.username || "No Author"}</Link>
-                        <StarRating value={book.Reviews[0].stars || 3} bookId={book.book_id} />
-                    </HStack>
-                    {isAuthorModalOpen && (
-                        <AuthorInfoModal
-                            isOpen={isAuthorModalOpen}
-                            onClose={() => setIsAuthorModalOpen(false)}
-                            author={book.Author}
-                        />
-                    )}
-                    <Box padding={5}>
-                        <Text>{book.summary || "No Description"}</Text>
-                    </Box>
-                    <Flex justifyContent="space-between">
-                        {book.Tags.map((tag: any) => (
-                            <TagButton key={tag.title} tag={tag}/>
-                        )) || "No Genres"}
-                    </Flex>
-                    <Box padding={2} display="flex" flexDirection="column" alignItems="center">
-                        {firstMessage && <Text>{firstMessage}</Text>}
-                        {secondMessage && <Text>{secondMessage}</Text>}
-                    </Box>
-                    {buttonClicked < 2 && (
-                        <Button w="30%" left="30%" marginBottom="2rem" 
-                        variant="primary" onClick={handleClick} isDisabled={availableAmount <= 0}>              
-                        {availableAmount <= 0 ? 'Out of stock' : buttonClicked ? 'Confirm' : 'Borrow Book'}
-                        </Button>
-                    )}
-                </VStack>
+                            {user.user && <BookMarkButton book={book} user={user.user} />}
+                        </HStack>
+                        <HStack justifyContent="center">
+                            <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
+                            <Link as="u" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleClickableAuthor(); }}>{book.Author.username || "No Author"}</Link>
+                            <StarRating value={book.Reviews[0].stars || 3} bookId={book.book_id} />
+                        </HStack>
+                        {isAuthorModalOpen && (
+                            <AuthorInfoModal
+                                isOpen={isAuthorModalOpen}
+                                onClose={() => setIsAuthorModalOpen(false)}
+                                author={book.Author}
+                            />
+                        )}
+                        <Box padding={5}>
+                            <Text>{book.summary || "No Description"}</Text>
+                        </Box>
+                        <Flex justifyContent="space-between">
+                            {book.Tags.map((tag: any) => (
+                                <TagButton key={tag.title} tag={tag} />
+                            )) || "No Genres"}
+                        </Flex>
+                        <Box padding={2} display="flex" flexDirection="column" alignItems="center">
+                            {firstMessage && <Text>{firstMessage}</Text>}
+                            {secondMessage && <Text>{secondMessage}</Text>}
+                        </Box>
+                        {buttonClicked < 2 && (
+                            <Button w="30%" left="30%" marginBottom="2rem"
+                                variant="primary" onClick={handleClick} isDisabled={availableAmount <= 0}>
+                                {availableAmount <= 0 ? 'Out of stock' : buttonClicked ? 'Confirm' : 'Borrow Book'}
+                            </Button>
+                        )}
+                    </VStack>
                 </ModalBody>
             </ModalContent>
         </Modal>

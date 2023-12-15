@@ -4,6 +4,8 @@ import BookCardSkeleton from "../book/bookCardSkeleton";
 import useBooks from "../../hooks/useBooks";
 import { useState } from "react";
 import { BookModal } from "../book/bookModal";
+import { Input, InputGroup, Icon, InputRightElement } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export default function AllBooks() {
     const { data, error, isLoading } = useBooks();
@@ -34,15 +36,20 @@ export default function AllBooks() {
                 <Box className="flex" justifyContent={"center"} marginBottom={3}>
                     {/* <SearchBar /> */}
 
-                    <input type="text" className="shade" placeholder="Search for book title"
-                        value={searchTerm}
-                        onBlurCapture={(e) => { removeValue(e) }}
-                        onChange={(event) => {
-                            setsearchTerm(event.target.value);
-                            if (searchTerm.length < 1) {
-                                setShow("Searched books");
-                            }
-                        }} />
+                    <InputGroup margin={3} w={80}>
+                        <InputRightElement pointerEvents="none">
+                            <Icon as={SearchIcon} color="gray.400" />
+                        </InputRightElement>
+                        <Input type="text" className="shade" placeholder="Search for book title" variant="filled" borderRadius={100}
+                            value={searchTerm}
+                            onBlurCapture={(e) => { removeValue(e) }}
+                            onChange={(event) => {
+                                setsearchTerm(event.target.value);
+                                if (searchTerm.length < 1) {
+                                    setShow("Searched books");
+                                }
+                            }} />
+                    </InputGroup>
                 </Box>
             </Box>
 
@@ -108,7 +115,7 @@ export default function AllBooks() {
                 <Box className="hide_on_mobil">
                     {/*  <Sorting /> */}
                     {/* <Subdjekt show={show} onShowChange={setShow} /> */}
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("All")
                         setShow("All books")
                     }}
@@ -116,7 +123,7 @@ export default function AllBooks() {
                         All
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Fantasy")
                         setShow("Filtered books")
                     }}
@@ -124,7 +131,7 @@ export default function AllBooks() {
                         Fantasy
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Non-Fiction")
                         setShow("Filtered books")
                     }}
@@ -132,7 +139,7 @@ export default function AllBooks() {
                         Non-Fiction
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Biography")
                         setShow("Filtered books")
                     }}
@@ -140,7 +147,7 @@ export default function AllBooks() {
                         Biography
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Mystery")
                         setShow("Filtered books")
                     }}
@@ -148,7 +155,7 @@ export default function AllBooks() {
                         Mystery
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Self-Help")
                         setShow("Filtered books")
                     }}
@@ -156,7 +163,7 @@ export default function AllBooks() {
                         Self-Help
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Romance")
                         setShow("Filtered books")
                     }}
@@ -164,7 +171,7 @@ export default function AllBooks() {
                         Romance
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Science Fiction")
                         setShow("Filtered books")
                     }}
@@ -172,7 +179,7 @@ export default function AllBooks() {
                         Science Fiction
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("Adventure")
                         setShow("Filtered books")
                     }}
@@ -180,7 +187,7 @@ export default function AllBooks() {
                         Adventure
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button w={40} onClick={() => {
                         setFilterTerm("History")
                         setShow("Filtered books")
                     }}

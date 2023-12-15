@@ -1,13 +1,13 @@
 import {
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Icon,
-    Spacer,
-    Box,
-    HStack
-  } from '@chakra-ui/react'
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Icon,
+  Spacer,
+  Box,
+  HStack
+} from '@chakra-ui/react'
 import { useUser } from '../userContext';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -36,31 +36,31 @@ export default function UserReviews() {
   return (
     <>
       <ModalHeader fontWeight="bold">Reviews by you</ModalHeader>
-      <ModalCloseButton />
+      <ModalCloseButton color='light.solid' />
       <ModalBody>
         {reviews.map((review, i) => (
-          <HStack 
-          borderColor='black'
-          borderWidth='1px'
-          p='1rem'>
-          <Box>
-            <h3>{review.Book.title}</h3>
-          </Box>
-          <Spacer />
-          <Box
-          pb='0.5rem'>
-            {Array.from({ length: review.stars }, (_, index) => (
-              <Icon
+          <HStack
+            borderColor='black'
+            borderWidth='1px'
+            p='1rem'>
+            <Box>
+              <h3>{review.Book.title}</h3>
+            </Box>
+            <Spacer />
+            <Box
+              pb='0.5rem'>
+              {Array.from({ length: review.stars }, (_, index) => (
+                <Icon
                   as={StarIcon}
                   key={index}
                   color='yellow.400'
                   w={5}
-                  h={5} 
-              />
-            ))}
-          </Box>
+                  h={5}
+                />
+              ))}
+            </Box>
           </ HStack>
-        ))} 
+        ))}
       </ModalBody>
       <ModalFooter>
       </ModalFooter>

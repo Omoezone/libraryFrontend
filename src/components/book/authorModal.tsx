@@ -5,6 +5,8 @@ import BookCard from './bookCard';
 import FavoritedButton from './favorited';
 import { useUser } from '../user/userContext';
 import { currentConfig } from '../../../config';
+import { GiFeather } from "react-icons/gi";
+
 
 interface AuthorInfoModalProps {
     isOpen: boolean;
@@ -34,26 +36,32 @@ const AuthorInfoModal: React.FC<AuthorInfoModalProps> = ({ isOpen, onClose, auth
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent bg="light.gradient">
-            <ModalCloseButton />
-            <ModalBody>
-            <VStack spacing={4}>
-                <h2><b>{author.username || "No Author Information"}</b></h2>{user.user ? (
-                        <FavoritedButton author={author} user={user.user} />
-                    ) : (<></>)}
-                <p>{author.total_books}: Published Books</p>
-                <Box id='slider'
-                        className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'> 
-                    {booksByAuthor.map(book => (
-                        <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
-                            <BookCard book={book} openModal={() => openModal(book)}/>
-                        </Box>
-                    ))}
-                </Box>'
-            </VStack>
-            </ModalBody>
-        </ModalContent>
+            <ModalOverlay />
+            <ModalContent bg="light.gradient">
+                <Box background='red.gradient' className='modul_banner'>
+                    <div className='feather'>
+                        <GiFeather />
+                    </div>
+                    <ModalCloseButton color='light.solid' />
+                </Box>
+
+                <ModalBody>
+                    <VStack spacing={4}>
+                        <h2><b>{author.username || "No Author Information"}</b></h2>{user.user ? (
+                            <FavoritedButton author={author} user={user.user} />
+                        ) : (<></>)}
+                        <p>{author.total_books}: Published Books</p>
+                        <Box id='slider'
+                            className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
+                            {booksByAuthor.map(book => (
+                                <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
+                                    <BookCard book={book} openModal={() => openModal(book)} />
+                                </Box>
+                            ))}
+                        </Box>'
+                    </VStack>
+                </ModalBody>
+            </ModalContent>
         </Modal>
     );
 };

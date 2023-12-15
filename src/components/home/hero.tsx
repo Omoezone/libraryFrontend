@@ -15,14 +15,14 @@ function Hero() {
     useEffect(() => {
         fetchBooksFromBackend();
     }, []);
-    
+
     const fetchBooksFromBackend = () => {
-    fetch(`${endpoint}/books`)
-        .then(response => response.json())
-        .then(data =>  {
-            setBooks(data);
-        })
-        .catch(error => console.error('Error fetching books:', error));
+        fetch(`${endpoint}/books`)
+            .then(response => response.json())
+            .then(data => {
+                setBooks(data);
+            })
+            .catch(error => console.error('Error fetching books:', error));
     };
 
     const openModal = (book: any) => {
@@ -43,31 +43,29 @@ function Hero() {
                     <Box className="hero_p">
                         <p>Within 7 days of borrowing a book it will be delivered to you, for free. Unless of course you fail to deliver it back after 31 days. You understand. Enjoy! </p>
                     </Box>
-                    <br/> 
+                    <br />
                     {user.user ? (
-                        <h3>Welcome {user.user.UserName.first_name + " " + user.user.UserName.last_name} </h3>  
-                    ):(
-                        <SignUp/>
+                        <h3>Welcome {user.user.UserName.first_name + " " + user.user.UserName.last_name} </h3>
+                    ) : (
+                        <SignUp />
                     )}
                 </Box>
                 <Box id="hero_right" color="dark" bg="light.gradient" className="hero_book_container" margin={3}>
-                    <Box></Box>
+
                     <Box
-                        width={230} height={340} bg="gold.solid" borderRadius={3} marginTop={-10}
+                        width={230} height={318} bg="gold.solid" borderRadius={3} marginTop={-10}
                         className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
                     >
                         {data.length > 0 && (
-                            <BookCard book={data[0]} openModal={() => openModal(data[0])}/>
+                            <BookCard book={data[0]} openModal={() => openModal(data[0])} />
+                        )}
+                        {selectedBook && (
+                            <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
                         )}
                     </Box>
-                    {selectedBook && (
-                        <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />
-                    )}
-                    <Box className="flex" margin="0rem 1rem 2rem 2rem">
+                    <Box className="flex" margin="1rem">
                         <h3>
-                            Top Book
-                            of the 
-                            Month 
+                            Book of the Month
                         </h3>
                     </Box>
                 </Box>
