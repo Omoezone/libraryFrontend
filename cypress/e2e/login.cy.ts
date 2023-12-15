@@ -11,10 +11,10 @@ describe('login', () => {
     it('an already existing user, should be able to login successfull', () => {
       cy.get('.chakra-stack > .chakra-button:nth-child(4)').click();
       cy.get('[name="email"]').type("cypress@mail.dk")
-      cy.get('[name="password"]').type("admin")
+      cy.get('[name="password"]').type("admin123")
 
       cy.get('[name="email"]').should('have.value', "cypress@mail.dk");
-      cy.get('[name="password"]').should('have.value', "admin");
+      cy.get('[name="password"]').should('have.value', "admin123");
 
       cy.get('[type="submit"]').click();
       cy.wait(1000)
@@ -28,9 +28,9 @@ describe('login', () => {
     it('favour an author', () => {
       cy.get('.chakra-stack > .chakra-button:nth-child(4)').click();
       cy.get('[name="email"]').type("cypress@mail.dk")
-      cy.get('[name="password"]').type("admin")
+      cy.get('[name="password"]').type("admin123")
       cy.get('[name="email"]').should('have.value', "cypress@mail.dk");
-      cy.get('[name="password"]').should('have.value', "admin");
+      cy.get('[name="password"]').should('have.value', "admin123");
       cy.get('[type="submit"]').click();
 
       cy.get('#slider2 > .inline-block:nth-child(3) .chakra-image').click();
@@ -41,9 +41,9 @@ describe('login', () => {
     it("borrow a book", () => {
       cy.get('.chakra-stack > .chakra-button:nth-child(4)').click();
       cy.get('[name="email"]').type("cypress@mail.dk")
-      cy.get('[name="password"]').type("admin")
+      cy.get('[name="password"]').type("admin123")
       cy.get('[name="email"]').should('have.value', "cypress@mail.dk");
-      cy.get('[name="password"]').should('have.value', "admin");
+      cy.get('[name="password"]').should('have.value', "admin123");
       cy.get('[type="submit"]').click();
 
       cy.get('#slider2 > .inline-block:nth-child(4) .chakra-image').click();

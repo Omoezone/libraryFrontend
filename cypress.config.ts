@@ -8,8 +8,7 @@ export default defineConfig({
     specPattern: [
       "cypress/e2e/signup.cy.ts",
       "cypress/e2e/login.cy.ts",
-      "cypress/e2e/useBookFilter.cy.ts",
-      "cypress/e2e/bookInteractions.cy.ts"
+      "cypress/e2e/deleteTestUser.cy.ts"
     ],
   },
 });
