@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run cypress:run",
     "dev": "vite --mode development",
-    "prod": "vite --mode production",
+    "start": "vite --mode production",
     "preview": "vite preview",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
