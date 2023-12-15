@@ -30,7 +30,7 @@ jobs:
     - name: Start React App
       run:  npm start &
 
-    - run: sleep 10
+    - run: sleep 5
 
     - name: Run Cypress tests
-      run: npm run cy:run
+      run: npm run test
