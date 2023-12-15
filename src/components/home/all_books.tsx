@@ -65,7 +65,7 @@ export default function AllBooks() {
 
                     {data &&
                         data.map((book, index) => (
-                            <Box key={book.book_id || index}>
+                            <Box key={book.book_id || index} >
                                 <BookCard book={book} openModal={() => openModal(book)} />
 
                             </Box>
