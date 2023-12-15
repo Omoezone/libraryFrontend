@@ -21,8 +21,10 @@ export default function AllBooks() {
         setSelectedBook(null);
     };
 
-    const removeValue = () => {
-        setsearchTerm("")
+    const removeValue = (e: any) => {
+        if (e.relatedTarget.type === "button") {
+            setsearchTerm("")
+        } else { }
     }
 
     return (
@@ -34,7 +36,7 @@ export default function AllBooks() {
 
                     <input type="text" className="shade" placeholder="Search for book title"
                         value={searchTerm}
-                        onBlurCapture={removeValue}
+                        onBlurCapture={(e) => { removeValue(e) }}
                         onChange={(event) => {
                             setsearchTerm(event.target.value);
                             if (searchTerm.length < 1) {
