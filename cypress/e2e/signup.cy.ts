@@ -3,7 +3,7 @@ describe('template spec', () => {
   before(() => {
     
     cy.clearAllCookies()
-    cy.visit('http://localhost:5173/')
+    cy.visit('https://icy-grass-099c31603.4.azurestaticapps.net')
   });
   
   it('a new user is created successfully', () => {
@@ -18,7 +18,7 @@ describe('template spec', () => {
     cy.get('[name="last_name"]').should('have.value', "Cypresslast");
     cy.get('[name="email"]').should('have.value', "cypress@mail.dk");
     cy.get('[name="password"]').should('have.value', "admin123");
-
+    cy.wait(2000)
     cy.get('[type="submit"]').click();
   })
 })

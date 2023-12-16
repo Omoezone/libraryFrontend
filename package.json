@@ -7,7 +7,7 @@
     "test": "npm run cypress:run",
     "build": "tsc && vite build",
     "dev": "vite --mode development",
-    "start": "vite --mode production",
+    "start": "vite --mode production",  
     "preview": "vite preview",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
