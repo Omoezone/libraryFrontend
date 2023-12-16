@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "npm run cypress:run",
+    "build": "tsc && vite build",
     "dev": "vite --mode development",
     "start": "vite --mode production",
     "preview": "vite preview",
