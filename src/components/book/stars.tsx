@@ -5,7 +5,12 @@ import { useUser } from '../user/userContext';
 import { useState } from 'react';
 import { currentConfig } from '../../../config';
 
-const StarRating = ({ value, bookId }) => {
+interface Props {
+    value: number;
+    bookId: number;
+}
+
+const StarRating = ({ value, bookId }: Props) => {
     const maxStars = 5;
     const { user } = useUser();
     const [isModalOpen, setIsModalOpen] = useState(false);
