@@ -14,6 +14,7 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useUser } from '../userContext'
 import { currentConfig } from '../../../../config';
+import { bookmarkAllUser } from '../../../types/allBookmarkUser';
 
 export default function Userborrowed() {
     const [borrowed, setBorrowed] = useState([]);
@@ -33,7 +34,7 @@ export default function Userborrowed() {
             console.error("Axios Error:", error);
         }
     }
-    const returnBook = async (book: string) => {
+    const returnBook = async (book: any) => {
         try {
             console.log("Book to return", book);
             const response = await axios.put(`${endpoint}/user/${user?.user?.user_id}/return/${book}`, { "authToken": Cookies.get('authToken') });
@@ -70,7 +71,7 @@ export default function Userborrowed() {
                     <>
                         {borrowed.length != 0 ? (
                             <>
-                                {borrowed.map((borrow, i) => (
+                                {borrowed.map((borrow: any, i) => (
                                     <HStack
                                         borderColor='black'
                                         borderWidth='1px'
@@ -91,7 +92,7 @@ export default function Userborrowed() {
                     </>
                 ) : (
                     <>
-                        {hasBorrowed.map((borrow, i) => (
+                        {hasBorrowed.map((borrow: any, i) => (
                             <HStack
                                 borderColor='black'
                                 borderWidth='1px'

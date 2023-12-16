@@ -8,8 +8,15 @@ import Theme from '../../theme';
 import AuthorInfoModal from './authorModal';
 import BookMarkButton from './bookmark';
 import { currentConfig } from '../../../config';
+import { Book } from '../../types/book';
 
-export const BookModal = ({ book, isOpen, onClose }) => {
+interface Props {
+    book: Book;
+    isOpen: boolean;
+    onClose: () => void;
+
+}
+export const BookModal = ({ book, isOpen, onClose }:Props) => {
     const [availableAmount, setAvailableAmount] = useState(book.available_amount);
     const [buttonClicked, setButtonClicked] = useState(0);
     const [firstMessage, setFirstMessage] = useState('');
@@ -23,6 +30,7 @@ export const BookModal = ({ book, isOpen, onClose }) => {
         padding: "1rem",
         textAlign: "center",
     };
+    console.log("book", book)
     const handleClick = async () => {
         try {
             if (user.user != null) {
@@ -76,13 +84,13 @@ export const BookModal = ({ book, isOpen, onClose }) => {
                         align='stretch'>
                         <Spacer />
                         <HStack justifyContent="center">
-                            <Text style={amountStyles}>Available: {availableAmount || 0}</Text>
+                            <Text sx={amountStyles}>Available: {availableAmount || 0}</Text>
                             {user.user && <BookMarkButton book={book} user={user.user} />}
                         </HStack>
                         <HStack justifyContent="center">
                             <Text as="b" fontSize="md" style={Theme.styles.global.h4}>{book.title || "No Title"}</Text>
                             <Link as="u" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleClickableAuthor(); }}>{book.Author.username || "No Author"}</Link>
-                            <StarRating value={book.Reviews[0].stars || 3} bookId={book.book_id} />
+                            {book.Reviews && book.Reviews[0] && <StarRating value={book.Reviews[0].stars || 3} bookId={book.book_id} />}
                         </HStack>
                         {isAuthorModalOpen && (
                             <AuthorInfoModal

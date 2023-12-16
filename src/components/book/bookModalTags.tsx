@@ -1,6 +1,9 @@
 import { Button } from '@chakra-ui/react';
-
-const TagButton = ({ tag }) => {
+import { Tags } from '../../types/tags';
+interface Props {
+    tag: Tags;
+}
+const TagButton = ({ tag }: Props) => {
     return (
         <Button
             variant="confirm"

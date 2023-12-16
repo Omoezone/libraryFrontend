@@ -47,7 +47,7 @@ export default function UserFavoritedAuthors() {
 			<ModalHeader fontWeight="bold">Authors favorited by you</ModalHeader>
 			<ModalCloseButton color='light.solid' />
 			<ModalBody>
-				{favAuthors.map((author, i) => (
+				{favAuthors.map((author: any, i) => (
 					<HStack
 						borderColor='black'
 						borderWidth='1px'

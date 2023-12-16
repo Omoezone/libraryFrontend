@@ -2,19 +2,41 @@ import { Box, Button, Flex } from "@chakra-ui/react"
 import BookCard from "../book/bookCard"
 import BookCardSkeleton from "../book/bookCardSkeleton";
 import useBooks from "../../hooks/useBooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookModal } from "../book/bookModal";
 import { Input, InputGroup, Icon, InputRightElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { Book } from "../../types/book";
+import { Tags } from "../../types/tags";
+import axios, { AxiosError } from "axios";
+import { currentConfig } from '../../../config';
 
 export default function AllBooks() {
-    const { data, error, isLoading } = useBooks();
+    const [data, setData] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [selectedBook, setSelectedBook] = useState(null);
     const skeleton = [...Array(20).keys()];
     const [searchTerm, setsearchTerm] = useState("");
     const [show, setShow] = useState("All books");
     const [filterTerm, setFilterTerm] = useState("All");
+    const endpoint = currentConfig.apiEnvEndpoint;
 
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(`${endpoint}/books`);
+            setData(response.data);
+            setIsLoading(false);
+        } catch (error) {   
+            setIsLoading(false);
+            console.log("useEffect error", error)
+        }
+        };
+        fetchData();
+    }, []); 
+    
     const openModal = (book: any) => {
         setSelectedBook(book);
     };
@@ -55,7 +77,7 @@ export default function AllBooks() {
 
             <Box id="all_books_container_container">
                 <Box id="all_books_container" className={` ${show === "All books" ? "show" : "hidden"}`}>
-                    {error && <p>{error.message}</p>}
+                    {error}
                     {isLoading &&
                         skeleton.map((skeleton) => (
                             <Box key={skeleton}>
@@ -64,10 +86,9 @@ export default function AllBooks() {
                         ))}
 
                     {data &&
-                        data.map((book, index) => (
+                        data.map((book: Book, index) => (
                             <Box key={book.book_id || index} >
                                 <BookCard book={book} openModal={() => openModal(book)} />
-
                             </Box>
                         ))}
                 </Box>
@@ -78,16 +99,13 @@ export default function AllBooks() {
                 <Box id="filtered_books_container" className={` ${show === "Filtered books" ? "show" : "hidden"}`}>
 
                     {data &&
-                        data.map((book: any) => {
-                            return Object.values(book.Tags.map((tag: any) => {
-
+                        data.map((book: Book, index) => {
+                            return Object.values(book.Tags.map((tag: Tags) => {
                                 for (let key in data) {
                                     if (data[key] === undefined) {
                                         delete data[key];
                                     } else {
-
-                                        if (tag.title == filterTerm /* || filterTerm.includes.(tag.title) */) {
-
+                                        if (tag.title == filterTerm) {
                                             return (
                                                 <BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />)
                                         }
@@ -101,7 +119,7 @@ export default function AllBooks() {
                 <Box id="searched_books_container" className={` ${show === "Searched books" ? "show" : "hidden"}`}>
                     {/*  <h3 className={` ${show === "Searched books" ? "show" : "hidden"}`}>{ } Results for "{searchTerm}":</h3> */}
                     {data &&
-                        data.map((book: any) => {
+                        data.map((book: any, Index) => {
                             if (searchTerm === "") {
                                 if (show === "Searched books") {
                                     setShow("All books");

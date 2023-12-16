@@ -52,13 +52,9 @@ describe('login', () => {
     });
 
     it('the tags are used to find a specific book correctly', () => {
-      cy.get('.chakra-button.css-1jw7goo:contains("Fantasy")').click();
-      cy.wait(2000)  
-      cy.get('.chakra-button.css-1jw7goo:contains("Mystery")').click();
-      cy.wait(2000)   
-      cy.get('.chakra-button.css-1jw7goo:contains("All")').click();
-      cy.wait(2000)   
+      cy.contains('.chakra-button', 'Fantasy').click();
+      cy.contains('.chakra-button', 'Non-Fiction').click();
+      cy.contains('.chakra-button', 'All').click();
+    })
   })
-  })
-  
-  
+

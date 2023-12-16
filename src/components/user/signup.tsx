@@ -27,12 +27,12 @@ const SignUp = () => {
 		email: "",
 		password: ""
 	});
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<String[]>([]);
 	const { dispatch } = useUser();
 
 
 
-	const validateForm = (data) => {
+	const validateForm = (data: any) => {
 		let errorlist = [];
 
 		// Validate first name

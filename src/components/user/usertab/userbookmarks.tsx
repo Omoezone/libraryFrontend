@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import BookmarkButton from '../../book/bookmark';
 import { currentConfig } from '../../../../config';
+import { bookmarkAllUser } from '../../../types/allBookmarkUser';
 
 export default function UserBookmarked() {
     const [bookmarks, setBookmarks] = useState([]);
@@ -39,7 +40,7 @@ export default function UserBookmarked() {
             <ModalHeader fontWeight="bold">You have bookmarked these</ModalHeader>
             <ModalCloseButton color='light.solid' />
             <ModalBody>
-                {bookmarks.map((bookmark, i) => (
+                {bookmarks.map((bookmark: bookmarkAllUser, index) => (
                     <HStack
                         borderColor='black'
                         borderWidth='1px'

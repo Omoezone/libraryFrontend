@@ -4,6 +4,8 @@ import BookCard from "../book/bookCard"
 import useBooks from "../../hooks/useBooks";
 import { useState } from "react";
 import { BookModal } from "../book/bookModal";
+import { Reviews } from '../../types/reviews';
+import { Book } from '../../types/book';
 
 export default function FavoriteBooks() {
 
@@ -43,16 +45,14 @@ export default function FavoriteBooks() {
                         className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'
                     >
                         {data &&
-                            data.map((book, index) => {
-                                return Object.values(book.Reviews.map((rev: any) => {
-                                    if (rev.stars >= 5) {
-                                        return (<Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
-                                            <BookCard book={book} openModal={() => openModal(book)} />
-                                        </Box>)
-                                    }
-                                }))
+                            data
+                                .filter((book: Book) => book.Reviews.some((rev: Reviews) => rev.stars >= 5))
+                                .map((book: Book, index: any) => (
+                                <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
+                                    <BookCard book={book} openModal={() => openModal(book)} />
+                                </Box>
+                                ))}
 
-                            })}
                     </Box>
                     {selectedBook && (
                         <BookModal book={selectedBook} isOpen={!!selectedBook} onClose={closeModal} />

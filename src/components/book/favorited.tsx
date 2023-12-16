@@ -5,8 +5,14 @@ import { useState, useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Cookies from 'js-cookie';
 import { currentConfig } from '../../../config';
+import { Author } from '../../types/author';
+import { User } from '../../types/user';
 
-const FavoritedButton = ({ author, user }) => {
+interface Props {
+    author: Author;
+    user: User;
+}
+const FavoritedButton = ({ author, user }: Props) => {
     const [isFavorited, setIsFavorited] = useState(false);
     const endpoint = currentConfig.apiEnvEndpoint;
 

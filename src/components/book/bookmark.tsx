@@ -4,8 +4,13 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { currentConfig } from '../../../config';
+import { Book } from '../../types/book';
 
-const BookmarkButton = ({ book, user }) => {
+interface Props {
+    book: any;
+    user: any;
+}
+const BookmarkButton = ({ book, user }: Props) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
     const endpoint = currentConfig.apiEnvEndpoint;
 

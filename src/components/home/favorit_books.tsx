@@ -1,7 +1,6 @@
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { Box, Img } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import BookCard from "../book/bookCard"
-import BookCardSkeleton from "../book/bookCardSkeleton";
 import useBooks from "../../hooks/useBooks";
 import { useState } from "react";
 import { BookModal } from "../book/bookModal";
@@ -48,7 +47,7 @@ export default function FavoriteBooks() {
                                 <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
                                     <BookCard book={book} openModal={() => openModal(book)} />
                                 </Box>
-
+ 
                             ))}
                     </Box>
                     {selectedBook && (
