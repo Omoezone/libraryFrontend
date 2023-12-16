@@ -6,6 +6,8 @@ import { useState } from "react";
 import { BookModal } from "../book/bookModal";
 import { Input, InputGroup, Icon, InputRightElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { Book } from "../../types/book";
+import { Tags } from "../../types/tags";
 
 export default function AllBooks() {
     const { data, error, isLoading } = useBooks();
@@ -64,10 +66,9 @@ export default function AllBooks() {
                         ))}
 
                     {data &&
-                        data.map((book, index) => (
+                        data.map((book: Book, index) => (
                             <Box key={book.book_id || index} >
                                 <BookCard book={book} openModal={() => openModal(book)} />
-
                             </Box>
                         ))}
                 </Box>
@@ -78,16 +79,13 @@ export default function AllBooks() {
                 <Box id="filtered_books_container" className={` ${show === "Filtered books" ? "show" : "hidden"}`}>
 
                     {data &&
-                        data.map((book: any) => {
-                            return Object.values(book.Tags.map((tag: any) => {
-
+                        data.map((book: Book, index) => {
+                            return Object.values(book.Tags.map((tag: Tags) => {
                                 for (let key in data) {
                                     if (data[key] === undefined) {
                                         delete data[key];
                                     } else {
-
-                                        if (tag.title == filterTerm /* || filterTerm.includes.(tag.title) */) {
-
+                                        if (tag.title == filterTerm) {
                                             return (
                                                 <BookCard book={book} key={book.book_id} openModal={() => openModal(book)} />)
                                         }
@@ -101,7 +99,7 @@ export default function AllBooks() {
                 <Box id="searched_books_container" className={` ${show === "Searched books" ? "show" : "hidden"}`}>
                     {/*  <h3 className={` ${show === "Searched books" ? "show" : "hidden"}`}>{ } Results for "{searchTerm}":</h3> */}
                     {data &&
-                        data.map((book: any) => {
+                        data.map((book: Book, Index) => {
                             if (searchTerm === "") {
                                 if (show === "Searched books") {
                                     setShow("All books");

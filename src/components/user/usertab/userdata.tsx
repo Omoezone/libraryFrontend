@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React, { CSSProperties } from 'react';
 import {
   ModalHeader,
   ModalFooter,
@@ -16,7 +17,10 @@ import axios from 'axios';
 import Cookies from "js-cookie";
 import { currentConfig } from '../../../../config';
 
-export default function Userdata({ onClose }) {
+interface Props {
+  onClose: () => void;
+}
+export default function Userdata({ onClose }: Props) {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false)
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
   const [data, setData] = useState({
@@ -26,17 +30,11 @@ export default function Userdata({ onClose }) {
   const { dispatch } = useUser();
   let { user } = useUser();
   const userEmail = user.user ? user.user.email : "Email missing";
-  const scrollBehavior = 'inside';
   const endpoint = currentConfig.apiEnvEndpoint;
 
-  const update_img_style = {
+  const update_img_style: CSSProperties = {
     width: '1.25rem',
     float: 'right',
-    cursor: 'pointer'
-  }
-
-  const avatar_img_style = {
-    width: '3rem',
     cursor: 'pointer'
   }
 
@@ -102,7 +100,7 @@ export default function Userdata({ onClose }) {
     <>
       <ModalHeader fontWeight="bold">Your info</ModalHeader>
       <ModalCloseButton color='light.solid' />
-      <ModalBody scrollBehavior={scrollBehavior}>
+      <ModalBody overflow="auto">
         {(!isUpdatingEmail && !isUpdatingPassword) && (
           <Box>
             <FormLabel fontWeight="bold">Email</FormLabel>

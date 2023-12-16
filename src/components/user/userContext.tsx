@@ -1,7 +1,7 @@
-import { createContext, useContext, useReducer } from 'react';
+import { ReactNode, createContext, useContext, useReducer } from 'react';
 
 const UserContext = createContext({
-    user: null,
+    user: null as any,
     dispatch: (action: any) => {}, 
 });
 
@@ -12,8 +12,11 @@ export function useUser() {
     const initialState = {
         user: null,
     };  
+    interface UserProviderProps {
+        children: ReactNode;
+    }
 
-export function UserProvider({ children }) {
+export function UserProvider({ children }: UserProviderProps) {
     const [user, dispatch] = useReducer(userReducer, initialState);
     return (
         <UserContext.Provider value={{ user, dispatch }}>

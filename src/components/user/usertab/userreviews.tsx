@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { StarIcon } from '@chakra-ui/icons';
 import { currentConfig } from '../../../../config';
+import { reviewAllUser } from '../../../types/allReviewUser';
 
 export default function UserReviews() {
   const [reviews, setReviews] = useState([]);
@@ -38,7 +39,7 @@ export default function UserReviews() {
       <ModalHeader fontWeight="bold">Reviews by you</ModalHeader>
       <ModalCloseButton color='light.solid' />
       <ModalBody>
-        {reviews.map((review, i) => (
+        {reviews.map((review: reviewAllUser, i) => (
           <HStack
             borderColor='black'
             borderWidth='1px'

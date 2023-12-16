@@ -7,7 +7,7 @@ import { currentConfig } from '../../../config';
 import { Book } from '../../types/book';
 
 interface Props {
-    book: Book;
+    book: any;
     user: any;
 }
 const BookmarkButton = ({ book, user }: Props) => {
