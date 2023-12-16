@@ -1,38 +1,331 @@
-.App {
-  text-align: center;
+.smol {
+  font-size: 0.8rem;
+  align-self: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.white_icons {
+  color: white;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-right: 0.5rem;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.button_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.button_grid button {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bottom-row-margin {
+  margin-bottom: 16rem;
+}
+
+/* ###################### */
+#red_banner {
+  position: absolute;
+  right: 0;
+  width: 10rem;
+  height: 100%;
+  z-index: -999;
+}
+.nav {
+  position: fixed;
+  /*  background-color: white; */
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.hero_text {
+  text-align: center;
+  margin-top: 3rem;
+  /* filter: invert(1);
+  mix-blend-mode: difference; */
+}
+
+.hero {
+  margin: 6rem 3rem 10rem 3rem;
+}
+
+#hero_left  {
+  display: grid;
+  justify-content: center;
+}
+
+.hero_book_container {
+  display: grid;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+  border-radius: 6px;
+}
+
+.hero_book_container div:first-child{
+
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+  border-radius: 6px;
+}
+
+.hero_book_container img{
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
+  border-radius: 6px;
+}
+
+#slider img,
+#slider2 img,
+#slider3 img {
+  border-radius: 12px;
+  width: 10rem;
+  height: 13rem;
+}
+
+#slider::-webkit-scrollbar,
+#slider2::-webkit-scrollbar,
+#slider3::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#slider,
+#slider2,
+#slider3 {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.banner_content {
+  color: white;
+  font-size: 1rem;
+}
+
+#all_books_container,
+#filtered_books_container,
+#searched_books_container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 10rem);
+  grid-gap: 0.5rem;
+}
+
+.hide_on_mobil {
+  display: none;
+}
+
+#all_books_container_container img {
+  width: 10rem;
+  height: 15rem;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+  border-radius: 6px;
+}
+
+#all_books_container_container img:hover {
+  scale:1.2;
+  transition: ease-in-out;
+  transition: 0.3s;
+}
+
+.slider_container {
+  margin-top: 8rem !important;
+}
+
+#all_books_container_container {
+  margin-top: 3rem;
+}
+
+.all_books_top input{
+  border: 2px rgb(255, 187, 0) solid;
+}
+
+.book_modal {
+  width: 15rem;
+  margin-top: 1rem;
+}
+
+#signup input, #login input{
+  border: 2px rgb(255, 187, 0) solid;
+  border-radius: 100px;
+  background-color: #FFEFBA;
+  margin: 0.5rem 0;
+}
+
+#signup input::placeholder,  #login input::placeholder {
+  color: rgb(255, 187, 0);
+}
+
+.primary {
+  color: #0F0C29;
+  background-color: #F8B500;
+  background-image: linear-gradient(174deg, rgba(225,239,186,1) 0%, rgba(248,181,0,1) 100%);
+   box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+}
+
+.center_this{
+  text-align: center !important;
+}
+
+.modul_banner {
+  height: 3.5rem;
+  margin-bottom: 1rem;
+  display: grid;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+}
+
+.modul_banner img{
+  height: 2.5rem;
+  justify-self: center;
+}
+
+.settings {
+ /*  all: unset !important; */
+ width: 3.5rem;
+ height: 3.5rem !important;
+ margin-top: -2.5rem !important;
+ background-image: linear-gradient(174deg, rgba(111,0,0,1) 0%, rgba(15,12,41,1) 100%) !important;
+ 
+}
+
+.settings path{
+  fill: white;
+ 
+}
+
+.settings svg{
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.feather svg {
+ width: 100%;
+}
+.feather path{
+  fill: #F8B500;
+}
+
+@media only screen and (min-width: 768px) {
+  #red_banner {
+    width: 18rem;
+  }
+  #hero_container {
+    margin: 8rem 5rem 5rem 5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  #hero_element {
+    position: absolute;
+    top: 0;
+    left: 12rem;
+    width: 18rem;
+    height: 40rem;
+    z-index: -999;
+  }
+
+  .hero_text {
+    text-align: left;
+  }
+
+  #hero_container button {
+    width: 12rem;
+  }
+
+  .hero_p {
+    max-width: 500px;
+  }
+
+  .hero_book_container {
+    justify-items: center;
+  }
+
+  #slider img,
+  #slider2 img,
+  #slider3 img {
+    width: 15rem;
+    height: 20rem;
+   /*  margin: 1.5rem 1rem; */
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+    padding: 0;
+    border-radius: 6px;
+  }
+
+  #slider,
+  #slider2,
+  #slider3 {
+    overflow-y: hidden;
+  }
+
+  .slider_container {
+    margin: 0 1.5rem 0 3rem !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .slider_right {
+    padding: 1rem 0 1rem 1rem;
+    height: 20rem;
+  }
+  .slider_right .flex {
+    align-items: flex-end;
+  }
+
+  .all_books_top {
+    margin-bottom: 3rem;
+  }
+  .all_books_top h2 {
+    text-align: center;
+  }
+
+  #all_books_container,
+  #filtered_books_container,
+  #searched_books_container {
+    grid-gap: 1.5rem;
+    /* margin: 0 8rem 8rem 3rem; */
+  }
+
+  #all_books_container_container {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    margin-bottom: 5rem;
+    margin-right: 1rem;
+  }
+
+  #all_books_container_container .button_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hide_on_mobil {
+    display: block;
+  }
+
+  #all_books_container_container .hide_on_mobil {
+    height: 7rem;
+    position: sticky;
+    top: 8rem;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.shade {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.App-link {
-  color: #61dafb;
+.show {
+  display: block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* ###################### */
