@@ -1,32 +1,42 @@
+// userData.ts
 import { useEffect, useState } from "react";
-import apiClient from "../service/apiClient";
-import { AxiosRequestConfig, CanceledError } from "axios";
+import ApiClient, { FetchResponse } from "../service/apiClient";
+import { AxiosError, AxiosRequestConfig } from "axios"; // Update this line
 
-const userData = <T> (
-    endpoint: string,
-    options?: AxiosRequestConfig) => {
-    
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        const controller = new AbortController();
-        apiClient(endpoint, {
-            signal: controller.signal,
-            ...options,
-        }).then((response) => {
-            setData(response.data);
-            setIsLoading(false);
-        })
-        .catch((error) => {
-            if (!(error instanceof CanceledError)) setError(error.message);
-        });
-        return () => controller.abort();
-        
-    }, [endpoint, options]);
+const userData = <T>(
+  endpoint: string,
+  options?: AxiosRequestConfig
+) => {
+    const [data, setData] = useState<T[]>([]);
+    const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    return { data, error };
+  useEffect(() => {
+    const controller = new AbortController();
+    setIsLoading(true);
+
+    const apiClient = new ApiClient<T>(endpoint);
+
+    apiClient
+      .getAll(options)
+      .then((response: FetchResponse<T>) => {
+        setData(response.results);
+        setIsLoading(false);
+      })
+      .catch((error: AxiosError) => {
+        if (error.message === "AbortError") {
+          console.log("Request aborted:", error.message);
+        } else {
+          setError(error.message);
+          setIsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, [endpoint, options]);
+
+  return { data, error, isLoading };
 };
 
 export default userData;
