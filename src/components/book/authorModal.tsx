@@ -6,6 +6,7 @@ import FavoritedButton from './favorited';
 import { useUser } from '../user/userContext';
 import { currentConfig } from '../../../config';
 import { GiFeather } from "react-icons/gi";
+import { Book } from '../../types/book';
 
 
 interface AuthorInfoModalProps {
@@ -53,9 +54,9 @@ const AuthorInfoModal: React.FC<AuthorInfoModalProps> = ({ isOpen, onClose, auth
                         <p>{author.total_books}: Published Books</p>
                         <Box id='slider'
                             className='overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
-                            {booksByAuthor.map(book => (
+                            {booksByAuthor.map((book: Book, index) => (
                                 <Box key={book.book_id || index} className='inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'>
-                                    <BookCard book={book} openModal={() => openModal(book)} />
+                                    <BookCard book={book} />
                                 </Box>
                             ))}
                         </Box>'
