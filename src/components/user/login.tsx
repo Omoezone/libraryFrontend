@@ -21,7 +21,7 @@ import { currentConfig } from '../../../config';
 const Login = () => {
   const endpoint = currentConfig.apiEnvEndpoint;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState<string[]>([]);
   const [data, setData] = useState({
     email: "",
     password: ""
@@ -29,7 +29,7 @@ const Login = () => {
 
   const { dispatch } = useUser();
 
-  const validateForm = (data) => {
+  const validateForm = (data:any) => {
     let errorlist = [];
 
     // Validate email

@@ -148,6 +148,7 @@ import {
   Input,
   useDisclosure
 } from '@chakra-ui/react'
+import { CSSProperties } from 'react';
 
 
 export default function Login() {
@@ -194,7 +195,7 @@ export default function Login() {
                     photos[currentIndex].id === photo.id ? 'fade' : 'slide fade'
                   }
                 >
-                  <img src={photo.url} alt={photo.title} style={bookPicSize} className='photo' />
+                  <img src={photo.url} alt={photo.title} style={bookPicSize as CSSProperties} className='photo' />
                   <div className='caption'>{photo.title}</div>
                 </div>
               ))}
